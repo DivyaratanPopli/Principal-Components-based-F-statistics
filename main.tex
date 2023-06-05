@@ -85,6 +85,18 @@ F_3(X_1,X_2;X_3,X_4) &= \frac{1}{S}\sum_{l=1}^S(x_{1l} - x_{2l})(x_{3l} - x_{4l}
 \subsection{fstats and PCA: Ben's paper}
 
 \subsection{Probabilstic PCA}
+\subsection{PCA-Waaij}
+
+We show that practically PCA and PPCA differ in the way that while PCA rotates the dataset, PPCA additionally models and removes noise from the data.
+
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{plots/pca_ppca.png}
+    \centering
+    \caption{Comparison of pca and ppca}
+    \label{fig3:Comparison_READ_KIN}
+\end{figure}
+
+Next we show that PPCA/PCA-w is a natural framework to estimate f-statistics. Estimation of f2's compared for PCA, PPCA-1 PPCA2, admixtools.
 
 \subsection{Probabilistic PCA and F-statistics}
 
@@ -93,8 +105,6 @@ F_3(X_1,X_2;X_3,X_4) &= \frac{1}{S}\sum_{l=1}^S(x_{1l} - x_{2l})(x_{3l} - x_{4l}
 
 
 \section{Results}
-We show that practically PCA and PPCA differ in the way that while PCA rotates the dataset, PPCA additionally models and removes noise from the data.
-
 
 
 There are several tools available to understand genetic diversity, and can be classified as the tools that make minimal assumptions to summarize population structure, and the tools that infer demographic parameters. Former set of tools includes f-statistics \cite{patterson_ancient_2012}, PCA \cite{mcvean_genealogical_2009}, MDS \cite{wang_comparison_2009}, Structure \cite{pritchard}, Admixture  
