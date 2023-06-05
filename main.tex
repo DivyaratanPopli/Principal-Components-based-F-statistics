@@ -43,11 +43,12 @@ singlelinecheck=false
 
 \begin{abstract}
 
-\noindent Principal component analysis (PCA) and F-statistics are routinely used in population genetic and archaeogenetic studies. However, these are closely related analyses and reveal the same biological signal. Here, we present a statistical framework to combine them into a joint analysis. In particular, we discuss the differences of probabilistic PCA and ordinary PCA, and show that F-statistics are more naturally interpreted in a probabilistic PCA framework. We also show that individual-based F-statistics can be accurately estimated from probabilistic PCA in the presence of large amounts of missing data. We present preliminary results using simulations and published data, and show that this joint estimation framework addresses  limitations of estimating F-statistics and PCA independently.
+\noindent Principal component analysis (PCA) and F-statistics are routinely used in population genetic and archaeogenetic studies. However, these are closely related analyses and reveal the same biological signal. Here, we present a statistical framework to combine them into a joint analysis. In particular, we discuss the differences of probabilistic PCA and ordinary PCA, and show that F-statistics are more naturally interpreted in a probabilistic PCA framework. We also show that individual-based F-statistics can be accurately estimated from probabilistic PCA in the presence of large amounts of missing data. We present preliminary results using simulations and published data, and show that this joint estimation framework addresses limitations of estimating F-statistics and PCA independently.
 
 \end{abstract}
 
 \section{Introduction}
+\subsection{Why study genetic diversity}
 A crucial first goal in any population genetic analysis of a natural population is to describe the observed genetic variation in the system. A major topic of population genetics is to link these patterns of variation with the underlying processes, including genetic drift, migration and selection.
 
 Admixture, along with other events in the evolutionary history, shapes the genetic diversity of populations. An important goal of many population genetic studies is to identify the admixture events that have left their mark as patterns of variation in human populations. 
@@ -66,7 +67,7 @@ A major issue when working with ancient DNA is low number of individuals and mis
 
 
 
-In this study, we develop a statistical framework to estimate F-statistics between many populations in a probabilistic PCA framework.  that probabilistic PCA (PPCA) explicitly models the error due to the sampling bias in allele frequencies. In addition. we demonstrate that PPCA based framework is not sensitive to non-random missing data, and so it can be used to visualize individuals in PCA-space without having to project lower quality samples.
+In this study, we develop a statistical framework to estimate F-statistics between many populations in a probabilistic PCA framework.  that probabilistic PCA (PPCA) explicitly models the error due to the sampling bias in allele frequencies. In addition. we demonstrate that PPCA based framework is not sensitive to random missing data, and so it can be used to visualize individuals in PCA-space without having to project lower quality samples.
 
 Finally, we show that PPCA provides a natural framework to estimate F-statistics with small sample-size and missing data. We show formal hypothesis tests for admixture and compare our results to admixtools2 cite{admixtools paper} on simulations. Finally we show the use of this framework on published datasets from neolithic Haak et al. and upper Paleolithic humans (Mateja). 
 
@@ -85,7 +86,7 @@ F_3(X_1,X_2;X_3,X_4) &= \frac{1}{S}\sum_{l=1}^S(x_{1l} - x_{2l})(x_{3l} - x_{4l}
 \subsection{fstats and PCA: Ben's paper}
 
 \subsection{Probabilstic PCA}
-\subsection{PCA-Waaij}
+
 
 We show that practically PCA and PPCA differ in the way that while PCA rotates the dataset, PPCA additionally models and removes noise from the data.
 
@@ -106,7 +107,22 @@ Next we show that PPCA/PCA-w is a natural framework to estimate f-statistics. Es
 
 \section{Results}
 
+We simulated 10 populations with split-times and migration rates as shown in Fig. 1. 
 
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{plots/pca_ppca.png}
+    \centering
+    \caption{Comparison of pca and ppca}
+    \label{fig3:Comparison_READ_KIN}
+\end{figure}
+
+
+
+
+
+
+
+\section{older stuff}
 There are several tools available to understand genetic diversity, and can be classified as the tools that make minimal assumptions to summarize population structure, and the tools that infer demographic parameters. Former set of tools includes f-statistics \cite{patterson_ancient_2012}, PCA \cite{mcvean_genealogical_2009}, MDS \cite{wang_comparison_2009}, Structure \cite{pritchard}, Admixture  
 - There are different tools to study diversity: 1) tools that make minimum assumptions like fstatistics, PCA, MDS, Structure, Admixture, 2) tools that can be used to infer demographic parameters.
 - Many studies use PCA followed by f-statistics in their pipline. Peter et al., show that these analyses reveal the same biological signal, and can be done jointly.
