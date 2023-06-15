@@ -167,9 +167,9 @@ plotf <- function(genf,outf){
   
   png(file=outf, width=1024, height=800, res=200)
   par(mfrow=c(1,3))
-  plot(PC, eigenvalues, main="PCA",ylim=c(0,1.3))
-  plot(PC, eigenvalues1, main="Probabilistic PCA",ylim=c(0,1.3))
-  plot(PC, eigenvalues2, main="LSE",ylim=c(0,1.3))
+  plot(PC, eigenvalues, main="PCA",ylim=c(0,1.3), xlab="", ylab="Eigenvalues")
+  plot(PC, eigenvalues1, main="Probabilistic PCA",ylim=c(0,1.3), ylab="")
+  plot(PC, eigenvalues2, main="LSE",ylim=c(0,1.3), ylab="", xlab="")
   #plot(PC, eigenvalues3, main="PPCA with binomial error")
   dev.off()
   
