@@ -165,7 +165,7 @@ plotf <- function(genf,outf){
   eigenvalues2=xxx2$eval[1:19]
   eigenvalues3=c(sqrt(xxx3$eval),rep(0,11))
   
-  png(file=outf, width=600, height=350, res=100)
+  png(file=outf, width=1024, height=800, res=200)
   par(mfrow=c(1,3))
   plot(PC, eigenvalues, main="PCA",ylim=c(0,1.3))
   plot(PC, eigenvalues1, main="Probabilistic PCA",ylim=c(0,1.3))
