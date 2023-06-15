@@ -48,28 +48,50 @@ singlelinecheck=false
 \end{abstract}
 
 \section{Introduction}
-\subsection{Why study genetic diversity}
-A crucial first goal in any population genetic analysis of a natural population is to describe the observed genetic variation in the system. A major topic of population genetics is to link these patterns of variation with the underlying processes, including genetic drift, migration and selection.
 
-Admixture, along with other events in the evolutionary history, shapes the genetic diversity of populations. An important goal of many population genetic studies is to identify the admixture events that have left their mark as patterns of variation in human populations. 
+Admixture between previously isolated populations is common in nature, and affects the patterns of genetic diversity. From these patterns of genetic diversity, one can reconstruct the past events of admixture.  
 
-There are several methods available to make inferences about admixture events that explain the observed genetic diversity. These methods can be classified as local or global ancestry based. Local ancestry based methods infer ancestry at each locus and reveal recent history of each individual, but have low power to infer events in deep past \cite{vi_genome-wide_2023, brisbin_pcadmix_2012, price_sensitive_2009, sankararaman_estimating_2008}. Commonly used methods to infer global ancestry are Principal Component Analysis (PCA)  \cite{mcvean_genealogical_2009}, f-statistics \cite{patterson_ancient_2012, peter_admixture_2016}, MDS \cite{wang_comparison_2009}, and model based methods like STRUCTURE \cite{pritchard_inference_2000} and ADMIXTURE \cite{alexander_fast_2009}. 
+\subsection{Overview of methods to study admixture}
+There are several methods available to make inferences about admixture events that explain the observed genetic diversity. These methods can be classified as local or global ancestry based. Local ancestry based methods infer ancestry at each locus and reveal recent history of each individual, but have low power to infer events in deep past \cite{vi_genome-wide_2023, brisbin_pcadmix_2012, price_sensitive_2009, sankararaman_estimating_2008}. Commonly used methods to infer global ancestry are Principal Component Analysis (PCA) \cite{mcvean_genealogical_2009}, MDS \cite{wang_comparison_2009}, STRUCTURE \cite{pritchard_inference_2000} and ADMIXTURE \cite{alexander_fast_2009}. These are powerful methods to infer admixture, but can be difficult to interpret since they do not provide model comparisons or formal tests of admixture.  
 
-PCA is a powerful method to visualize population structure but it can be difficult to interpret \citep{cavalli-sforza1993, novembre_stephens_2008, degiorgio_rosenberg2013}. In particular, the population structure in PCA is a function of expected pairwise coalescence times \citep{mcvean_genealogical_2009}, and thus is not explicitly tied to a particular scenario; different histories may yield similar or identical PCAs. 
+\subsection{F-statistics}
+F-statistics are a popular way to infer global ancestry. They provide an intuitive and powerful way to test hypothesis of admixture by measuring the genetic drift shared between two, three, or four populations \cite{patterson_ancient_2012, peter_admixture_2016}. In this framework, the null model is represented by a tree connecting the populations, with the branch lengths denoting the shared drift, and the null hypothesis can be rejected when the variation in observed data can not be explained by a tree-like structure. It is worth noting that the measure of branch lengths here is based on the allele frequencies in the populations of interest. These allele frequencies can be estimated accurately when there are large number of samples available for each population. However, the sampling bias becomes important when sample sizes are small, and the branch lengths estimated from population allele frequencies should then be corrected \cite{patterson_ancient_2012, peter_admixture_2016}. We provide a detailed definition of F-statistics, and the correction terms for sampling bias in section YY.
 
-Thus, parameter estimation, model comparisions and formal tests of admixture are usually not carried out in PCA. 
+\subsection{Estimation of population allele frequencies}
+We describe two issues in accurate estimation of population allele frequencies:
 
-(add section here introducing the general idea of PCA, explain how it deals with error/noise  and difference between probabilistic and regular PCA. Possibly also explain how people use PCA as a QC-step to detect batch effects, and how that compares with PCA used for population structure (i.e. Ainash' question from your talk))
+1. Humans may not fit into well-differentiated discrete populations, except in cases where the populations have been isolated due to geographical features \cite{novembre_genes_2008}. The estimation of population allele frequencies depends on the assignment of individuals to discrete populations, and may be affected by miss-assignment especially when few samples are available. 
 
-F-statistics are a useful tool to quantify population structure, and provide tests for admixture. Hence, a common pipeline in many population genetic studies is to analyze PCA plots to look for visible patterns that could be due to past admixtures, followed by formal test with F-statistics \cite{lazaridis_ancient_2014,lazaridis_genomic_2016}. F-statistics use population allele frequencies to test for admixture, and hence the accuracy of these tests is limited by the accuracy of allele frequency estimates \cite{peter_admixture_2016}. Whereas F-statistics estimates are robust when there are enough high quality samples, we show that low number of samples and missing data decrease the accuracy of these tests.
+2. Missing data in some individuals for certain sites can make it difficult to get accurate allele frequency estimates at those sites. One commonly used solution to this problem is to filter out all the sites with missing data. However, this may make the number of sites available for F-statistics quite small. E.g., for 100 individuals with $10\%$ randomly missing sites, the available number of sites after filtering out positions with missing data would be $\approx26$ out of a total 1,000,000 sites. 
 
-A major issue when working with ancient DNA is low number of individuals and missing data. This issue is exacerbated due to difficulty in assigning some of the individuals to discrete populations. Especially in the case of humans samples, we know that the genetic samples do not strictly belong to discrete populations, but form a continuous spectrum in the allele frequency space \cite{oteo-garcia_geometrical_2021}. Hence, it is a step in the right direction to think of a method to estimate F-statistics in a structure-aware framework. The easiest way to think about this is using PCA. PCA does not require assignment of individuals to discrete populations, and it has been shown that F-statistics can be estimated conveniently from distance between populations on PCA space \cite{peter_geometric_2022}. However, PCA distances are inaccurate when population sizes are small since PCA does not explicitly model sampling bias in the allele frequencies (see section XX). In addition, PCA is sensitive to missing data, and this makes it difficult to work with ancient DNA. 
+\subsection{PCA and F-statistics}
+
+PCA is a dimensionality reduction technique used to transform a high-dimensional dataset into a lower-dimensional representation while retaining as much of the original variance as possible. It achieves this by finding orthogonal axes, called principal components (PC's), that capture the maximum variance in the data. It is commonly used to understand structure and admixture between populations. 
+
+Issue 1 in the previous section can be addressed by estimating F-statistics from PCA \cite{peter_geometric_2022}. We describe a formal relation between PCA and F-statistics (from \cite{peter_geometric_2022}) in section YY, but here we point out that a joint framework to estimate PCA and F-statistics not only addresses the issue of population assignment in F-statistics, but also can potentially resolve some issues with the interpretations of PCA. Studies using PCA generally use specific PC's to visualize population structure or admixture, and the choice of the PC's used can be quite subjective \cite{elhaik_principal_2022}. Estimation of F-statistics from PCA quantifies, using all the important PC's, what the researcher has visualized using seemingly arbitrary PC's.
+
+However, a limitation with such a framework is that it is possible to define F-statistics in terms of PC's only when allele frequencies are known, and need not be estimated. This is due to the fact that PCA does not filter the noise in the data due to sampling. 
+
+\subsection{Probabilistic PCA and Latent Subspace Estimation (LSE)}
+
+We can filter the noise due to sampling by using probabilistic PCA (PPCA), which is an extension of PCA that incorporates a probabilistic framework \cite{tipping_probabilistic_nodate}. PPCA models the observed data as generated by a linear transformation of a lower-dimensional latent space $W$ with added Gaussian noise $\Psi$. Another way to filter out the sampling noise is by removing binomial sampling noise from the covariance matrix of the unnormalized data before estimating the PC's \cite{van_waaij_evaluation_2023}. This is referred to as Latent Subspace Estimation (LSE) \cite{cabreros_likelihood-free_2019}. We give a detailed explanation of both the methods in section YY. In practice, PCA, PPCA and LSE differ in the way that they model the noise in the data due to sampling. Fig. 1 (change it to genetic simulation) shows that PPCA models the sampling noise as multivariate normal, LSE assumes and removes binomial noise, while PCA does not model the sampling noise.  
+
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{plots/pca_ppca.png}
+    \centering
+    \caption{Comparison of PCA, PPCA and LSE}
+    \label{fig1:pca_ppca}
+\end{figure}
 
 
+We would point out here that in ancient DNA studies PCA is sometimes used as quality-control step by constructing PC's using high-quality samples, and projecting the low-quality samples which may be from the same populations or even the same individuals as the high coverage samples. In the presence of contamination from present-day people, reference bias, ascertainment bias or batch effects, the projected sample may not overlap with an identical high-coverage sample. These biases and issues are not resolved with PPCA/LSE either, since PPCA only models sampling noise. 
 
-In this study, we develop a statistical framework to estimate F-statistics between many populations in a probabilistic PCA framework.  that probabilistic PCA (PPCA) explicitly models the error due to the sampling bias in allele frequencies. In addition. we demonstrate that PPCA based framework is not sensitive to random missing data, and so it can be used to visualize individuals in PCA-space without having to project lower quality samples.
 
-Finally, we show that PPCA provides a natural framework to estimate F-statistics with small sample-size and missing data. We show formal hypothesis tests for admixture and compare our results to admixtools2 cite{admixtools paper} on simulations. Finally we show the use of this framework on published datasets from neolithic Haak et al. and upper Paleolithic humans (Mateja). 
+\subsection{F-statistics with PPCA/LSE}
+In this study, we develop a statistical framework to estimate F-statistics between individuals in a PPCA framework. We show that PPCA explicitly models the error due to the sampling bias in allele frequencies. In addition, we demonstrate that PPCA based framework is not sensitive to random missing data, and so it can be used to visualize individuals in PCA-space without having to project lower quality samples.
+
+We explain that PPCA provides a natural framework to estimate F-statistics with small sample-size and missing data. We show formal hypothesis tests for admixture and compare our results to admixtools2 \cite{maier_limits_2022} on simulations. Finally we show the use of this framework on published datasets from neolithic Haak et al. and upper Paleolithic humans (Mateja). 
+
 
 \section{Theory}
 
@@ -94,12 +116,35 @@ We show that practically PCA and PPCA differ in the way that while PCA rotates t
     \includegraphics[width=16.5cm]{plots/pca_ppca.png}
     \centering
     \caption{Comparison of pca and ppca}
-    \label{fig3:Comparison_READ_KIN}
+    \label{fig1:pca_ppca}
 \end{figure}
 
-Next we show that PPCA/PCA-w is a natural framework to estimate f-statistics. Estimation of f2's compared for PCA, PPCA-1 PPCA2, admixtools.
-
 \subsection{Probabilistic PCA and F-statistics}
+
+
+
+\section{old stuff}
+\subsection{PCA}
+
+One way to estimate F-statistics 
+
+the estimation of allele frequencies can also be affected by large amounts of missing data. Since F-statistics are dependent on the ascertainment scheme, random missing data reduces the number of overlapping sites greatly.
+PCA is a powerful method to visualize population structure but it can be difficult to interpret \citep{cavalli-sforza1993, novembre_stephens_2008, degiorgio_rosenberg2013}. In particular, the population structure in PCA is a function of expected pairwise coalescence times \citep{mcvean_genealogical_2009}, and thus is not explicitly tied to a particular scenario; different histories may yield similar or identical PCAs. 
+
+Thus, parameter estimation, model comparisions and formal tests of admixture are usually not carried out in PCA. 
+
+(add section here introducing the general idea of PCA, explain how it deals with error/noise  and difference between probabilistic and regular PCA. Possibly also explain how people use PCA as a QC-step to detect batch effects, and how that compares with PCA used for population structure (i.e. Ainash' question from your talk))
+
+F-statistics are a useful tool to quantify population structure, and provide tests for admixture. Hence, a common pipeline in many population genetic studies is to analyze PCA plots to look for visible patterns that could be due to past admixtures, followed by formal test with F-statistics \cite{lazaridis_ancient_2014,lazaridis_genomic_2016}. F-statistics use population allele frequencies to test for admixture, and hence the accuracy of these tests is limited by the accuracy of allele frequency estimates \cite{peter_admixture_2016}. Whereas F-statistics estimates are robust when there are enough high quality samples, we show that low number of samples and missing data decrease the accuracy of these tests.
+
+A major issue when working with ancient DNA is low number of individuals and missing data. This issue is exacerbated due to difficulty in assigning some of the individuals to discrete populations. Especially in the case of humans samples, we know that the genetic samples do not strictly belong to discrete populations, but form a continuous spectrum in the allele frequency space \cite{oteo-garcia_geometrical_2021}. Hence, it is a step in the right direction to think of a method to estimate F-statistics in a structure-aware framework. The easiest way to think about this is using PCA. PCA does not require assignment of individuals to discrete populations, and it has been shown that F-statistics can be estimated conveniently from distance between populations on PCA space \cite{peter_geometric_2022}. However, PCA distances are inaccurate when population sizes are small since PCA does not explicitly model sampling bias in the allele frequencies (see section XX). In addition, PCA is sensitive to missing data, and this makes it difficult to work with ancient DNA. 
+
+
+
+In this study, we develop a statistical framework to estimate F-statistics between many populations in a probabilistic PCA framework.  that probabilistic PCA (PPCA) explicitly models the error due to the sampling bias in allele frequencies. In addition. we demonstrate that PPCA based framework is not sensitive to random missing data, and so it can be used to visualize individuals in PCA-space without having to project lower quality samples.
+
+Finally, we show that PPCA provides a natural framework to estimate F-statistics with small sample-size and missing data. We show formal hypothesis tests for admixture and compare our results to admixtools2 cite{admixtools paper} on simulations. Finally we show the use of this framework on published datasets from neolithic Haak et al. and upper Paleolithic humans (Mateja). 
+
 
 
 
@@ -107,16 +152,16 @@ Next we show that PPCA/PCA-w is a natural framework to estimate f-statistics. Es
 
 \section{Results}
 
-We simulated 10 populations with split-times and migration rates as shown in Fig. 1. 
+We simulated 10 populations with slendr \cite{slendr} using the standard mutation rate $10^{-8}$ per base per generation, recombination rate $10^{-8}$ per base per generation, and a generation time of 30 years. 
 
 \begin{figure}[ht!]
     \includegraphics[width=16.5cm]{inkscape/sim1.png}
     \centering
-    \caption{Comparison of pca and ppca}
-    \label{fig3:Comparison_READ_KIN}
+    \caption{Simulated trees for testing our estimation of F-statistics. Split time for each node in generations and the admixture branches are shown in dashed lines. The red arrow represents a migration event from Pop3 to Pop2.}
+    \label{fig2:sim}
 \end{figure}
 
-
+We estimate F2's between the following pairs of pop1 and pop2, pop2 and pop3, pop3 and pop4
 
 
 
@@ -561,7 +606,12 @@ This is just o
 
 
 
+\section{Introduction-not used }
+A crucial first goal in any population genetic analysis of a natural population is to describe the observed genetic variation in the system. A major topic of population genetics is to link these patterns of variation with the underlying processes, including genetic drift, migration and selection.
 
+Admixture followed by drift can influence and shape the genetic diversity of populations. An important goal of many population genetic studies is to identify the admixture events that have left their mark as patterns of variation in human populations. 
+
+Genetic variation in a natural population is shaped by many processes, including genetic drift, selection, and admixture. Admixture followed by drift is one of the most prevalent process that shaped human genetic diversity 
 
 
 
