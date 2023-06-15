@@ -129,30 +129,29 @@ fstats_pca <- function(X3,method,npcs){
   mu = rowMeans(data11,na.rm=TRUE)
   data = data11 - mu
   data = data/2
-    
-    if (method=='pca'){
-      xxx=run_pca(data)
-    }else if (method=='ppca_direct'){
-      xxx = ppca_direct(as.matrix(data), n_pcs=npcs)
-    }else if (method=='PCA1'){
-      xxx = PCA1(as.matrix(data12), n_pcs=npcs, normalized=TRUE)
-    }else if (method=='ppca_cor'){
-      xxx = ppca_cor(as.matrix(data12), n_pcs=npcs, normalized=TRUE)
-    }
+  
+  if (method=='pca'){
+    xxx=run_pca(data)
+  }else if (method=='ppca_direct'){
+    xxx = ppca_direct(as.matrix(data), n_pcs=npcs)
+  }else if (method=='PCA1'){
+    xxx = PCA1(as.matrix(data12), n_pcs=npcs, normalized=TRUE)
+  }else if (method=='ppca_cor'){
+    xxx = ppca_cor(as.matrix(data12), n_pcs=npcs, normalized=TRUE)
+  }
   
   return(xxx)
   
 }
 
-plotf <- function(outf){
+#genf = "/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/test_samplesize100/simfiles/Ne1000/split_times1000/mu0/run1/npop10_nind100/eigen.geno_pc"
+
+
+plotf <- function(genf,outf){
   
-  N_SNPS = 100000
-  N_SAMPLES = 20
-  TRUE_RANK = 4
-  N_PCS=4
-  SIGMA=0.5
-  
-  X= simple_sim(N_SAMPLES=N_SAMPLES , TRUE_RANK=TRUE_RANK , N_SNPS=N_SNPS, SIGMA=SIGMA)
+  X=read.csv(file=genf, header=F, sep=',')
+
+  N_PCS=8
   xxx= fstats_pca(X3=X, method='pca', npcs=N_PCS)
   xxx1= fstats_pca(X3=X, method='ppca_direct', npcs=N_PCS)
   xxx2= fstats_pca(X3=X, method='PCA1', npcs=N_PCS)
@@ -161,19 +160,19 @@ plotf <- function(outf){
   eigenvalues=xxx$eval[1:19]
   PC=1:19
   #plot(PC, eigenvalues, main="PCA", ylim=c(0,1.7))
-  eigenvalues1=c(sqrt(xxx1$eval),rep(0,15))
+  eigenvalues1=c(sqrt(xxx1$eval),rep(0,11))
   #plot(PC, eigenvalues1, main="Probabilistic PCA", ylim=c(0,1.7))
   eigenvalues2=xxx2$eval[1:19]
-  eigenvalues3=c(sqrt(xxx3$eval),rep(0,15))
+  eigenvalues3=c(sqrt(xxx3$eval),rep(0,11))
   
-  png(file=outf, width=600, height=350)
+  png(file=outf, width=600, height=350, res=100)
   par(mfrow=c(1,3))
-  plot(PC, eigenvalues, main="PCA",ylim=c(0,1))
-  plot(PC, eigenvalues1, main="Probabilistic PCA",ylim=c(0,1))
-  plot(PC, eigenvalues2, main="PCA with binomial error",ylim=c(0,1))
+  plot(PC, eigenvalues, main="PCA",ylim=c(0,1.3))
+  plot(PC, eigenvalues1, main="Probabilistic PCA",ylim=c(0,1.3))
+  plot(PC, eigenvalues2, main="LSE",ylim=c(0,1.3))
   #plot(PC, eigenvalues3, main="PPCA with binomial error")
   dev.off()
   
 }
 
-plotf(outf=snakemake@output[["outf"]])
+plotf(genf=snakemake@input[["genf"]],outf=snakemake@output[["outf"]])
