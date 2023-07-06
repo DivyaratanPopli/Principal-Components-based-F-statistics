@@ -1,4 +1,70 @@
 
+@article{meisner_large-scale_2021,
+	title = {Large-scale inference of population structure in presence of missingness using {PCA}},
+	volume = {37},
+	issn = {1367-4811},
+	doi = {10.1093/bioinformatics/btab027},
+	abstract = {MOTIVATION: Principal component analysis (PCA) is a commonly used tool in genetics to capture and visualize population structure. Due to technological advances in sequencing, such as the widely used non-invasive prenatal test, massive datasets of ultra-low coverage sequencing are being generated. These datasets are characterized by having a large amount of missing genotype information.
+RESULTS: We present EMU, a method for inferring population structure in the presence of rampant non-random missingness. We show through simulations that several commonly used PCA methods cannot handle missing data arisen from various sources, which leads to biased results as individuals are projected into the PC space based on their amount of missingness. In terms of accuracy, EMU outperforms an existing method that also accommodates missingness while being competitively fast. We further tested EMU on around 100K individuals of the Phase 1 dataset of the Chinese Millionome Project, that were shallowly sequenced to around 0.08×. From this data we are able to capture the population structure of the Han Chinese and to reproduce previous analysis in a matter of CPU hours instead of CPU years. EMU's capability to accurately infer population structure in the presence of missingness will be of increasing importance with the rising number of large-scale genetic datasets.
+AVAILABILITY AND IMPLEMENTATION: EMU is written in Python and is freely available at https://github.com/rosemeis/emu.
+SUPPLEMENTARY INFORMATION: Supplementary data are available at Bioinformatics online.},
+	language = {eng},
+	number = {13},
+	journal = {Bioinformatics (Oxford, England)},
+	author = {Meisner, Jonas and Liu, Siyang and Huang, Mingxi and Albrechtsen, Anders},
+	month = jul,
+	year = {2021},
+	pmid = {33459779},
+	pages = {1868--1875},
+}
+
+@misc{petr_slendr_2022,
+	title = {slendr: a framework for spatio-temporal population genomic simulations on geographic landscapes},
+	copyright = {© 2022, Posted by Cold Spring Harbor Laboratory. This pre-print is available under a Creative Commons License (Attribution 4.0 International), CC BY 4.0, as described at http://creativecommons.org/licenses/by/4.0/},
+	shorttitle = {slendr},
+	url = {https://www.biorxiv.org/content/10.1101/2022.03.20.485041v2},
+	doi = {10.1101/2022.03.20.485041},
+	abstract = {One of the goals of population genetics is to understand how evolutionary forces shape patterns of genetic variation over time. However, because populations evolve across both time and space, most evolutionary processes also have an important spatial component, acting through phenomena such as isolation by distance, local mate choice, or uneven distribution of resources. This spatial dimension is often neglected, partly due to the lack of tools specifically designed for building and evaluating complex spatio-temporal population genetic models. To address this methodological gap, we present a new framework for simulating spatially-explicit genomic data, implemented in a new R package called slendr (www.slendr.net), which leverages a SLiM simulation back-end script bundled with the package. With this framework, the users can programmatically and visually encode spatial population ranges and their temporal dynamics (i.e., population displacements, expansions, and contractions) either on real Earth landscapes or on abstract custom maps, and schedule splits and gene-flow events between populations using a straightforward declarative language. Additionally, slendr can simulate data from traditional, non-spatial models, either with SLiM or using an alternative built-in coalescent msprime back end. Together with its R-idiomatic interface to the tskit library for tree-sequence processing and analysis, slendr opens up the possibility of performing efficient, reproducible simulations of spatio-temporal genomic data entirely within the R environment, leveraging its wealth of libraries for geospatial data analysis, statistics, and visualization. Here, we present the design of the slendr R package and demonstrate its features on several practical example workflows.},
+	language = {en},
+	urldate = {2023-07-04},
+	publisher = {bioRxiv},
+	author = {Petr, Martin and Haller, Benjamin C. and Ralph, Peter L. and Racimo, Fernando},
+	month = sep,
+	year = {2022},
+	note = {Pages: 2022.03.20.485041
+Section: New Results},
+}
+
+@misc{chen_consistent_2015,
+	title = {Consistent {Estimation} of {Low}-{Dimensional} {Latent} {Structure} in {High}-{Dimensional} {Data}},
+	url = {http://arxiv.org/abs/1510.03497},
+	abstract = {We consider the problem of extracting a low-dimensional, linear latent variable structure from high-dimensional random variables. Speciﬁcally, we show that under mild conditions and when this structure manifests itself as a linear space that spans the conditional means, it is possible to consistently recover the structure using only information up to the second moments of these random variables. This ﬁnding, specialized to one-parameter exponential families whose variance function is quadratic in their means, allows for the derivation of an explicit estimator of such latent structure. This approach serves as a latent variable model estimator and as a tool for dimension reduction for a high-dimensional matrix of data composed of many related variables. Our theoretical results are veriﬁed by simulation studies and an application to genomic data.},
+	language = {en},
+	urldate = {2023-06-29},
+	publisher = {arXiv},
+	author = {Chen, Xiongzhi and Storey, John D.},
+	month = oct,
+	year = {2015},
+	note = {arXiv:1510.03497 [stat]},
+	keywords = {Statistics - Machine Learning},
+}
+
+@article{gower_distance_1966,
+	title = {Some {Distance} {Properties} of {Latent} {Root} and {Vector} {Methods} {Used} in {Multivariate} {Analysis}},
+	volume = {53},
+	issn = {0006-3444},
+	url = {https://www.jstor.org/stable/2333639},
+	doi = {10.2307/2333639},
+	abstract = {This paper is concerned with the representation of a multivariate sample of size \$n\$ as points \$P\_1, P\_2,{\textbackslash}ldots, P\_n\$ in a Euclidean space. The interpretation of the distance \${\textbackslash}Delta(P\_i, P\_j)\$ between the \$i\$th and \$j\$th members of the sample is discussed for some commonly used types of analysis, including both \$Q\$ and \$R\$ techniques. When all the distances between \$n\$ points are known a method is derived which finds their co-ordinates referred to principal axes. A set of necessary and sufficient conditions for a solution to exist in real Euclidean space is found. \$Q\$ and \$R\$ techniques are defined as being dual to one another when they both lead to a set of \$n\$ points with the same inter-point distances. Pairs of dual techniques are derived. In factor analysis the distances between points whose co-ordinates are the estimated factor scores can be interpreted as \$D{\textasciicircum}2\$ with a singular dispersion matrix.},
+	number = {3/4},
+	urldate = {2023-06-27},
+	journal = {Biometrika},
+	author = {Gower, J. C.},
+	year = {1966},
+	note = {Publisher: [Oxford University Press, Biometrika Trust]},
+	pages = {325--338},
+}
+
 @misc{maier_limits_2022,
 	title = {On the limits of fitting complex models of population history to genetic data},
 	copyright = {© 2022, Posted by Cold Spring Harbor Laboratory. This pre-print is available under a Creative Commons License (Attribution 4.0 International), CC BY 4.0, as described at http://creativecommons.org/licenses/by/4.0/},
@@ -1566,7 +1632,7 @@ Section: Biological Sciences},
 	pages = {2867--2873},
 }
 
-@article{li_relationship_2014-3,
+@article{li_relationship_2014,
 	title = {Relationship {Estimation} from {Whole}-{Genome} {Sequence} {Data}},
 	volume = {10},
 	issn = {1553-7404},
