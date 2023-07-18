@@ -1,5 +1,6 @@
 
 folder1="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE/"
+folder2="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE_1ind/"
 
 rule pca_ppca:
     output:
@@ -28,5 +29,15 @@ rule supp_PC_comparison_all_inds:
         true=folder1+"simfiles/Ne{Ne}/split_times{sp}/mu{mu}/avgrun/npop{npop}_nind{nind}/true_val/f2mat8",
     output:
         f2plot="plots/supplementary/Ne{Ne}_split_times{sp}_npop{npop}_nind{nind}_mu{mu}_f2_plot_scale_test.png"
+    script:
+        "scale_f2.R"
+
+rule supp_PC_comparison_all_inds1:
+    input:
+        flist=expand(folder2+"simfiles/Ne{{Ne}}/split_times{{sp}}/mu{{mu}}/average_run/npop{{npop}}_nind{{nind}}/avgAccuracy_{vals}_scale{npcs}", vals=["PCA1_val","pca_val","ppca_direct_val"], npcs=list(range(2,51))),
+        slist=expand(folder2+"simfiles/Ne{{Ne}}/split_times{{sp}}/mu{{mu}}/average_run/npop{{npop}}_nind{{nind}}/stdDev_{vals}_scale{npcs}", vals=["PCA1_val","pca_val","ppca_direct_val"], npcs=list(range(2,51))),
+        true=folder2+"simfiles/Ne{Ne}/split_times{sp}/mu{mu}/avgrun/npop{npop}_nind{nind}/true_val/f2mat8",
+    output:
+        f2plot="plots/supplementary/Ne{Ne}_split_times{sp}_npop{npop}_nind{nind}_mu{mu}_f2_plot_scale_test_ind.png"
     script:
         "scale_f2.R"
