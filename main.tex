@@ -104,7 +104,7 @@ F_3(X_1;X_2,X_3) &= \frac{1}{S}\sum_{s=1}^S(x_{1s} - x_{2s})(x_{1s} - x_{3s})\no
 F_4(X_1,X_3;X_2,X_4) &= \frac{1}{S}\sum_{s=1}^S(x_{1s} - x_{2s})(x_{3s} - x_{4s})\nonumber\\
 \end{align}
 
-$F_2(X_1,X_2)$ is interpreted as the branch length between populations $X_1$ and $X_2$ (fig S2 a) and it measures the expected amount of drift that occurred between $X_1$ and $X_2$. $F_3(X_1;X_2,X_3)$ represents the amount of drift that occurred on the branch connecting $X_1$ to the common ancestor node of $X_2$ and $X_3$ (fig S2 b). When $X_1$ is admixed between $X_2$ and $X_3$, $F_3(X_1;X_2,X_3)$ may be negative, and hence this is used as a test for admixture\cite{peter_admixture_2016, patterson_ancient_2012}. $F_4(X_1,X_3;X_2,X_4)$ represents the covariance between shared drifts between X1,X2 and X3,X4. This would be represented by the internal branch between the common ancestor nodes of $X_1$, $X_2$ and $X_3$, $X_4$ (fig S2 c). $F_4$ statistic, with a different permutation of the populations can be used as test of admixture. $F_4(X_1,X_2;X_3,X_4)$ is expected to be 0 if $X_1$, $X_2$, $X_3$, $X_4$ are related to each other by a tree (fig S2 d). However, a large positive or negative value would suggest a departure from the null model of treeness due to gene flow between X1 and X3 or X2 and X3 respectively. 
+$F_2(X_1,X_2)$ is interpreted as the branch length between populations $X_1$ and $X_2$ (fig S2 a) and it measures the expected amount of drift that occurred between $X_1$ and $X_2$. $F_3(X_1;X_2,X_3)$ represents the amount of drift that occurred on the branch connecting $X_1$ to the common ancestor node of $X_2$ and $X_3$ (fig S2 b). When $X_1$ is admixed between $X_2$ and $X_3$, $F_3(X_1;X_2,X_3)$ may be negative, and hence this is used as a test for admixture\cite{peter_admixture_2016, patterson_ancient_2012}. $F_4(X_1,X_3;X_2,X_4)$ represents the covariance between shared drifts between X1,X2 and X3,X4. This would be represented by the internal branch between the common ancestor nodes of $X_1$, $X_2$ and $X_3$, $X_4$ (fig S2 c). $F_4$ statistic, with a different permutation of the populations can be used as test of admixture. $F_4(X_1,X_2;X_3,X_4)$ is expected to be 0 if $X_1$, $X_2$, $X_3$, $X_4$ are related to each other by a tree (fig S2 d). However, a large positive or negative value would suggest a departure from the null model of treeness due to gene flow between X1 and X3 or X2 and X3 respectively.
 
 Since $F_2$ represents the branch length between a pair of populations, we can write $F_3$ and $F_4$ as linear combination of $F_2$'s.
 
@@ -203,7 +203,7 @@ We simulated 10 populations with 10 individuals each using slendr \cite{petr_sle
     \label{fig2:sim}
 \end{figure}
 
-We use equation 6 to express $F_2$ for a pair of populations as a squared Euclidean distance between them (see Fig. S2). We estimate the PC's using PCA, PPCA and LSE, and compare $F-statistics$ estimated from these methods to the true theoretical value of the statistic obtained from branch lengths in slendr \cite{petr_slendr_2022}. We first do a comparison between $F_2$'s estimated from PCA, PPCA and LSE with different number of PC's used (Fig. S1). We see that PPCA and LSE are not very sensitive to small changes in the number of PC's used, while PCA's estimates of $F_2$'s are inflated with additional PC's. 
+We use equation 6 to express $F_2$ for a pair of populations as a squared Euclidean distance between them (see Fig. S2). We estimate the PC's using PCA, PPCA and LSE, and compare F-statistics estimated from these methods to the true theoretical value of the statistic obtained from branch lengths in slendr \cite{petr_slendr_2022}. We first do a comparison between $F_2$'s estimated from PCA, PPCA and LSE with different number of PC's used (Fig. S1). Here, we use 10 individuals in each population, and we see that all three methods are not sensitive to the number of PC's used, as long as the number of PC's is higher than 7. Estimate of F2 with PCA is only slightly higher than PPCA and LSE, since population size of 10 diploid individuals is large enough to ignore sampling error correction. We next look at a comparison between the three methods using only one individuals in each population (Fig. S2). Here we observe that PCA 
 
 In the rest of the analyses, we exclude PCA, and compare PPCA and LSE to admixtools2, which is a popularly used tool in population genetics \cite{maier_limits_2022}. We first compare these methods in an ideal scenario, where each population has 10 individuals, and there is no missing data. In this case we find that the three methods perform well, and get F-statistics close to the truth. 
 
@@ -232,7 +232,12 @@ We show that F-statistics estimated from LSE using all eigenvalues is same as F-
 \section{Supplementary Figures}
 
 
-
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{plots/supplementary/Ne1000_split_times1000_npop10_nind100_mu0_f2_plot_scale_test.png}
+    \centering
+    \caption{Comparison of PCA, PPCA and LSE using population allele frequencies of 10 individuals in each population.x-axis shows the number of PC's used for the three methods, ranging from 2 to 50.}
+    \label{figS1:pc_scale}
+\end{figure}
 
 
 
