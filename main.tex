@@ -203,9 +203,9 @@ We simulated 10 populations with 10 individuals each using slendr \cite{petr_sle
     \label{fig2:sim}
 \end{figure}
 
-We use equation 6 to express $F_2$ for a pair of populations as a squared Euclidean distance between them (see Fig. S2). We estimate the PC's using PCA, PPCA and LSE, and compare F-statistics estimated from these methods to the true theoretical value of the statistic obtained from branch lengths in slendr \cite{petr_slendr_2022}. We first do a comparison between $F_2$'s estimated from PCA, PPCA and LSE with different number of PC's used (Fig. S1). Here, we use 10 individuals in each population, and we see that all three methods are not sensitive to the number of PC's used, as long as the number of PC's is higher than 7. Estimate of F2 with PCA is only slightly higher than PPCA and LSE, since population size of 10 diploid individuals is large enough to ignore sampling error correction. We next look at a comparison between the three methods using only one individuals in each population (Fig. S2). Here we observe that PCA 
+We use equation 6 to express $F_2$ for a pair of populations as a squared Euclidean distance between them (see Fig. S2). We estimate the PC's using PCA, PPCA and LSE, and compare F-statistics estimated from these methods to the true theoretical value of the statistic obtained from branch lengths in slendr \cite{petr_slendr_2022}. We first do a comparison between $F_2$'s estimated from PCA, PPCA and LSE with different number of PC's used (Fig. S1). Here, we use 10 individuals in each population, and we see that all three methods are not sensitive to the number of PC's used, as long as the number of PC's is higher than 7. Estimate of F2 with PCA is only slightly higher than PPCA and LSE, since population size of 10 diploid individuals is large enough to ignore sampling error correction. We next look at a comparison between the three methods using only one individuals in each population (Fig. S2). Here we observe that $F2$ estimates from PPCA and LSE are quite close to the true value at all cases with $PCs \geq 7$. However, estimates from PCA get higher with more PC's used.
 
-In the rest of the analyses, we exclude PCA, and compare PPCA and LSE to admixtools2, which is a popularly used tool in population genetics \cite{maier_limits_2022}. We first compare these methods in an ideal scenario, where each population has 10 individuals, and there is no missing data. In this case we find that the three methods perform well, and get F-statistics close to the truth. 
+In the rest of the analyses, we exclude PCA, and compare PPCA and LSE with 8 and 12 PC's to admixtools2, which is a popularly used tool in population genetics \cite{maier_limits_2022}. We first compare these methods in an ideal scenario, where each population has 10 individuals, and there is no missing data. In this case we find that the three methods perform well, and get F-statistics close to the truth.  
 
 We next address the issues listed in Introduction section XX. Issue 1 is about estimation of F-statistics when population assignment is difficult, especially when few samples are available. We show that this can be resolved with individual-based F-statistics. In our simulations, we label each individual as a different population, and we sample one ancient individual from each population  to calculate F-statistics. Fig. YY shows that all three methods on an average are close to the true values, but admixtools2 shows higher variability in the estimates. This is expected, since both PPCA and LSE do not utilize the population labels, and get the information about structure and admixture from all samples, even though the F-statistics are calculated using only one individual from each population. On the other hand, admixtools 2 has only one individual from each population to assess structure / admixture. 
 Test of admixture for F3/F4
@@ -235,12 +235,16 @@ We show that F-statistics estimated from LSE using all eigenvalues is same as F-
 \begin{figure}[ht!]
     \includegraphics[width=16.5cm]{plots/supplementary/Ne1000_split_times1000_npop10_nind100_mu0_f2_plot_scale_test.png}
     \centering
-    \caption{Comparison of PCA, PPCA and LSE using population allele frequencies of 10 individuals in each population.x-axis shows the number of PC's used for the three methods, ranging from 2 to 50.}
+    \caption{Comparison of PCA, PPCA and LSE using population allele frequencies of 10 individuals in each population. X-axis shows the number of PC's used for the three methods, ranging from 2 to 50.}
     \label{figS1:pc_scale}
 \end{figure}
 
-
-
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{plots/supplementary/Ne1000_split_times1000_npop10_nind100_mu0_f2_plot_scale_test_ind.png}
+    \centering
+    \caption{Comparison of PCA, PPCA and LSE using population genotypes from one individual in each population. X-axis shows the number of PC's used for the three methods, ranging from 2 to 50.}
+    \label{figS2:pc_scale}
+\end{figure}
 
 
 
