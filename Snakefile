@@ -30,7 +30,7 @@ rule supp_PC_comparison_all_inds:
     output:
         f2plot="plots/supplementary/Ne{Ne}_split_times{sp}_npop{npop}_nind{nind}_mu{mu}_f2_plot_scale_test.png"
     script:
-        "scale_f2.R"
+        "Rscripts/scale_f2.R"
 
 rule supp_PC_comparison_all_inds1:
     input:
@@ -40,4 +40,18 @@ rule supp_PC_comparison_all_inds1:
     output:
         f2plot="plots/supplementary/Ne{Ne}_split_times{sp}_npop{npop}_nind{nind}_mu{mu}_f2_plot_scale_test_ind.png"
     script:
-        "scale_f2.R"
+        "Rscripts/scale_f2.R"
+
+rule supp_method_comparison_ideal:
+    input:
+        flist=expand(folder1 + "simfiles/Ne{{Ne}}/split_times{{sp}}/mu{{mu}}/average_run/npop{{npop}}_nind{{nind}}/avgAccuracy_{vals}_scale{{npcs}}", vals=["PCA1_val","ppca_direct_val","admixtools2Norm"]),
+        fscale2=folder1 + "simfiles/Ne{Ne}/split_times{sp}/mu{mu}/average_run/npop{npop}_nind{nind}/avgAccuracy_ppca_direct_val_scale{npcs2}",
+        pscale2=folder1 + "simfiles/Ne{Ne}/split_times{sp}/mu{mu}/average_run/npop{npop}_nind{nind}/avgAccuracy_PCA1_val_scale{npcs2}",
+        slist=expand(folder1 + "simfiles/Ne{{Ne}}/split_times{{sp}}/mu{{mu}}/average_run/npop{{npop}}_nind{{nind}}/stdDev_{vals}_scale{{npcs}}", vals=["PCA1_val","ppca_direct_val","admixtools2Norm"]),
+        s_scale2=folder1 + "simfiles/Ne{Ne}/split_times{sp}/mu{mu}/average_run/npop{npop}_nind{nind}/stdDev_ppca_direct_val_scale{npcs2}",
+        p_scale2=folder1 + "simfiles/Ne{Ne}/split_times{sp}/mu{mu}/average_run/npop{npop}_nind{nind}/stdDev_PCA1_val_scale{npcs2}",
+        true=folder1 + "simfiles/Ne{Ne}/split_times{sp}/mu{mu}/avgrun/npop{npop}_nind{nind}/true_val/f2mat15"
+    output:
+        f2plot="plots/simfiles/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/plots_{npcs}_{npcs2}/mu{mu}_f2_plot_slides.png"
+    script:
+        "Rscripts/plot_f2.R"
