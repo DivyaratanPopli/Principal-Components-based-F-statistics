@@ -205,7 +205,7 @@ We simulated 10 populations with 10 individuals each using slendr \cite{petr_sle
 
 We use equation 6 to express $F_2$ for a pair of populations as a squared Euclidean distance between them (see Fig. S2). We estimate the PC's using PCA, PPCA and LSE, and compare F-statistics estimated from these methods to the true theoretical value of the statistic obtained from branch lengths in slendr \cite{petr_slendr_2022}. We first do a comparison between $F_2$'s estimated from PCA, PPCA and LSE with different number of PC's used (Fig. S1). Here, we use 10 individuals in each population, and we see that all three methods are not sensitive to the number of PC's used, as long as the number of PC's is higher than 7. Estimate of F2 with PCA is only slightly higher than PPCA and LSE, since population size of 10 diploid individuals is large enough to ignore sampling error correction. We next look at a comparison between the three methods using only one individual in each population (Fig. S2). Here we observe that $F2$ estimates from PPCA and LSE are quite close to the true value at all cases with $PCs \geq 7$. However, estimates from PCA get higher with more PC's used. This is expected from theory (section XX), since PCA does not account for sampling bias.
 
-In the rest of the analyses, we exclude PCA, and compare PPCA and LSE with 8 and 12 PC's to admixtools2, which is a popularly used tool in population genetics \cite{maier_limits_2022}. We first compare these methods in an ideal scenario, where each population has 10 individuals, and there is no missing data. In this case we find that the three methods perform well, and get F-statistics close to the truth (fig. S3). We then sub-sample only one individual from each population, and find individual-based F-statistics (fig. 1). We observe that in this case both PPCA and LSE- based frameworks perform atleast as well as ADMIXTOOLS 2. The mean estimate from each method is close to the true value, however, the error bars are lower for PPCA compared to ADMIXTOOLS 2, specially for Pop1 and Pop2, which have low split-times. This is an expected result, since ADMIXTOOLS 2 has access to only one individual from each population, while PPCA and LSE utilize the information about structure in the populations from the PC's.       
+In the rest of the analyses, we exclude PCA, and compare PPCA and LSE with 8 and 12 PC's to admixtools2, which is a popularly used tool in population genetics \cite{maier_limits_2022}. We first compare these methods in an ideal scenario, where each population has 10 individuals, and there is no missing data. We estimate $F_2$, $F_3$ and $F_4$  In this case we find that the three methods perform well, and get F-statistics close to the truth (fig. S3). We then sub-sample only one individual from each population, and find individual-based F-statistics (fig. 1). We observe that in this case both PPCA and LSE- based frameworks perform atleast as well as ADMIXTOOLS 2. The mean estimate from each method is close to the true value, however, the error bars are lower for PPCA compared to ADMIXTOOLS 2, specially for Pop1 and Pop2, which have low split-times. This is an expected result, since ADMIXTOOLS 2 has access to only one individual from each population, while PPCA and LSE utilize the information about structure in the populations from the PC's.       
 
 \begin{figure}[ht!]
     \includegraphics[width=16.5cm]{plots/simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_f2_plot_slides_1ind.png}
@@ -246,6 +246,15 @@ We show that F-statistics estimated from LSE using all eigenvalues is same as F-
     \label{figS1:pc_scale}
 \end{figure}
 
+
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{plots/supplementary/Ne1000_split_times1000_npop10_nind100_mu0_f2_plot_scale_test.png}
+    \centering
+    \caption{Comparison of PCA, PPCA and LSE using population allele frequencies of 10 individuals in each population. X-axis shows the number of PC's used for the three methods, ranging from 2 to 50.}
+    \label{figS1:pc_scale}
+\end{figure}
+
+
 \begin{figure}[ht!]
     \includegraphics[width=16.5cm]{plots/supplementary/Ne1000_split_times1000_npop10_nind100_mu0_f2_plot_scale_test_ind.png}
     \centering
@@ -255,7 +264,7 @@ We show that F-statistics estimated from LSE using all eigenvalues is same as F-
 
 
 \begin{figure}[ht!]
-    \includegraphics[width=16.5cm]{plots/simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_f2_plot_slides.png}
+    \includegraphics[width=16.5cm]{plots/simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_plot_all.png}
     \centering
     \caption{Comparison of PPCA and LSE to ADMIXTOOLS 2 using population genotypes from ten individuals in each population.}
     \label{figS2:pc_scale}
