@@ -81,3 +81,15 @@ rule one_plot:
         plotf="plots/simfiles/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/plots_{npcs}_{npcs2}/mu{mu}_plot_all.png"
     script:
         "Rscripts/plot_all.R"
+
+rule one_plot_1ind:
+    input:
+        f2f=folder2+"simfiles/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/plots_{npcs}_{npcs2}/mu{mu}_f2.csv",
+        f3f=folder2+"simfiles/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/plots_{npcs}_{npcs2}/mu{mu}_f3.csv",
+        f4f=folder2+"simfiles/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/plots_{npcs}_{npcs2}/mu{mu}_f4.csv",
+        true_f2=folder2+"simfiles/Ne{Ne}/split_times{sp}/mu{mu}/avgrun/npop{npop}_nind{nind}/true_val/f2mat15",
+        ftrue=folder2+"simfiles/Ne{Ne}/split_times{sp}/mu{mu}/average_run/npop{npop}_nind{nind}/fstats_avg_true_val"
+    output:
+        plotf="plots/simfiles/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/plots_{npcs}_{npcs2}/mu{mu}_plot_all_1ind.png"
+    script:
+        "Rscripts/plot_all.R"
