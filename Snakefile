@@ -105,4 +105,4 @@ rule one_plot_1ind_missing:
     output:
         plotf="plots/simfiles/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/missing{miss}/plots_{npcs}_{npcs2}/mu{mu}_plot_all_1ind_missing.png"
     script:
-        "Rscripts/plot_all.R"
+        "Rscripts/plot_all_missing.R"
