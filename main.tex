@@ -187,8 +187,6 @@ Probabilistic PCA provides a probabilistic framework that offers several advanta
 LSE is a dimensionality reduction technique quite similar to PCA, with the difference that LSE accounts for the heteroscedasticity in the data \cite{chen_consistent_2015}. From the data matrix X, we calculate $\delta_j = \frac{1}{S}\sum_i2x_{ij} - x_{ij}^2$. We define D as a diagonal matrix with $j^{th}$ entry as $\delta_j$. We then calculate the eigenvalues of G = $\frac{1}{S}X^TX - D$. The eigenvectors of G then span the latent subspace of L , and the smallest M-q eigenvalues converge to 0 for large M \cite{cabreros_likelihood-free_2019}. 
 
 
-
-
 \section{Results}
 
 We evaluate the performance of PCA, PPCA and LSE frameworks and compare to that of admixtools 2 using simulations, and a Neandertal dataset. 
@@ -205,19 +203,22 @@ We simulated 10 populations with 10 individuals each using slendr \cite{petr_sle
 
 We use equation 6 to express $F_2$ for a pair of populations as a squared Euclidean distance between them (see Fig. S2). We estimate the PC's using PCA, PPCA and LSE, and compare F-statistics estimated from these methods to the true theoretical value of the statistic obtained from branch lengths in slendr \cite{petr_slendr_2022}. We first do a comparison between $F_2$'s estimated from PCA, PPCA and LSE with different number of PC's used (Fig. S1). Here, we use 10 individuals in each population, and we see that all three methods are not sensitive to the number of PC's used, as long as the number of PC's is higher than 7. Estimate of F2 with PCA is only slightly higher than PPCA and LSE, since population size of 10 diploid individuals is large enough to ignore sampling error correction. We next look at a comparison between the three methods using only one individual in each population (Fig. S2). Here we observe that $F2$ estimates from PPCA and LSE are quite close to the true value at all cases with $PCs \geq 7$. However, estimates from PCA get higher with more PC's used. This is expected from theory (section XX), since PCA does not account for sampling bias.
 
-In the rest of the analyses, we exclude PCA, and compare PPCA and LSE with 8 and 12 PC's to admixtools2, which is a popularly used tool in population genetics \cite{maier_limits_2022}. We first compare these methods in an ideal scenario, where each population has 10 individuals, and there is no missing data. We estimate $F_2$, $F_3$ and $F_4$  In this case we find that the three methods perform well, and get F-statistics close to the truth (fig. S3). We then sub-sample only one individual from each population, and find individual-based F-statistics (fig. 1). We observe that in this case both PPCA and LSE- based frameworks perform atleast as well as ADMIXTOOLS 2. The mean estimate from each method is close to the true value, however, the error bars are lower for PPCA compared to ADMIXTOOLS 2, specially for Pop1 and Pop2, which have low split-times. This is an expected result, since ADMIXTOOLS 2 has access to only one individual from each population, while PPCA and LSE utilize the information about structure in the populations from the PC's.       
+In the rest of the analyses, we exclude PCA, and compare PPCA and LSE with 8 and 12 PC's to admixtools2, which is a popularly used tool in population genetics \cite{maier_limits_2022}. We first compare these methods in an ideal scenario, where each population has 10 individuals, and there is no missing data. We estimate $F_2$, $F_3$ and $F_4$  In this case we find that the three methods perform well, and get F-statistics close to the truth (fig. S3). 
+
+We next address the issues listed in Introduction section XX. Issue 1 is about estimation of F-statistics when population assignment is difficult, especially when few samples are available. We show that this can be resolved with individual-based F-statistics. In our simulations, we label each individual as a different population, and we sample one ancient individual from each population to calculate F-statistics (fig. S4). We observe that in this case both PPCA and LSE- based frameworks perform atleast as well as ADMIXTOOLS 2. The mean estimate from each method is close to the true value, however, the error bars for $F_2$ estimates are lower for PPCA compared to ADMIXTOOLS 2, specially for X1 and X2, which have low split-times. This is an expected result, since both PPCA and LSE do not utilize the population labels, and get the information about structure and admixture from all samples, even though the F-statistics are calculated using only one individual from each population. On the other hand, admixtools 2 has only one individual from each population to assess structure / admixture.     
+
+Finally, we address issue 2 and evaluate the estimation of these methods when there is random missing data. Our implementation of PPCA on missing data is inspired from EMU \cite{meisner_large-scale_2021}, and is described in Methods section YY. We see that PPCA is not affected by missing data, while admixtools 2 results are inflated (Fig. 3).
 
 \begin{figure}[ht!]
-    \includegraphics[width=16.5cm]{plots/simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_f2_plot_slides_1ind.png}
+    \includegraphics[width=16.5cm]{plots/simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_plot_all_1ind.png}
     \centering
-    \caption{Comparison of PPCA and LSE to ADMIXTOOLS 2 using population genotypes from ten individuals in each population.}
+    \caption{Comparison of PPCA and LSE to ADMIXTOOLS 2 using population genotypes from one individual from each population.}
     \label{figS2:pc_scale}
 \end{figure}
 
-We next address the issues listed in Introduction section XX. Issue 1 is about estimation of F-statistics when population assignment is difficult, especially when few samples are available. We show that this can be resolved with individual-based F-statistics. In our simulations, we label each individual as a different population, and we sample one ancient individual from each population  to calculate F-statistics. Fig. YY shows that all three methods on an average are close to the true values, but admixtools2 shows higher variability in the estimates. This is expected, since both PPCA and LSE do not utilize the population labels, and get the information about structure and admixture from all samples, even though the F-statistics are calculated using only one individual from each population. On the other hand, admixtools 2 has only one individual from each population to assess structure / admixture. 
-Test of admixture for F3/F4
 
-Finally, we evaluate the estimation of these methods when there is random missing data. Our implementation of PPCA on missing data is inspired from EMU \cite{meisner_large-scale_2021}, and is described in Methods section YY. We see that PPCA is not affected by missing data, while admixtools 2 results are inflated (Fig. 3).
+\subsection{Admixture with $F_3$ and $F_4$}
+
 
 \subsection{Evaluation on neandertal dataset}
 
@@ -271,7 +272,7 @@ We show that F-statistics estimated from LSE using all eigenvalues is same as F-
 \begin{figure}[ht!]
     \includegraphics[width=16.5cm]{plots/simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_plot_all_1ind.png}
     \centering
-    \caption{Comparison of PPCA and LSE to ADMIXTOOLS 2 using population genotypes from ten individuals in each population.}
+    \caption{Comparison of PPCA and LSE to ADMIXTOOLS 2 using population genotypes from one individual from each population.}
     \label{figS2:pc_scale}
 \end{figure}
 
