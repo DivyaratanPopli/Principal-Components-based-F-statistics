@@ -222,7 +222,7 @@ Finally, we address issue 2 and evaluate the estimation of these methods when th
 Many population genetic studies are interested in a test for admixture (cite). We showed in the previous section that PPCA framework can be used to calculate the point estimates of F-statistics. In this section we show that we can also get standard errors for these estimates using block-jackknife (cite), and use these to do hypothesis testing for admixture. We simulate a gene flow from X3 to X2 500 generations ago with the migration rate of $\mu \epsilon [0, 0.01, 0.05]$. We then compare PPCA framework to ADMIXTOOLS 2. We first test for admixture by checking if the estimate of $F_4(X1,X2,X3,X4)$ is significantly away from 0. We show that when there are 10 individuals in each population, both methods perform well (Fig. S6, table 1). Reducing the number of individuals to 1 from each population reduces the power for both the methods, and with $50\%$ missingness, ADMIXTOOLS 2 loses power to detect admixture, while PPCA-based-framework is not affected as much.
 
 \begin{figure}[ht!]
-    \includegraphics[width=16.5cm]{plots/simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_plot_all_1ind.png}
+    \includegraphics[width=16.5cm]{plo}
     \centering
     \caption{Comparison of PPCA and LSE to ADMIXTOOLS 2 using population genotypes from one individual from each population.}
     \label{figS2:pc_scale}
