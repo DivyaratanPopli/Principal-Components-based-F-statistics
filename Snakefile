@@ -2,6 +2,7 @@
 folder1="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE/"
 folder2="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE_1ind/"
 folder3="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE_1ind_missing/"
+folder4="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/block_jackknife_miss/"
 
 rule pca_ppca:
     output:
@@ -106,3 +107,16 @@ rule one_plot_1ind_missing:
         plotf="plots/simfiles/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/missing{miss}/plots_{npcs}_{npcs2}/mu{mu}_plot_all_1ind_missing.png"
     script:
         "Rscripts/plot_all_missing.R"
+
+rule admixplot_f4:
+    input:
+        fname=folder4 + "simfiles/AvgFolder/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/missing{miss}/ppca_miss_val_scale{npcs}/ll.csv"
+    output:
+        fout="simfiles/AvgFolder/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/missing{miss}/plots_{npcs}/hypothesis_test_comparison.png"
+    script:
+        "Rscripts/plot_comp.R"
+
+rule admix_all:
+    input:
+        a1="simfiles/AvgFolder/Ne1000/split_times1000/npop10_nind100/missing0/plots_8/hypothesis_test_comparison.png",
+        a2="simfiles/AvgFolder/Ne1000/split_times1000/npop10_nind100/missing0.5/plots_8/hypothesis_test_comparison.png"
