@@ -112,11 +112,11 @@ rule admixplot_f4:
     input:
         fname=folder4 + "simfiles/AvgFolder/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/missing{miss}/ppca_miss_val_scale{npcs}/ll.csv"
     output:
-        fout="simfiles/AvgFolder/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/missing{miss}/plots_{npcs}/hypothesis_test_comparison.png"
+        fout="plots/simfiles/AvgFolder/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/missing{miss}/plots_{npcs}/hypothesis_test_comparison.png"
     script:
         "Rscripts/plot_comp.R"
 
 rule admix_all:
     input:
-        a1="simfiles/AvgFolder/Ne1000/split_times1000/npop10_nind100/missing0/plots_8/hypothesis_test_comparison.png",
-        a2="simfiles/AvgFolder/Ne1000/split_times1000/npop10_nind100/missing0.5/plots_8/hypothesis_test_comparison.png"
+        a1="plots/simfiles/AvgFolder/Ne1000/split_times1000/npop10_nind100/missing0/plots_8/hypothesis_test_comparison.png",
+        a2="plots/simfiles/AvgFolder/Ne1000/split_times1000/npop10_nind100/missing0.5/plots_8/hypothesis_test_comparison.png"
