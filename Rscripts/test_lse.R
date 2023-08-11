@@ -189,11 +189,11 @@ sum((xxx$pcs[,1] - xxx$pcs[,2])^2) * nrow(X)
 
 # calculate f2 with correction
 
-sum( (Xc[,1] - Xc[,4])^2 - ( (1 - Xc[,1])*Xc[,1] ) - ( (1 - Xc[,4])*Xc[,4] ) )
+sum( (Xc[,1] - Xc[,2])^2 - ( (1 - Xc[,1])*Xc[,1] ) - ( (1 - Xc[,2])*Xc[,2] ) )
 
 # calculate f2 from LSE
 
-sum((xxx2$pcs[1,] - xxx2$pcs[4,])^2) * nrow(X)
+sum((xxx2$pcs[1,] - xxx2$pcs[2,])^2) * nrow(X)
 
 # calculate f2 from ppca
 
@@ -352,11 +352,12 @@ fstats_pca <- function(X3,method,npcs){
 
 plotf <- function(outf){
   
-  N_SNPS = 100000
+  N_SNPS = 1000
   N_SAMPLES = 20
   TRUE_RANK = 4
   N_PCS=4
   SIGMA=0.5
+  N_PCS=20
   
   X= simple_sim(N_SAMPLES=N_SAMPLES , TRUE_RANK=TRUE_RANK , N_SNPS=N_SNPS, SIGMA=SIGMA)
   xxx= fstats_pca(X3=X, method='pca', npcs=N_PCS)

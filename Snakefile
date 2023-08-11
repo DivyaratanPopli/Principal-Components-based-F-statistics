@@ -3,6 +3,7 @@ folder1="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparis
 folder2="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE_1ind/"
 folder3="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE_1ind_missing/"
 folder4="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/block_jackknife_miss/"
+folder5="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/neandertal_shrinkage/"
 
 rule pca_ppca:
     output:
@@ -120,3 +121,16 @@ rule admix_all:
     input:
         a1="plots/simfiles/AvgFolder/Ne1000/split_times1000/npop10_nind100/missing0/plots_8/hypothesis_test_comparison.png",
         a2="plots/simfiles/AvgFolder/Ne1000/split_times1000/npop10_nind100/missing0.5/plots_8/hypothesis_test_comparison.png"
+
+rule nea_pca:
+    input:
+        ppcaf="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/neandertal_shrinkage/nea.evec",
+        ppcaf1="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/neandertal_shrinkage/filter3/pcs_ppca_miss/pcs_npcs2.csv",
+        indf="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/neandertal_shrinkage/all_ind.ind"
+    output:
+        outplot1="plots/neandertal_pca_smartpca.png",
+        outplot2="plots/neandertal_ppca.png"
+    params:
+        n_pcs=2
+    script:
+        "Rscripts/neandertal_ppca_pca.R"
