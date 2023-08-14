@@ -124,9 +124,9 @@ rule admix_all:
 
 rule nea_pca:
     input:
-        ppcaf="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/neandertal_shrinkage/nea.evec",
-        ppcaf1="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/neandertal_shrinkage/filter3/pcs_ppca_miss/pcs_npcs2.csv",
-        indf="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/neandertal_shrinkage/all_ind.ind"
+        ppcaf=folder5+"nea.evec",
+        ppcaf1=folder5+"filter3/pcs_ppca_miss/pcs_npcs2.csv",
+        indf=folder5+"all_ind.ind"
     output:
         outplot1="plots/neandertal_pca_smartpca.png",
         outplot2="plots/neandertal_ppca.png"
@@ -134,3 +134,13 @@ rule nea_pca:
         n_pcs=2
     script:
         "Rscripts/neandertal_ppca_pca.R"
+
+rule nea_f3:
+    input:
+        admf=folder5+"admixtools2/f3stats.csv",
+        ppca_muf=folder5+"ppca_miss_val_scale2/mu.csv",
+        ppca_stdf=folder5+"ppca_miss_val_scale2/std.csv"
+    output:
+        plotf="plots/f3_neandertal.png"
+    script:
+        "Rscripts/plot_f3.R"
