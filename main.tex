@@ -222,15 +222,19 @@ Finally, we address issue 2 and evaluate the estimation of these methods when th
 Many population genetic studies are interested in a test for admixture (cite). We showed in the previous section that PPCA framework can be used to calculate the point estimates of F-statistics. In this section we show that we can also get standard errors for these estimates using block-jackknife (cite), and use these to do hypothesis testing for admixture. We simulate a gene flow from X3 to X2 500 generations ago with the migration rate of $\mu \epsilon [0, 0.01, 0.05]$. We then compare PPCA framework to ADMIXTOOLS 2. We first test for admixture by checking if the estimate of $F_4(X1,X2,X3,X4)$ is significantly away from 0. We show that when there are 10 individuals in each population, both methods perform well (Fig. S6, table 1). Reducing the number of individuals to 1 from each population reduces the power for both the methods, and with $50\%$ missingness, ADMIXTOOLS 2 loses power to detect admixture, while PPCA-based-framework is not affected as much.
 
 \begin{figure}[ht!]
-    \includegraphics[width=16.5cm]{plo}
+    \includegraphics[width=16.5cm]{plots/simfiles/AvgFolder/Ne1000/split_times1000/npop10_nind100/missing0.5/plots_8/hypothesis_test_comparison.png}
     \centering
-    \caption{Comparison of PPCA and LSE to ADMIXTOOLS 2 using population genotypes from one individual from each population.}
+    \caption{Test for admixture with individual-based F4 statistic. We compare ADMIXTOOLS 2 (orange)to PPCA-based-framework (blue) in the presence of 50\% missingness in data.}
     \label{figS2:pc_scale}
 \end{figure}
 
 
+
 \subsection{Evaluation on neandertal dataset}
 
+To test our framework on real data, we apply it to a published dataset of arcaic humans from Eurasia \cite{hajdinjak}. This dataset consists of low-coverage late neandertal specimens from Goyet (Goyet\_L35MQ25), Spy (Spy\_L35MQ25), Les Cottés (Les\_Cottes\_L35MQ25), Vindija (VindijaG1\_L35MQ25), and Mezmaiskaya caves (Mezmaiskaya1\_L35MQ25 and Mezmaiskaya2\_L35MQ25) along with the high-coverage archaic specimens from Altai (Altai, Denisova) and Vindija caves (Vindija33.19). We first estimate PC's for this dataset using PPCA, and show that our plot captures all the features of PCA from the authors (fig. S10, S11). However, we demonstrate that with PPCA, the user can utilize all the specimens to estimate the PC's. This is more straight-forward than authors' approach to first estimate the PC's using high-coverage genomes, and then project the low-coverage genomes.
+
+We analyze how close or distant the low-coverage late Neandertals are to high-coverage Vindija Neandertal using outgroup F3 statistic. F3(Altai, Vindija33.19, X) represents the branch length extending from Altai to the common ancestor of Vindija33.19 and X, where X is a low-coverage late Neandertal. Higher value of F3 denotes closeness of X to Vindija33.19 (fig. S10). We compare the estimates from PPCA-based framework and ADMIXTOOLS 2, and show that they have a very similar pattern (fig. 4). 
 
 \section{Methods}
 
@@ -285,6 +289,14 @@ We show that F-statistics estimated from LSE using all eigenvalues is same as F-
     \caption{Comparison of PPCA and LSE to ADMIXTOOLS 2 using population genotypes from one individual from each population.}
     \label{figS2:pc_scale}
 \end{figure}
+
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{plots/simfiles/AvgFolder/Ne1000/split_times1000/npop10_nind100/missing0/plots_8/hypothesis_test_comparison.png}
+    \centering
+    \caption{Test for admixture with F4 statistic. We compare ADMIXTOOLS 2 (orange)to PPCA-based-framework (blue).}
+    \label{figS2:pc_scale}
+\end{figure}
+
 
 
 \section{old stuff}
