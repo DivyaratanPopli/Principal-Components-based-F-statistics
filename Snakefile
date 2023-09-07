@@ -45,6 +45,16 @@ rule supp_PC_comparison_all_inds1:
     script:
         "Rscripts/scale_f2.R"
 
+
+rule Fig_PCA_PPCA_LSE_scales:
+    input:
+        flist=expand(folder1+"simfiles/Ne{{Ne}}/split_times{{sp}}/mu{{mu}}/average_run/npop{{npop}}_nind{{nind}}/avgAccuracy_{vals}_scale{npcs}", vals=["PCA1_val","pca_val","ppca_direct_val"], npcs=list(range(2,51))),
+        slist=expand(folder1+"simfiles/Ne{{Ne}}/split_times{{sp}}/mu{{mu}}/average_run/npop{{npop}}_nind{{nind}}/stdDev_{vals}_scale{npcs}", vals=["PCA1_val","pca_val","ppca_direct_val"], npcs=list(range(2,51))),
+        true=folder2+"simfiles/Ne{Ne}/split_times{sp}/mu{mu}/avgrun/npop{npop}_nind{nind}/true_val/f2mat8",
+    output:
+
+
+
 rule supp_method_comparison_ideal:
     input:
         flist=expand(folder1 + "simfiles/Ne{{Ne}}/split_times{{sp}}/mu{{mu}}/average_run/npop{{npop}}_nind{{nind}}/avgAccuracy_{vals}_scale{{npcs}}", vals=["PCA1_val","ppca_direct_val","admixtools2Norm"]),
@@ -144,3 +154,18 @@ rule nea_f3:
         plotf="plots/f3_neandertal.png"
     script:
         "Rscripts/plot_f3.R"
+
+rule main_fig_all_pca:
+    input:
+        x1 = folder1 + "simfiles/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/mu{mu}_f2_fig_all.csv",
+        x2 = folder2 + "simfiles/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/mu{mu}_f2_fig_all.csv",
+        x3 = folder3 + "simfiles/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/missing{miss}/mu{mu}_f2_fig_all.csv",
+        truef = folder1 + "simfiles/Ne{Ne}/split_times{sp}/mu{mu}/avgrun/npop{npop}_nind{nind}/true_val/f2mat8",
+        nfile_avg1 = folder1+ "simfiles/Ne{Ne}/split_times{sp}/mu{mu}/average_run/npop{npop}_nind{nind}/avgAccuracy_noisy_val_scale8",
+        nfile_avg2 = folder2+ "simfiles/Ne{Ne}/split_times{sp}/mu{mu}/average_run/npop{npop}_nind{nind}/avgAccuracy_noisy_val_scale8",
+        nfile_avg3 = folder3+ "simfiles/Ne{Ne}/split_times{sp}/mu{mu}/average_run/npop{npop}_nind{nind}/missing{miss}/avgAccuracy_noisy_val_scale8"
+
+    output:
+        f2plot="plots/simfiles_Ne{Ne}_split_times{sp}/npop{npop}_nind{nind}/missing{miss}/mu{mu}_main_fig_all_pca.png"
+    script:
+        "Rscripts/main_fig_pca_all.R"
