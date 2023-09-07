@@ -48,7 +48,7 @@ plot_f2s <-function(x1, x2, x3, truef, nfile_avg1, nfile_avg2, nfile_avg3, f2plo
     theme_bw() + theme(legend.position="bottom")
 
   ggsave(f2plot, xx,
-         width = 8, height = 5, dpi = 150, units = "in", device='png')
+         width = 8, height = 5, dpi = 300, units = "in", device='png')
 }
 
 plot_f2s(x1=snakemake@input[["x1"]],
