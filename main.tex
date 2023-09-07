@@ -206,7 +206,7 @@ Using this matrix, we show in the appendix that
     &= G_{ii} + G_{jj} - 2 G_{ij}
 \end{align}
 
-It is worth noting that the sampling error terms in equation XX are the same as the binomial error model of LSE, and so the distances based on LSE (using all components) are equivalent to those obtained from $F$-statistics.
+It is worth noting that the sampling error terms in equation XX are the same as the binomial error model of LSE, and so the distances based on LSE (using all components) are equivalent to those obtained from $F$-statistics (Fig. YY).
 
 \section{Results}
 
@@ -222,7 +222,16 @@ We simulated 10 populations with 10 individuals each using slendr \cite{petr_sle
     \label{fig2:sim}
 \end{figure}
 
-We use eq. \ref{eq:f_pca} to calculate $F_2$ for a pair of populations using the  squared Euclidean distance between them from the principal components (see Fig. S2) based on either  PCA, PPCA and LSE, and compare F-statistics estimated from these methods to the true theoretical value of the statistic obtained from branch lengths in slendr \cite{petr_slendr_2022}. We first do a comparison between $f_2$s estimated from PCA, PPCA and LSE with different number of PC's used (Fig. S1). Here, we use 10 individuals in each population, and we see that all three methods are not sensitive to the number of PC's used, as long as the number of PC's is higher than 7. The estimate of F2 based on PCA is only slightly higher than that for PPCA and LSE, since sample  sizes of 10 diploid individuals is large enough that we can ignore the sampling error correction. We next look at a comparison between the three methods using only one individual in each population (Fig. S2). Here we observe that $F2$ estimates from PPCA and LSE are quite close to the true value at all cases with $PCs \geq 7$. However, estimates from PCA get increasingly higher if we add additional PC's. This is expected from theory (section XX), since PCA does not account for sampling bias we end up with the biased estimator $F_2$, and not the bias-corrected $f_2$.
+We use eq. \ref{eq:f_pca} to calculate $F_2$ for a pair of populations using the  squared Euclidean distance between them from the principal components (see Fig. S2) based on either  PCA, PPCA and LSE, and compare F-statistics estimated from these methods to the true theoretical value of the statistic obtained from branch lengths in slendr \cite{petr_slendr_2022}. We first do a comparison between $f_2$s estimated from PCA, PPCA and LSE with different number of PC's used (Fig. 1). Here, we use 10 individuals in each population, and we see that all three methods are not sensitive to the number of PC's used, as long as the number of PC's is higher than 7. The estimate of F2 based on PCA is only slightly higher than that for PPCA and LSE, since sample  sizes of 10 diploid individuals is large enough that we can ignore the sampling error correction. We next look at a comparison between the three methods using only one individual in each population (Fig. S2). Here we observe that $F2$ estimates from PPCA and LSE are quite close to the true value at all cases with $PCs \geq 7$. However, estimates from PCA get increasingly higher if we add additional PC's. This is expected from theory (section XX), since PCA does not account for sampling bias we end up with the biased estimator $F_2$, and not the bias-corrected $f_2$.
+
+
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{inkscape/sim1.png}
+    \centering
+    \caption{Simulated trees for testing our estimation of F-statistics. Split time for each node in generations and the admixture branches are shown in dashed lines. The red arrow represents a migration event from Pop3 to Pop2.}
+    \label{fig2:sim}
+\end{figure}
+
 
 In the rest of the analyses, we exclude PCA, and compare PPCA and LSE with 8 and 12 PC's to ADMIXTOOLS 2 \cite{maier_limits_2022}, which is a recent reimplementation of ADMIXTOOLS \cite{patterson_ancient_2012}. We chose 8 and 12 PCs because the number of PCs to use will not be known in most applications. We first compare these methods in an ideal scenario, where each population has 10 individuals, and there is no missing data. We estimate $F_2$, $F_3$ and $F_4$  In this case we find that the three methods perform well, and get F-statistics close to the truth (fig. S3). 
 
@@ -378,6 +387,46 @@ To summarize, we present a method to perform PCA and F-statistics jointly and sh
     \caption{PCA of archaic neandertals created with smartpca with high coverage neandertals, and projection of the rest.}
     \label{figS2:pc_scale}
 \end{figure}
+
+
+\section{Appendix}
+
+\begin{equation}
+    \hat{\mathbf{H}} = \frac{1}{m}\mathbf{X}^T\mathbf{X} - \hat{\mathbf{D}},
+\end{equation}
+
+Here, $\MX$ is the (uncentered) genotype matrix and $\hat{\mathbf{D}}$ is a matrix of diagonal entries ``correcting'' heterozygosities and $m$ is the number of SNPs.
+
+In particular $d_{ij} = 0 $ for $i \neq j$ and, 
+\begin{equation}
+    d_{ii} = d_i = \frac{1}{m}\sum_{k=1}^m x_{ik}(2-x_{ik}),
+\end{equation}
+for diploid data. The correction term given by Reich 2009 and Patterson 2012 is different by a factor of four:
+\begin{equation*}
+    d_{ii}' = \frac{1}{m}\sum_{k=1}^m \frac{x_{ik}(2-x_{ik})}{4} = \frac{d_{ii}}{4}
+\end{equation*}.
+The difference is explained that they use allele frequencies instead of genotypes, i.e. their approach would use (again for diploid data)
+\begin{equation*}
+    \hat{\mathbf{H}'} = \frac{1}{m}\frac{\mathbf{X}^T}{2}\frac{\mathbf{X}}{2} - \frac{\hat{\mathbf{D'}}}{4} = \frac{\hat{\mathbf{H}}}{4},
+\end{equation*}
+and so the parametrizations are equivalent, but will differ by a factor of four.
+
+Thus, (TODO: double-check if rows/columns are aligned, sum should be over SNP)
+
+\begin{subequations}\begin{align}
+    h_{ii} &= \frac{1}{m}\sum_{k=1}^m x_{ik}^2 - d_i \\
+    h_{ij} &= \frac{1}{m}\sum_{k=1}^m x_{ik}x_{jk} 
+\end{align}\end{subequations}
+Consider now
+\begin{align}
+    f_{ij} &= h_{ii} + h_{jj} - 2 h_{ij}\nonumber\\
+     &= \frac{1}{m}\sum_{k=1}^m x_{ik}^2 - d_i + \frac{1}{m}\sum_{k=1}^m x_{jk}^2 - d_j - \frac{2}{m}\sum_{k=1}^m x_{ik}x_{jk}\nonumber \\
+    &= \frac{1}{m} \sum_{k=1}^m (x_{ik} - x_{jk})^2 - d_i - d_j \\
+    &= F_2(i,j)\nonumber
+\end{align}
+
+Hence the matrix $\hat{\mathbf{H}}$ can be used to estimate $F_2$-statistics (possibly instead of PPCA?).
+
 
 
 \section{removed stuff}
