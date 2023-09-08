@@ -45,7 +45,9 @@ plot_f2s <-function(x1, x2, x3, truef, nfile_avg1, nfile_avg2, nfile_avg3, f2plo
     scale_linetype_manual(name = "", values = c(2,3),
                           guide = guide_legend(override.aes = list(linetype = "dashed"))) +
     xlab("Number of PC's used") + ylab("f2") +
-    theme_bw() + theme(legend.position="bottom")
+    theme_bw() + theme(legend.position="bottom", axis.text=element_text(size=14),
+                       axis.title=element_text(size=14), legend.text=element_text(size=14), legend.title=element_text(size=14),
+                       strip.text.x = element_text(size = 18))
 
   ggsave(f2plot, xx,
          width = 8, height = 5, dpi = 300, units = "in", device='png')
