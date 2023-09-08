@@ -40,10 +40,10 @@ plot_f2s <-function(x1, x2, x3, truef, nfile_avg1, nfile_avg2, nfile_avg3, f2plo
    geom_point(alpha=0.5) + facet_grid(~factor(data,levels=c("Population-based", "Individual-based","With missing data"))) +
     geom_errorbar(aes(ymin=F2-(2*SE), ymax=F2+(2*SE)), width=.2, alpha=0.8) +
     scale_color_manual(values=c(PCA="#E69F00", LSE="#009E73", PPCA="#CC79A7")) +
-    geom_hline(data = tru, aes(yintercept = true_val, linetype="True F2"), alpha=0.2) +
-    geom_hline(data = noi, aes(yintercept = noisy_val, linetype="Uncorrected f2"), alpha=0.5) +
-    scale_linetype_manual(name = "", values = c(2,3),
-                          guide = guide_legend(override.aes = list(linetype = "dashed"))) +
+    geom_hline(data = tru, aes(yintercept = true_val, linetype="True")) +
+    geom_hline(data = noi, aes(yintercept = noisy_val, linetype = "Uncorrected")) +
+    scale_linetype_manual(name = "f2", values = c("True" = "dashed", "Uncorrected" = "dotted"),
+                          guide = guide_legend()) +
     xlab("Number of PC's used") + ylab("f2") +
     theme_bw() + theme(legend.position="bottom", axis.text=element_text(size=14),
                        axis.title=element_text(size=14), legend.text=element_text(size=14), legend.title=element_text(size=14),
