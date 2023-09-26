@@ -1,0 +1,106 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[super]{nth}
+\usepackage{hyperref}
+\usepackage{lineno}
+\usepackage[
+singlelinecheck=false
+]{caption}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{csvsimple}
+\usepackage[section]{placeins}
+\usepackage{lineno}
+\usepackage{natbib}
+
+\title{KIN: A method to infer relatedness from low-coverage ancient DNA}
+\author{Divyaratan Popli, Stéphane Peyrégne, Benjamin M. Peter}
+%\date{5 August 2021}
+\linenumbers
+
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+
+\newcommand{\BZ}{\mathbf{Z}}
+\newcommand{\BD}{\mathbf{D}}
+\newcommand{\BN}{\mathbf{N}}
+\newcommand{\BH}{\mathbf{H}}
+\newcommand{\Btheta}{\pmb{\theta}}
+
+
+\begin{document}
+
+\maketitle
+%\renewcommand\thefigure{\arabic{figure}}    
+\section*{Supplementary Figures}
+%\setcounter{figure}{0}   
+\renewcommand{\figurename}{Fig S}
+
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{inkscape/pca.png}
+    \centering
+    \caption{Calculation of $F_2(Pop1,Pop3)$. Figure shows that $F_2$ can be calculated as the squared Euclidean sum between 2 points using all the relevant PC's (see eq. \ref{eq:f_pca}).}
+    \label{figS1:pc_scale}
+\end{figure}
+
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{plots/supplementary/Ne1000_split_times1000_npop10_nind100_mu0_f2_plot_scale_test_ind.png}
+    \centering
+    \caption{Comparison of PCA, PPCA and LSE using population allele frequencies of 10 individuals in each population. X-axis shows the number of PC's used for the three methods, ranging from 2 to 50.}
+    \label{figS1:pc_scale}
+\end{figure}
+
+
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{plots/supplementary/Ne1000_split_times1000_npop10_nind100_mu0_f2_plot_scale_test_ind.png}
+    \centering
+    \caption{Comparison of PCA, PPCA and LSE using population genotypes from one individual in each population. X-axis shows the number of PC's used for the three methods, ranging from 2 to 50.}
+    \label{figS2:pc_scale}
+\end{figure}
+
+
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{plots/simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_plot_all.png}
+    \centering
+    \caption{Comparison of PPCA and LSE to ADMIXTOOLS 2 using population genotypes from ten individuals in each population.}
+    \label{figS2:pc_scale}
+\end{figure}
+
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{plots/simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_plot_all_1ind.png}
+    \centering
+    \caption{Comparison of PPCA and LSE to ADMIXTOOLS 2 using population genotypes from one individual from each population.}
+    \label{figS2:pc_scale}
+\end{figure}
+
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{plots/simfiles/AvgFolder/Ne1000/split_times1000/npop10_nind100/missing0/plots_8/hypothesis_test_comparison.png}
+    \centering
+    \caption{Test for admixture with F4 statistic. We compare ADMIXTOOLS 2 (orange)to PPCA-based-framework (blue).}
+    \label{figS2:pc_scale}
+\end{figure}
+
+
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{plots/neandertal_pca_smartpca.png}
+    \centering
+    \caption{PPCA of archaic specimens}
+    \label{figS2:pc_scale}
+\end{figure}
+
+\begin{figure}[ht!]
+    \includegraphics[width=16.5cm]{plots/neandertal_ppca.png}
+    \centering
+    \caption{PCA of archaic neandertals created with smartpca with high coverage neandertals, and projection of the rest.}
+    \label{figS2:pc_scale}
+\end{figure}
+
+
+
+
+
+\end{document}
