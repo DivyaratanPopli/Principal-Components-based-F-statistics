@@ -75,7 +75,8 @@ PCA1 <- function(data, n_pcs=4, tol=1e-4, verbose=T, normalized=T){
   if(normalized){ #such that data is between 0 and 1
     dhat = colMeans( data * (1-data))
     gram_mat <- t(data) %*% data / n_snps - diag(dhat)
-    cm = double_center(gram_mat)
+    #cm = double_center(gram_mat)
+    cm=gram_mat
   } else{ #unnormalized version
     dhat = colMeans( data * (2-data))
     gram_mat <- t(data) %*% data / n_snps - diag(dhat)
@@ -122,7 +123,7 @@ ppca_cor <- function(data, n_pcs=4, normalized=T){
 
 
 
-fstats_pca <- function(X3,method,npcs){
+fstats_pca <- function(X3,method,npcs,...){
   
   data11=X3
   data12=data11/2
@@ -135,7 +136,7 @@ fstats_pca <- function(X3,method,npcs){
   }else if (method=='ppca_direct'){
     xxx = ppca_direct(as.matrix(data), n_pcs=npcs)
   }else if (method=='PCA1'){
-    xxx = PCA1(as.matrix(data12), n_pcs=npcs, normalized=TRUE)
+    xxx = PCA1(as.matrix(data11), n_pcs=npcs, ...)
   }else if (method=='ppca_cor'){
     xxx = ppca_cor(as.matrix(data12), n_pcs=npcs, normalized=TRUE)
   }
@@ -145,16 +146,16 @@ fstats_pca <- function(X3,method,npcs){
 }
 
 #genf = "/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/test_samplesize100/simfiles/Ne1000/split_times1000/mu0/run1/npop10_nind100/eigen.geno_pc"
-
+genf="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE_1ind/simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/eigen_pop.geno_pc"
 
 plotf <- function(genf,outf){
   
   X=read.csv(file=genf, header=F, sep=',')
   
-  N_PCS=8
+  N_PCS=104
   xxx= fstats_pca(X3=X, method='pca', npcs=N_PCS)
   xxx1= fstats_pca(X3=X, method='ppca_direct', npcs=N_PCS)
-  xxx2= fstats_pca(X3=X, method='PCA1', npcs=N_PCS)
+  xxx2= fstats_pca(X3=X/2, method='PCA1', npcs=N_PCS, normalized=TRUE)
   xxx3= fstats_pca(X3=X, method='ppca_cor', npcs=N_PCS)
   
   eigenvalues=xxx$eval[1:19]
@@ -178,7 +179,7 @@ plotf <- function(genf,outf){
 plotf(genf=snakemake@input[["genf"]],outf=snakemake@output[["outf"]])
 
 N_PCS=104
-
+#N_PCS=20, get X from pca_ppca_pca1.R
 # calculate f2 from definition
 Xc = X/2
 sum((Xc[,1] - Xc[,2])^2)
@@ -193,7 +194,7 @@ sum( (Xc[,1] - Xc[,2])^2 - ( (1 - Xc[,1])*Xc[,1] ) - ( (1 - Xc[,2])*Xc[,2] ) )
 
 # calculate f2 from LSE
 
-sum((xxx2$pcs[1,] - xxx2$pcs[2,])^2) * nrow(X)
+sum((xxx2$pcs[1,] - xxx2$pcs[2,])^2 * nrow(X) * sign(xxx2$eval))
 
 # calculate f2 from ppca
 

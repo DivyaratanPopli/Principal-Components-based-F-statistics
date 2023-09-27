@@ -40,7 +40,7 @@ ppca_direct <- function(data, n_pcs=4, n_iter=1000, tol=1e-4, verbose=T){
   SVD = svd(S)
   
   #eq 8
-  sigma = sum(SVD$d[(n_pcs+1):n_dims]) / (n_dims - n_pcs)
+  sigma = , they dsum(SVD$d[(n_pcs+1):n_dims]) / (n_dims - n_pcs)
   
   #eq 7
   W = SVD$u[,1:n_pcs] %*% sqrt(diag(SVD$d[1:n_pcs] - sigma))
@@ -177,3 +177,4 @@ plotf <- function(outf){
 }
 
 plotf(outf=snakemake@output[["outf"]])
+
