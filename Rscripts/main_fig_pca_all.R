@@ -37,7 +37,7 @@ plot_f2s <-function(x1, x2, x3, truef, nfile_avg1, nfile_avg2, nfile_avg3, f2plo
   df[df$data=="Indiviadual-based-missing","data"] = "With missing data"
 
   xx=ggplot(df, aes(x=Scale, y=F2, col=Method)) +
-   geom_point(alpha=0.5) + facet_grid(~factor(data,levels=c("Population-based", "Individual-based","With missing data"))) +
+   geom_point(alpha=0.5) + facet_grid(rows = vars(factor(data,levels=c("Population-based", "Individual-based","With missing data")))) +
     geom_errorbar(aes(ymin=F2-(2*SE), ymax=F2+(2*SE)), width=.2, alpha=0.8) +
     scale_color_manual(values=c(PCA="#E69F00", LSE="#009E73", PPCA="#CC79A7")) +
     geom_hline(data = tru, aes(yintercept = true_val, linetype="True")) +
