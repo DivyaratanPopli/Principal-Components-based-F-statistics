@@ -62,37 +62,46 @@ singlelinecheck=false
 \section{Introduction}
 Many populations live in heterogeneous and changing environments, and thus will exhibit some population structure, which we expect to change over time. Over short time scales, the two principal forces affecting this structure are drift (which creates differentiation between populations over time due to isolation), and admixture (secondary contact between isolated populations), that causes intermediate genotypes. A common goal is to characterize the genetic variation caused by these processes.
 
+In particular for humans, there has been a long-standing debate on how we define genetic population structure, whether populations as such exist, and to what degree they are the result of biased sampling designs \cite{serre_evidence_2004, rosenberg_clines_2005, peter_genetic_2020}, and how they affect ancestry estimation \cite{mathieson_what_2020, simon_contribution_2023}.
+
+Questions like these are of fundamental importance because they impact how we assess access to genetic medicine, how we think about racial discriminations and other (mis)uses of genetic variation.
+
+
 Admixture between previously isolated populations is common in nature, and affects the patterns of genetic diversity. From these patterns of genetic diversity, one can reconstruct the past events of admixture.  
 
 \subsection{Overview of methods to study admixture}
 There are several methods available to make inferences about population structure arising from many diverse processes including geographical isolation, migration, admixture and founder events, that explain the observed genetic diversity. \cite{schraiber_methods_2015}.
 
 
-These methods can be classified as local or global ancestry based. Local ancestry based methods infer ancestry at each locus and reveal recent history of each individual, but have low power to infer events in deep past \cite{vi_genome-wide_2023, brisbin_pcadmix_2012, price_sensitive_2009, sankararaman_estimating_2008}. Global ancestry methods focus on estimating the allele frequencies in ancestral populations, as well as the ancestry proportion of each individual by fitting a probabilistic model to the observed genotype data by either maximizing the posterior probability \cite{pritchard_inference_2000, gopalan_scaling_2016, noauthor_ancient_nodate} or the likelihood function \cite{alexander_fast_2009, tang_estimation_2005}. Principal Component Analysis (PCA) is a widely used method to uncover population structure, and is related to the global ancestry methods \cite{mcvean_genealogical_2009, engelhardt_analysis_2010}. PCA finds the primary axes of variation in the genomic data, and projects all individuals on these axes to reveal population structure. However, it can be difficult to interpret a PCA plot since it does not provide model comparison or a formal test of admixture.   
+These methods can be classified as local or global ancestry based. Local ancestry based methods infer ancestry at each locus and reveal recent history of each individual, but have low power to infer events in deep past \cite{vi_genome-wide_2023, brisbin_pcadmix_2012, price_sensitive_2009, sankararaman_estimating_2008}. Global ancestry methods focus on estimating the allele frequencies in ancestral populations, as well as the ancestry proportion of each individual \cite{pritchard_inference_2000, gopalan_scaling_2016, noauthor_ancient_nodate,alexander_fast_2009, tang_estimation_2005}. Principal Component Analysis (PCA) is a widely used global ancestry method used to uncover population structure \cite{mcvean_genealogical_2009, engelhardt_analysis_2010}. PCA tends to cluster similar individuals nearby, and provides a an easy to understand and often useful visualization of the genetic variation in the data. The big caveat is that it can be difficult to interpret a PCA plot since it does not provide model comparison or a formal test of admixture \cite{novembre stevens 2008 nature, degiorgio_geographic_2013}.   
 
 %\subsection{F-statistics}
-F-statistics are a popular way to infer global ancestry, particularly in applications of ancient human population structure \cite{orlando_ancient_2021}. They provide an intuitive and powerful way to test hypothesis of admixture by measuring the genetic drift shared between two, three, or four populations \cite{patterson_ancient_2012, peter_admixture_2016}. In this framework, the null model is represented by a tree connecting the populations (Fig. \ref{fig2:overview}). In the null model, all the branch lengths represent genetic drift, and there is no gene flow between populations. The null hypothesis can be rejected when the variation in observed data can not be explained by a tree-like history without any admixture branches. 
+A popular way to quantify drift and admixture relies on a set of statistics called $F$-statistics \cite{patterson_ancient_2012, peter_admixture_2016}. $F$-statistics are particularly in wide use in applications of ancient human population structure \cite{orlando_ancient_2021}. 
+
+They provide an intuitive and powerful way to test hypothesis of admixture by measuring the genetic drift shared between two, three, or four populations \cite{patterson_ancient_2012, peter_admixture_2016}. Based on these measures of genetic drift, one can formulate hypotheses of admixture or population history. In this framework, the null model is represented by a tree connecting the populations (Fig. \ref{fig2:overview}). A tree model does not allow for gene flow between populations, and thus admixture would lead to rejection of the null model. 
 
 
 \subsection{Estimation of F-statistics}\label{intro-fstats-estimation}
 
-It is worth noting that estimating $F$-statistics from data is not trivial. For large sample-size this is a minor issue, but for small sample-size, the necessary bias correction term can be substantial\cite{patterson_ancient_2012, peter_admixture_2016}. We provide a detailed definition of F-statistics, and the correction terms for sampling bias in section \ref{fstats}. The issue with estimation of $F$-statistics is further compounded because many species with distributions over large ranges, are not easily subdivided into discrete populations. For humans, it has been a long-standing debate on whether populations as such exist, and to what degree they are the result of biased sampling designs \cite{serre_evidence_2004, rosenberg_clines_2005, peter_genetic_2020}, and how they affect ancestry estimation \cite{mathieson_what_2020, simon_contribution_2023}.
+As we will define in full detail in the theory section, $F$-statistics are defined in terms of population allele frequencies at a large number of loci. Population allele frequencies are different from the sample allele frequencies that we can obtain from data. Patterson et al showed that a naive estimator would be biased, and introduced a bias-correction term . This bias is largest if the sample size is small (e.g. for single genomes), and will reduce in magnitude for larger samples. 
+
+Thus, from a statistical perspective, it would make sense to group samples into as large groups as possible, because this improves the statistical accuracy. However, on the flip side,  many species with distributions over large ranges, are not easily subdivided into discrete populations. Treating each individual independently will lead to an accurate description of the overall, genetic structure, but will be hard to interpret and will have low statistical accuracy. On the flip side, grouping as many individuals together as possible improves statistical accuracy, but increase the danger of an overly  simplistic view of human genetic structure.
 
 
-In the context of $F$-statistic-based analyses, this causes a trade-off between the urge to group as many individuals together as possible (which improves statistical accuracy of statistics, and can help with missing data), but can lead to an overly simplistic view of human genetic structure. On the flip-side, treating each individual independently, will lead to a more accurate description of the overall, individual-level genetic structure, but will be much harder to interpret and the statistical accuracy of individual estimates  will be lower.
-
-
-These issues are further compounded if the data is low-coverage and of heterogeneous quality, as is common for ancient DNA data sets, where the amount of DNA preserved is often a limiting factor that precludes the generation of high-quality/high-coverage data \cite{orlando_ancient_2021}. In this case, missingness can make individual-based statistics even harder to estimate.
+\subsubsection{Missing data}
+Because the amount of preserved DNA is often a limiting factor of ancient DNA data, low-coverage and of heterogeneous data quality arr common issues in data analysis  \cite{orlando_ancient_2021}. In this case, missingness can make individual-based statistics even harder to estimate.
 
 For example, a conservative approach to estimate individual-based F-statistics is to only retain sites where data is present from every single individual in the data set. However, even for moderately large data sets that quickly becomes prohibitive: As a toy example, consider a data set with 100 (haploid) individuals with 10\% missing data, and 1,000,000 sites. Out of those, only 26 are expected to be covered in every single individual, which makes this approach not feasible.
 
 Thus, grouping individuals into populations can dramatically increase the number of sites retained. A common practice is to retain sites if at least one individual in each population has data. In the above example, if we grouped the 100 individuals into 10 populations of 10 individuals each, and retained sites where at least one individual in each population carried data, we would expect no missing sites in almost all cases. However, grouping individuals may not be justified when they do not form discrete clusters, or when there are very few samples whose population assignments are unknown.
 
+
+
 Here, we aim to address these issues by developing a framework to jointly estimate F-statistics in a framework that does not require a priori assignment of individuals to discrete populations, and is much more robust to data missing at random.
 
 
 \subsection{PCA}
-The key ingredient in our approach is PCA. There are several ways to motivate PCA; here we think of PCA is a dimensionality reduction technique used to transform a high-dimensional dataset into a lower-dimensional representation, while retaining as much of the original variantion in the data as possible. PCA achieves this by finding orthogonal axes, called principal components (PCs), that capture the maximum variance in the data. It is commonly used to understand structure and admixture between populations \cite{patterson_population_2006,novembre_genes_2008,noauthor_cavalli-sforza_nodate,mcvean_genealogical_2009,brisbin_pcadmix_2012}. 
+The key ingredient in our approach is PCA. There are several ways to motivate PCA; here we think of PCA is a dimensionality reduction technique used to transform a high-dimensional data set into a lower-dimensional representation, while retaining as much of the original variation in the data as possible. PCA achieves this by finding orthogonal axes, called principal components (PCs), that capture the maximum variance in the data. It is commonly used to understand structure and admixture between populations \cite{patterson_population_2006,novembre_genes_2008,noauthor_cavalli-sforza_nodate,mcvean_genealogical_2009,brisbin_pcadmix_2012}. 
 
 PCA was introduced and popularized as a tool to study human genetic structure by Cavalli-Sforza et al., and using just a handful of genetic loci, they was able to use PCA to accurately describe patterns of human genetic variation, and to make inference about their possible causes, although the way these patterns were analyzed were typically qualitative \cite{menozzi_synthetic_1978, sforza_great_1995, noauthor_cavalli-sforza_nodate}.
 
@@ -101,11 +110,11 @@ As is still the norm with $F$-statistics, Cavalli-Sforza aggregated individuals 
 
 \subsection{Probabilistic PCA and Latent Subspace Estimation (LSE)}
 
-Probabilistic PCA (PPCA) is an extension of PCA that incorporates a probabilistic framework \cite{tipping_probabilistic_nodate}. PPCA models the observed data as generated by a linear transformation of a lower-dimensional latent space $W$ with added Gaussian noise $\Psi$. 
-The key idea of adding noise is that we aim to separate the variation caused by the population structure that we are ultimately interested in, and which is modeled by $W$, from the variation caused by the sampling of single individuals.
+Probabilistic PCA (PPCA) is an extension of PCA that incorporates a probabilistic framework \cite{tipping_probabilistic_nodate}. PPCA models the observed data as generated by a linear transformation of a lower-dimensional latent space $\mathbf{W}$ with added Gaussian noise $\Psi$. 
+The key idea of adding noise is that we aim to separate the variation caused by the population structure that we are ultimately interested in, and which is modeled by $W$, from the variation caused by the estimation of the population allele frequencies from sample allele frequencies (modelled by $Psi$).
 
 
-A similar approach to model the observed data is Latent Subspace Estimation (LSE) \cite{cabreros_likelihood-free_2019}. Here, the noise is modelled as binomially distributed, and so is independent for each individual \cite{van_waaij_evaluation_2023, cabreros_likelihood-free_2019, chen_consistent_2015}. We give a detailed explanation of both frameworks in sections \ref{theory-ppca} and \ref{theory-lse}. In practice, PCA, PPCA and LSE differ in the way that they model the noise in the observed data due to sampling (see Fig.\ref{fig1:pca_ppca}). 
+A similar approach to model the observed data is Latent Subspace Estimation (LSE) \cite{cabreros_likelihood-free_2019}. Similar to PPCA, a latent space $\mathbf{W}$ models the relationships between individuals, but the  sample allele frequencies are modelled as independent, binomially distributed random variable for each individual \cite{van_waaij_evaluation_2023, cabreros_likelihood-free_2019, chen_consistent_2015}. We give a detailed description of both frameworks in sections \ref{theory-ppca} and \ref{theory-lse}. In practice, the main different between PCA, PPCA and LSE is how they model the noise in the observed data due to sampling (see Fig.\ref{fig1:pca_ppca}). 
 
 \begin{figure}[ht!]
     \includegraphics[width=16.5cm]{plots/pca_all_genetic.png}
@@ -117,34 +126,36 @@ A similar approach to model the observed data is Latent Subspace Estimation (LSE
 \subsection{PCA and $F$-statistics}
 A common analysis paradigm in ancient DNA is to use PCA for exploratory and descriptive analyses, and then follow them up with methods based on $F$-statistic for a more formal treatment (typically in a third step, methods that synthesize many $F$-statistics are also applied, although we will not cover those here). Because they were developed independently and occur at different stages of the analyses, PCA and F-statistics use different data groupings and different normalizations, and are usually not directly compared. 
 
-Recently, we showed that the information contained in $F$-statistics and PCA is closely related, and that $F$-statistics can be interpreted geometrically in the context of PCA \cite{peter_geometric_2022, oteo-garcia_geometrical_2021}
+Recently, we showed that the information contained in $F$-statistics and PCA is closely related, and that $F$-statistics can be interpreted geometrically in the context of PCA \cite{peter_geometric_2022, oteo-garcia_geometrical_2021}.
+
+Using these frameworks, we showed that genetic drift will move individuals further apart from each other on a PCA-plot. Independent drift, i.e. unconnected populations, will drift on orthogonal axes in PCA-space. On the other hand, admixted individuals will be placed between their populations of origin.  
+
 
 (BP: You have not introduced the individual F-statistics here, this should come later)
 We illustrate this in Fig. \ref{fig2:overview}:  $F_2(X_1,X_2)$ can be thought of as the squared Eucledian distance between populations $X_1$ and $X_2$ in PCA-space. Similarly, $F_3(X_1;X_3,X_4)$ is represented as the length of projection of the vector $X_1-X_3$ on $X_1-X_4$. Internal branch length $F_4(X_1,X_3;X_2,X_4)$ can be described as the length of projection of $X_1-X_3$ on $X_2-X_4$ on PCA, and the test of admixture $F_4(X_1,X_2,X_3,X_4)$ is equivalent to the length of projection of $X_1-X_2$ on $X_3-X_4$. We describe a formal relation between PCA and F-statistics (refer to \cite{peter_geometric_2022} for a detailed derivation) in section \ref{theory-pca-fstats}, but here we point out that a joint framework to estimate PCA and F-statistics not only addresses the issue of population assignment in F-statistics, but also can help in interpreting PCA plots \cite{novembre_genes_2008, noauthor_cavalli-sforza_nodate, degiorgio_geographic_2013, francois_principal_2010}. 
 
-However, while \cite{peter_geometric_2022} develops a theoretical link between PCA and $F$-statistics, it does not deal with statistical uncertainty, and thus cannot directly be applied to data. 
+However, while \cite{peter_geometric_2022} develops a theoretical link between PCA and $F$-statistics, it does not deal with statistical uncertainty, and thus cannot directly be applied to noisy data. 
 
-Here, we develop a statistical framework to jointly estimate PCA and $F$-statistics. We show how in particular the choice of the  PCA-algorithm (classical PCA, PPCA, LSE) greatly impacts the results.
+Here, we develop a statistical framework to jointly estimate PCA and $F$-statistics. We show how in particular the choice of the PCA-algorithm (classical PCA, PPCA, LSE) greatly impacts the results.
 
 Using simulations, we show that using PPCA-based $F$-statistics can result in higher accuracy than using the naive estimators, especially when there is missing data. We also draw comparison between PPCA-based framework and ADMIXTOOLS 2 using published Neanderthal samples. At the end, we discuss that this approach not only solves issues related to F-statistics, but also is a step towards standardization and quantification of PCA methods.
 
 \section{Theory}\label{theory}
 
 \subsection{F-statistics}\label{fstats}
-We follow the original notation of \cite{patterson_ancient_2012}, and distinguish between the parameters $F_2$, $F_3$ and $F_4$, and their estimates from empirical data, denoted by lower-case $f_2$, $f_3$ and $f_4$. The three F-statistics are defined in terms of population allele frequencies as follows:
-
-\begin{align}\label{eq:f_intro}
-F_2(X_1,X_4) &= \frac{1}{S}\sum_{s=1}^S(x_{1s} - x_{4s})^2\nonumber\\
-F_3(X_1;X_3,X_4) &= \frac{1}{S}\sum_{s=1}^S(x_{1s} - x_{3s})(x_{1s} - x_{4s})\nonumber\\
-F_4(X_1,X_2;X_3,X_4) &= \frac{1}{S}\sum_{s=1}^S(x_{1s} - x_{2s})(x_{3s} - x_{4s}).\nonumber\\
-\end{align}
-
-Here, $S$ is the total number of SNPs, and $x_{is}$ is the (unobserved) population allele frequency in population $X_i$ at SNP $s$. Equivalently, we can also assign each individual to a separate population, and so these equations also hold for individuals.
-
-(BP: I think this paragraph should be further up)
-Assuming a tree-like relationship between populations, $F_2(X_1,X_4)$ is interpreted as the branch length between populations $X_1$ and $X_4$ (Fig. \ref{fig2:overview} A) and it reflects the expected amount of drift that occurred between $X_1$ and $X_4$. $F_3(X_1;X_3,X_4)$ represents the amount of drift that occurred on the external branch connecting $X_1$ to the common ancestor node of $X_3$ and $X_4$ (Fig. \ref{fig2:overview} B). Under a tree-like model, $F_3$ will always be non-negative. However, in the case where $X_1$ is admixed between $X_3$ and $X_4$, $F_3(X_1;X_3,X_4)$ may be negative, and hence this is used as a test for admixture\cite{peter_admixture_2016, patterson_ancient_2012}. 
+We follow the original notation of \cite{patterson_ancient_2012}, and distinguish between the parameters $F_2$, $F_3$ and $F_4$, and their estimates from empirical data, denoted by lower-case $f_2$, $f_3$ and $f_4$. Assuming a tree-like relationship between populations, $F_2(X_1,X_4)$ is interpreted as the branch length between populations $X_1$ and $X_4$ (Fig. \ref{fig2:overview} A) and it reflects the expected amount of drift that occurred between $X_1$ and $X_4$. $F_3(X_1;X_3,X_4)$ represents the amount of drift that occurred on the external branch connecting $X_1$ to the common ancestor node of $X_3$ and $X_4$ (Fig. \ref{fig2:overview} B). Under a tree-like model, $F_3$ will always be non-negative. However, in the case where $X_1$ is admixed between $X_3$ and $X_4$, $F_3(X_1;X_3,X_4)$ may be negative, and hence this is used as a test for admixture\cite{peter_admixture_2016, patterson_ancient_2012}. 
 
 $F_4(X_1,X_3;X_2,X_4)$ represents the covariance between shared drifts between X1,X2 and X3,X4. This would be represented by the internal branch between the common ancestor nodes of $X_1$, $X_2$ and $X_3$, $X_4$ (Fig. \ref{fig2:overview} C). $F_4$ statistic, with a different permutation of the populations can be used as test of admixture. $F_4(X_1,X_2;X_3,X_4)$ is expected to be 0 if $X_1$, $X_2$, $X_3$, $X_4$ are related to each other by a tree (Fig. \ref{fig2:overview} D). However, a large positive or negative value would suggest a departure from the null model of treeness due to gene flow between X1 and X3 or X2 and X3 respectively.
+
+The three F-statistics are defined in terms of population allele frequencies as follows:
+
+\begin{align}\label{eq:f_intro}
+F_2(X_1,X_4) &= \frac{1}{S}\sum_{s=1}^S(\mathcal{X}_{1s} - \mathcal{X}_{4s})^2\nonumber\\
+F_3(X_1;X_3,X_4) &= \frac{1}{S}\sum_{s=1}^S(\mathcal{X}_{1s} - \mathcal{X}_{3s})(\mathcal{X}_{1s} - \mathcal{X}_{4s})\nonumber\\
+F_4(X_1,X_2;X_3,X_4) &= \frac{1}{S}\sum_{s=1}^S(\mathcal{X}_{1s} - \mathcal{X}_{2s})(\mathcal{X}_{3s} - \mathcal{X}_{4s}).\nonumber\\
+\end{align}
+
+Here, $S$ is the total number of SNPs, and $\mathcal{X}_{is}$ is the (unobserved) population allele frequency in population $X_i$ at SNP $s$. Equivalently, we can also assign each individual to a separate population, and so these equations also hold for individuals.
 
 Since $F_2$ represents the branch length between a pair of populations, we can write $F_3$ and $F_4$ as linear combination of $F_2$'s.
 
@@ -155,23 +166,23 @@ F_4(X_1,X_2;X_3,X_4) &= \frac{1}{2} [F_2(X_1,X_3) + F_2(X_2,X_4) - F_2(X_1,X_4) 
 
 Patterson et al. showed that the naive estimation of $F_2$ from \emph{sample} allele frequency data will be biased, particularly when the sample size is small. They thus  introduced the bias-corrected estimator \cite{peter_admixture_2016, patterson_ancient_2012}.
 
-(BP: I think it would make sense to distinguish also between the (population allele frequency)  and the sample allele frequencies) (currently both are denoted by $x_{ij}$)
+
 \begin{align}\label{eq:f2_correction}
 f_2(X_1,X_4) &= \sum_{s=1}^S[(x_{1s} - x_{4s})^2 - \frac{x_{1s}(1-x_{1s})}{n_{1s}-1} - \frac{x_{4s}(1-x_{4s})}{n_{2s}-1}]
 \end{align}\label{eq:f2_error}
 
-This sampling bias affects the estimates of $F_3$ as well but the correction terms cancel out for $F_4$, where the two estimators coincide.
+Here, we denote the observed sample allele frequency as $x$. This sampling bias affects the estimates of $F_3$ as well but the correction terms cancel out for $F_4$, where the two estimators coincide.
 
 \begin{align}\label{eq:f3_correction}
 f_3(X_1;X_3,X_4) &= \sum_{s=1}^S(x_{1s} - x_{3s})(x_{1s} - x_{4s}) - \frac{x_{1s}(1-x_{1s})}{n_{1s}-1}
 \end{align}\label{eq:f3_error}
 
-Oteo-Garcia \& Oteo \cite{oteo-garcia_geometrical_2021} showed that since $F_2$ is just a squared Euclidean distance, we can think of F-statistics in terms of Euclidean distances in an allele frequency space. In this framework, each population can be represented as a point in a multi dimensional allele frequency space, and $F_2(X_1, X_4)$ is then the  squared Euclidean distance between these points (Fig. \ref{fig2:overview} E). $F_3(X_1;X_3,X_4)$ is then a dot product of the vectors $\Vec{x1} - \Vec{x3}$ and $\Vec{x1} - \Vec{x4}$ (Fig. \ref{fig2:overview} F). $F_4(X_1,X_3;X_2,X_4)$ is a dot product of vectors $\Vec{x1} - \Vec{x3}$ and $\Vec{x2} - \Vec{x4}$ (Fig. \ref{fig2:overview} G), and $F_4(X_1,X_2;X_3,X_4)$ is a dot product of vectors $\Vec{x1} - \Vec{x2}$ and $\Vec{x3} - \Vec{x4}$ (Fig. \ref{fig2:overview} H). 
+Oteo-Garcia \& Oteo \cite{oteo-garcia_geometrical_2021} showed that since $F_2$ is just a squared Euclidean distance, we can think of F-statistics in terms of Euclidean distances in an allele frequency space. In this framework, each population can be represented as a point in a multi dimensional allele frequency space ($\mathcal{X}_1 = (\mathcal{X}_{11}, \dots, \mathcal{X}_{1S})$, and $F_2(X_1, X_4)$ is then the  squared Euclidean distance between these points (Fig. \ref{fig2:overview} E). $F_3(X_1;X_3,X_4)$ is then a dot product of the vectors $\Vec{x1} - \Vec{x3}$ and $\Vec{x1} - \Vec{x4}$ (Fig. \ref{fig2:overview} F). $F_4(X_1,X_3;X_2,X_4)$ is a dot product of vectors $\Vec{x1} - \Vec{x3}$ and $\Vec{x2} - \Vec{x4}$ (Fig. \ref{fig2:overview} G), and $F_4(X_1,X_2;X_3,X_4)$ is a dot product of vectors $\Vec{x1} - \Vec{x2}$ and $\Vec{x3} - \Vec{x4}$ (Fig. \ref{fig2:overview} H). 
 
 \begin{align}\label{eq:f_geometric}
-F_2(X_1,X_4) &= \frac{1}{S}||\Vec{x_{1}} - \vec{x_{4}}||^2\nonumber\\
-F_3(X_1;X_3,X_4) &= \frac{1}{S}||\vec{x_{1}} - \vec{x_{3}})\cdot(\vec{x_{1}} - \vec{x_{4}})||\nonumber\\
-F_4(X_1,X_2;X_3,X_4) &= \frac{1}{S}||(x_{1} - x_{2})\cdot(x_{3} - x_{4})||\nonumber\\
+F_2(X_1,X_4) &= \frac{1}{S}||\Vec{\mathcal{X}_{1}} - \vec{\mathcal{X}_{4}}||^2\nonumber\\
+F_3(X_1;X_3,X_4) &= \frac{1}{S}||\vec{\mathcal{X}_{1}} - \vec{\mathcal{X}_{3}})\cdot(\vec{\mathcal{X}_{1}} - \vec{\mathcal{X}_{4}})||\nonumber\\
+F_4(X_1,X_2;X_3,X_4) &= \frac{1}{S}||(\mathcal{X}_{1} - \mathcal{X}_{2})\cdot(\mathcal{X}_{3} - \mathcal{X}_{4})||\nonumber\\
 \end{align}
 
 Crucially however, these interpretations only hold for the (unobserved) $F$-statistics, but not for the (observed) $f$-statistics and thus, they cannot be directly applied to data.
@@ -187,22 +198,22 @@ Crucially however, these interpretations only hold for the (unobserved) $F$-stat
 
 \subsection{PCA and F-statistics}\label{theory-pca-fstats}
 
-This geometric framework provides an alternate way to understand the properties of F-statistics \cite{oteo-garcia_geometrical_2021}. However, many population genetic studies use a large number of SNPs (in the order of a million), and it is not possible to visualize population vectors in such a high dimensional space. Peter at al. showed that one can do dimensionality reduction on such datasets with PCA, and use the top PC's to estimate F-statistics \cite{peter_geometric_2022}.
+This geometric framework provides an alternate way to understand the properties of F-statistics \cite{oteo-garcia_geometrical_2021}. However, many population genetic studies use a large number of SNPs (in the order of a million), and it is not possible to visualize population vectors in such a high dimensional space. Peter at al. showed that one can do dimensionality reduction on such datasets with PCA, and use the top PCs to estimate F-statistics \cite{peter_geometric_2022}.
 
-Let us assume M populations and S SNPs, such that our dataset X has the dimension $[M \times S]$, and each entry of X is an allele frequency $\in$ [0,1]. PCA of mean-centered X allows us to project this $[M \times S]$ high dimensional data on a lower dimensional subspace $[M \times q]$. $q = M-1$ represents the case where we retain all the PC's, and thus PCA only rotates X. However, in practice we often only need few PC's (q << M) to explain most variation in the populations \cite{peter_geometric_2022}. A common algorithm to estimate PC's is Singular Value Decomposition (SVD). For this approach we first mean-center X, and then decompose X into U, $\Sigma$, and $V^T$.
+Let us assume M populations and S SNPs, such that our dataset $\mathbf{X}$ has the dimension $[M \times S]$, and each entry of $\mathbf{X}$ is an allele frequency $\in$ [0,1]. PCA of mean-centered X allows us to project this $[M \times S]$ high dimensional data on a lower dimensional subspace $[M \times q]$. $q = M-1$ represents the case where we retain all the PCs, and thus PCA only rotates X. However, in practice we often only need few PCs (q << M) to explain most variation in the populations \cite{peter_geometric_2022}. A common algorithm to estimate PCs is Singular Value Decomposition (SVD). For this approach we first mean-center $\mathbf{X}$, and then decompose $\mathbf{X}$ into $\mathbf{U}$, $\mathbf{\Sigma}$, and $\mathbf{V^T}$.
 
-$$Y = CX = (U\Sigma ) V^T = WL,$$
+$$\mathbf{Y} = \mathbf{C}\mathbf{X} = (\mathbf{U}\mathbf{\Sigma}) \mathbf{V}^T = \mathbf{WL},$$
 
-where C is the centering matrix such that $C = I_M - (1/M)J_M$. Here $I_M$ is identity matrix of dimension M, and $J_M$ is $M\times M$ matrix of all ones. We perform SVD to decompose Y into a product of $W = U\Sigma$ and $L = V^T$. In the context of PCA, $W_{M\times M}$ is a matrix of principal components and contains information about structure, while $L_{M\times S}$, also known as SNP loadings contains the contribution of each SNP to each PC, and can be used to identify outlier SNPs that may be potential candidates for selection \cite{gower_distance_1966}. 
+where $\mathbf{C}$ is the centering matrix such that $\mathbf{C} = \mathbf{I_M} - (1/M)\mathbf{J_M}$. Here $\mathbf{I_M}$ is identity matrix of dimension M, and $\mathbf{J_M}$ is $M\times M$ matrix of all ones. We perform SVD to decompose $\mathbf{Y}$ into a product of $\mathbf{W} = \mathbf{U\Sigma}$ and $\mathbf{L} = \mathbf{V}^T$. In the context of PCA, $\mathbf{W}_{M\times M}$ is a matrix of principal components and contains information about structure, while $\mathbf{L}_{M\times S}$, also known as SNP loadings contains the contribution of each SNP to each PC, and can be used to identify outlier SNPs that may be potential candidates for selection \cite{gower_distance_1966}. 
 
-Since F-statistics can be written as dot products  in an allele frequency space (eq XXXX), and dot products are invariant to rotation, PCA will not change F-statistics as long as we retain all PCs and we can calculate F-statistics from the PC's directly \cite{peter_geometric_2022}:
+Since F-statistics can be written as dot products in an allele frequency space (eq. \ref{eq:f_geometric}), and dot products are invariant to rotation, PCA will not change F-statistics as long as we retain all PCs and we can calculate F-statistics from the PCs directly \cite{peter_geometric_2022}:
 
 \begin{align}\label{eq:f_pca}
-F_2(X_1,X_4) &= \sum_{s=1}^S(x_{1s} - x_{4s})^2\nonumber\\
-&= \sum_{s=1}^S(x_{1s} - \mu_s)(x_{4s} - \mu_s) = F_2(Y_1,Y_4)\nonumber\\
-&= \sum_{s=1}^q(w_{1s} - w_{4s})^2 = F_2(W_1,W_4)\nonumber\\
+F_2(X_1,X_4) &= \sum_{s=1}^S(\mathcal{X}_{1s} - \mathcal{X}_{4s})^2\nonumber\\
+&= \sum_{s=1}^S(\mathcal{X}_{1s} - \mu_s)(\mathcal{X}_{4s} - \mu_s) = F_2(Y_1,Y_4)\nonumber\\
+&= \sum_{q=1}^M(w_{1q} - w_{4q})^2 = F_2(W_1,W_4)\nonumber\\
 \end{align}
-(BP: This equation is NOT true when q < M-1 !!!!)
+
 
 
 \subsection{PPCA}\label{theory-ppca}
@@ -220,13 +231,13 @@ In classical PCA, the goal is to find a linear transformation (rotation) of the 
 
 PPCA introduces a probabilistic generative model. It assumes that the observed data points are generated by a linear transformation of a lower-dimensional latent space, with an additional Gaussian noise term. The latent variables capture the underlying structure or patterns in the data, while the noise accounts for variability due to sampling error. Setting the Gaussian noise parameter to 0, converges PPCA to PCA.
 
-PPCA models a latent structure of the form $X \sim N(WZ + \Psi I)$, where X is the observed data, W is a M x q matrix of linear mappings, $\Psi$ is a Gaussian noise term, $Z$ is a $S$-dimensional latent variable, and I is the identity matrix. Intuitively, WZ captures the covariance in the observed data, analogous to the F-statistics, and $\Psi I$ is analogous to the bias-correction term.
+PPCA models a latent structure of the form $X \sim N(\mathbf{W}Z + \Psi I)$, where X is the observed data, $\mathbf{W}$ is a M x q matrix of linear mappings, $\Psi$ is a Gaussian noise term, $Z$ is a $S$-dimensional latent variable, and $I$ is the identity matrix. Intuitively, $\mathbf{W}Z$ captures the covariance in the observed data, analogous to the F-statistics, and $\Psi I$ is analogous to the bias-correction term.
 
-The goal of PPCA is to estimate the parameters of the model, namely W, $\mu$, and $\Psi$, given the observed data. This is typically done through the standard expectation-maximization (EM) algorithm or maximum likelihood estimation (MLE).
+The goal of PPCA is to estimate the parameters of the model, namely $\mathbf{W}$, $\mu$, and $\Psi$, given the observed data. This is typically done through the standard expectation-maximization (EM) algorithm or maximum likelihood estimation (MLE).
 
 \subsection{LSE}\label{theory-lse}
 
-LSE is a dimensionality reduction technique quite similar to PPCA, with the difference that LSE accounts for the heteroscedasticity in the data \cite{chen_consistent_2015}, and explicitly models the binomial error in genetic data. In this algorithm, we calculate the heterozygosity  $d_{jj} = \frac{1}{S}\sum_i 2x_{ij}(1- x_{ij})$ from $X$. We define D as a diagonal matrix with $j^{th}$ entry as $\delta_{jj}$. We then calculate an (estimated covariance matrix $\MG$ = $\frac{1}{S}X^TX - D$. (BP: I think it is standard notation to denote matrices with boldface letters. Use mathbf (or define macros)). The eigenvectors of G then span the latent subspace of L , and the smallest $M-q$ eigenvalues converge to 0 for large M \cite{cabreros_likelihood-free_2019}.
+LSE is a dimensionality reduction technique quite similar to PPCA, with the difference that LSE accounts for the heteroscedasticity in the data \cite{chen_consistent_2015}, and explicitly models the binomial error in genetic data. In this algorithm, we calculate the heterozygosity  $d_{jj} = \frac{1}{S}\sum_i 2x_{ij}(1- x_{ij})$ from $X$. We define $\mathbf{D}$ as a diagonal matrix with $j^{th}$ entry as $\delta_{jj}$. We then estimate covariance matrix $\MG$ = $\frac{1}{S}X^TX - D$. The eigenvectors of $\mathbf{G}$ then span the latent subspace of $\mathbf{L}$ , and the smallest $M-q$ eigenvalues converge to 0 for large M \cite{cabreros_likelihood-free_2019}.
 
 
 Crucially, if we use \emph{all} the PCs, the $f$-statistics coincide with LSE (see appendix for a derivation): 
@@ -235,9 +246,17 @@ Crucially, if we use \emph{all} the PCs, the $f$-statistics coincide with LSE (s
     &= G_{11} + G_{44} - 2 G_{14}
 \end{align}
 
+The covariance used by LSE is an estimated covariance matrix, and its properties differ from the sample covariance matrix used in classical PCA. In particular, sample covariance matrices are positive semi-definite, which means that all eigenvalues are non-negative. In contrast, for an estimated covariance matrix, the expecation of the smallest $M-q$ eigenvalues is zero, and thus an unbiased estimate will have both positive and negative eigenvalues. PCs with negative eigenvalues correspond to imaginary PCs, and thus, we need to adjust eq. \ref{eq:f_pca} as
+
+
+\begin{align}\label{eq:f_lse}
+F_2(X_1,X_4) &= \sum_{q=1}^{M}\mathbb{I}(e_q \geq 0) (w_{1q} - w_{4q})^2 - \sum_{q=1}^M \mathbb{I}(e_q <0) (w_{1q} - w_{4q})^2,
+\end{align}
+where $e_q$ denotes the $q$-th eigenvalue of $\mathbf{G}$, and $\mathbb{I}$ denotes the indicator function that is 1 when the condition is satisfied, and zero otherwise.
+
 
 \section{Results}
-We evaluate the performance of PCA, PPCA and LSE frameworks and compare to that of admixtools2 (BP: add citation)using simulations, and a dataset on Neandertal genetic variation. 
+We evaluate the performance of PCA, PPCA and LSE frameworks and compare to that of admixtools2 \cite{maier_limits_2022} using simulations, and a dataset on Neandertal genetic variation. 
 
 \subsection{Evaluation on simulations}
 We simulated 10 populations with 10 individuals each using slendr \cite{petr_slendr_2022}. We use a mutation rate of $10^{-8}$ per base per generation, a recombination rate of $10^{-8}$ per base per generation, and a generation time of 30 years. Fig. \ref{fig2:sim} shows the split times and migration events. 
@@ -251,7 +270,7 @@ We simulated 10 populations with 10 individuals each using slendr \cite{petr_sle
 
 We use eq. \ref{eq:f_pca} to calculate $F_2$ for a pair of populations using the  squared Euclidean distance between them from the principal components (see Fig. S1) based on either  PCA, PPCA and LSE, and compare F-statistics estimated from these methods to the true theoretical value of the statistic obtained from branch lengths in slendr \cite{petr_slendr_2022}. 
 
-We first do a comparison between $f_2$s estimated from PCA, PPCA and LSE with different number of PCs used (Fig. \ref{fig:comparison}, Fig. S2). In Fig. \ref{fig:comparison}A, we use 10 (diploid?) individuals per population, and we see that all three methods are not sensitive to the number of (BP: should be PCs, not PC's throughout) PCs used, as long as the number of PC's is higher than 7 (BP: this 7 bit is actually very hard to see.). The estimate of $F_2$ based on PCA is only slightly higher than that for PPCA and LSE, as the sampling error term is inversely proportional to the sample size. We next look at a comparison between the three methods using only one individual in each population (Fig. \ref{fig:comparison}, Fig. S3). Here we observe that $F2$ estimates from PPCA and LSE are quite close to the true value in all cases, as long as we use at least 7 PCs. and less than 75. However, estimates from PCA get increasingly higher if we add additional PCs. This is expected from theory (section \ref{theory}), since PCA does not account for sampling bias, and, using all PCs, we end up with the biased estimator of $F_2$. Finally, we repeated the estimation of $F_2$s with PPCA and PCA in the presence of $50\%$ missing data (\ref{fig:comparison}C). In this case, PPCA gives reasonably accurate results when the number of PCs used is higher than 7 and lower than around 25, while PCA results are much more noisy. Implementation of LSE is not trivial when there is missingness in data, and is not included in this analysis. 
+We first do a comparison between $f_2$s estimated from PCA, PPCA and LSE with different number of PCs used (Fig. \ref{fig:comparison}, Fig. S2). In Fig. \ref{fig:comparison}A, we use 10 diploid individuals per population, and we see that all three methods are not sensitive to the number of  PCs used, as long as enough number of PCs are used (in this case, $\approx 7$). The estimate of $F_2$ based on PCA is only slightly higher than that for PPCA and LSE, as the sampling error term is inversely proportional to the sample size. We next look at a comparison between the three methods using only one individual in each population (Fig. \ref{fig:comparison}, Fig. S3). Here we observe that $F2$ estimates from PPCA and LSE are quite close to the true value in all cases, as long as we use at least 7 PCs. and less than 75. However, estimates from PCA get increasingly higher if we add additional PCs. This is expected from theory (section \ref{theory}), since PCA does not account for sampling bias, and, using all PCs, we end up with the biased estimator of $F_2$. Finally, we repeated the estimation of $F_2$s with PPCA and PCA in the presence of $50\%$ missing data (\ref{fig:comparison}C). In this case, PPCA gives reasonably accurate results when the number of PCs used is higher than 7 and lower than around 25, while PCA results are much more noisy. Implementation of LSE is not trivial when there is missingness in data, and is not included in this analysis. 
 
 
 \begin{figure}[ht!]
@@ -262,12 +281,12 @@ We first do a comparison between $f_2$s estimated from PCA, PPCA and LSE with di
 \end{figure}
 
 
-In the rest of the analyses, we exclude PCA, and compare PPCA and LSE with 8 and 12 PC's to ADMIXTOOLS 2 \cite{maier_limits_2022}, which is a recent reimplementation of ADMIXTOOLS \cite{patterson_ancient_2012} that gives equivalent results. We chose 8 and 12 PCs because the number of PCs to use will not be known in most applications. We first compare $f_2$, $f_3$ and $f_4$ estimated by these methods in an ideal scenario, where each population has 10 individuals, and there is no missing data. In this case we find that the three methods perform well, and get F-statistics close to the truth (fig. S4). 
+In the rest of the analyses, we exclude PCA, and compare PPCA and LSE with 8 and 12 PCs to ADMIXTOOLS 2 \cite{maier_limits_2022}, which is a recent reimplementation of ADMIXTOOLS \cite{patterson_ancient_2012} that gives equivalent results. We chose 8 and 12 PCs because the number of PCs to use will not be known in most applications. We first compare $f_2$, $f_3$ and $f_4$ estimated by these methods in an ideal scenario, where each population has 10 individuals, and there is no missing data. In this case we find that the three methods perform well, and get F-statistics close to the truth (fig. S4). 
 
 We next address the issues listed in Introduction section \ref{intro-fstats-estimation}. The first issue is about the estimation of F-statistics when population assignment is difficult, especially when few samples are available. We show that this can be resolved with individual-based F-statistics. In our simulations, we label each individual as a different population, and we sample one individual from each population to calculate F-statistics (fig. S5). We observe that in this case both PPCA and LSE- based frameworks perform atleast as well as ADMIXTOOLS 2. The mean estimate from each method is close to the true value, however, the error bars for $F_2$ estimates are lower for PPCA compared to ADMIXTOOLS 2, specially for X1 and X2, which have low split-times. The improved accuracy of PCA-based tools versus ADMIXTOOLS 2 is explained because PCA incorporates a succinct summary of the full data of all the individuals, and thus the PCA-based estimates can ``borrow'' information from related individuals in the sample that are not used to calculate the statistic at hand. In contrast, ADMIXTOOLS 2 has only one individual from each population to assess structure / admixture, and while the estimates based on admixtools 2 are minimum-variance estimators for these subsets of the data \citep{patterson_ancient_2012}, PCA-based methods do better whenever we have data from additional individuals.     
 
 \subsection{Missing data}
-Next, we address the issue of missing data and evaluate the estimation of these methods when there is random missing data. Our implementation of PPCA on missing data is inspired from EMU \cite{meisner_large-scale_2021}, and is described in Methods section \ref{method-ppca}. We use EMU software for inferring PC's for the calculation of F-statistics. We see that PPCA is not affected by missingness, while ADMIXTOOLS 2 and EMU results are inflated (Fig. \ref{fig:comparison-adm}).
+Next, we address the issue of missing data and evaluate the estimation of these methods when there is random missing data. Our implementation of PPCA on missing data is inspired from EMU \cite{meisner_large-scale_2021}, and is described in Methods section \ref{method-ppca}. We use EMU software for inferring PCs for the calculation of F-statistics. We see that PPCA is not affected by missingness, while ADMIXTOOLS 2 (run with maxmiss=1, so no SNPs are excluded) and EMU results are inflated (Fig. \ref{fig:comparison-adm}).
 
 \begin{figure}[ht!]
     \includegraphics[width=16.5cm]{plots/simfiles/Ne1000/split_times1000/npop10_nind100/missing0.5/plots_8_12/mu0.05_plot_all_1ind_missing.png}
@@ -289,7 +308,7 @@ A major application of $F$-statistics are tests of admixture \cite{orlando_ancie
 
 \subsection{Evaluation on neandertal dataset}
 
-To test our framework on real data, we apply it to a published dataset of archaic humans from Eurasia \cite{hajdinjak}. This dataset consists of low-coverage late Neandertal specimens from Goyet (Goyet\_L35MQ25), Spy (Spy\_L35MQ25), Les Cottés (Les\_Cottes\_L35MQ25), Vindija (VindijaG1\_L35MQ25), and Mezmaiskaya caves (Mezmaiskaya1\_L35MQ25 and Mezmaiskaya2\_L35MQ25) along with the high-coverage archaic specimens from Densiova (Altai, Denisova) and Vindija caves (Vindija33.19). We first estimate PC's for this dataset using PPCA, and show that our plot captures all the features of PCA from the authors (Fig. S7, S8). However, we demonstrate that with PPCA, the user can utilize all the specimens to estimate the PC's. 
+To test our framework on real data, we apply it to a published dataset of archaic humans from Eurasia \cite{hajdinjak}. This dataset consists of low-coverage late Neandertal specimens from Goyet (Goyet\_L35MQ25), Spy (Spy\_L35MQ25), Les Cottés (Les\_Cottes\_L35MQ25), Vindija (VindijaG1\_L35MQ25), and Mezmaiskaya caves (Mezmaiskaya1\_L35MQ25 and Mezmaiskaya2\_L35MQ25) along with the high-coverage archaic specimens from Densiova (Altai, Denisova) and Vindija caves (Vindija33.19). We first estimate PCs for this dataset using PPCA, and show that our plot captures all the features of PCA from the authors (Fig. S7, S8). However, we demonstrate that with PPCA, the user can utilize all the specimens to estimate the PCs. 
 
 We analyze how close or distant the low-coverage late Neandertals are to high-coverage Vindija Neandertal using outgroup F3 statistic. F3(Altai, Vindija33.19, X) represents the branch length extending from Altai to the common ancestor of Vindija33.19 and X, where X is a low-coverage late Neandertal. Higher value of F3 denotes closeness of X to Vindija33.19 (Fig. \ref{fig2:overview}). We compare the estimates from PPCA-based framework and ADMIXTOOLS 2, and show that they have a very similar pattern (Fig. \ref{fig:nea_f3}). It is interesting to find that $F_3$(Altai, Vindija33.19, VindijaG1\_L35MQ25) estimated by PPCA framework is higher than that by ADMIXTOOLS 2. We can write $F_3$ as a linear combination of $F_2$'s:
 
@@ -312,7 +331,7 @@ We looked at the values of the three $f_2$-terms from ADMIXTOOLS 2 and PPCA fram
 
 \subsection{PPCA implimentation}\label{method-ppca}
 
-We implement PPCA using maximum-likelihood approach following Tipping and Bishop \cite{tipping_probabilistic_nodate}, and modify this algorithm to work with missing data. Our approach to handle missingness is inspired from EMU \cite{meisner_large-scale_2021}. We describe our algorithm briefly:
+We implement PPCA using maximum-likelihood approach following Tipping and                Bishop \cite{tipping_probabilistic_nodate}, and modify this algorithm to work with missing data. Our approach to handle missingness is inspired from EMU \cite{meisner_large-scale_2021}. We describe our algorithm briefly:
 \begin{enumerate}
     \item Mean center data $Y = X - \mu$.
     \item Set missing values to 0.
@@ -328,7 +347,7 @@ We implement PPCA using maximum-likelihood approach following Tipping and Bishop
 
 \subsection{Calculation of standard errors}
 
-We use a block-jackknife approach to calculate standard errors \cite{maier_limits_2022}. We divide the genome in 2 MB blocks, and estimate PC's and then F-statistics removing a block. Since the statistics obtained are not independent, we calculate variance using this equation \cite{maier_limits_2022}:
+We use a block-jackknife approach to calculate standard errors \cite{maier_limits_2022}. We divide the genome in 2 MB blocks, and estimate PCs and then F-statistics removing a block. Since the statistics obtained are not independent, we calculate variance using this equation \cite{maier_limits_2022}:
 
 \begin{align}\label{eq:bjk_var}
 V &= \frac{1}{g} \sum_{i=1}^g \frac{s_i}{S-s_i} (\hat{\theta} - \theta_i)^2
@@ -345,26 +364,24 @@ Apart from a better understanding of the statistical links between PCA and $F$-s
 \subsection{Different versions of PCA emphasize different aspects of the data, and have different uses}
 \paragraph{Classical PCA}
 The key advantage of classical PCA is that it incorporates sampling noise. Thus it should be the primary choice for analyzes primarily aimed at quality control. Effects of different sequencing or capturing techniques, for example, will very often be visible on a PCA-plot, while they may be more hidden and partially corrected in PPCA.
-\paragraph{Probabilistic PCA/LSE}. Our results suggest that PPCA is preferable to classical PCA when the primary goal is to depict population structure, because the effect of sampling is removed. In particular, using LSE ensures that both PCA and $F$-statistics use the same modelling assumptions, and thus LSE-based PCA plots are directly comparable to $F$-statistics. The advantage of PPCA is that it works relatively well even for single pseudohaploid samples.
+\paragraph{Probabilistic PCA/LSE}. Our results suggest that PPCA is preferable to classical PCA when the primary goal is to depict population structure, because the effect of sampling is removed. In particular, using LSE ensures that both PCA and $F$-statistics use the same modelling assumptions, and thus LSE-based PCA plots are directly comparable to $F$-statistics. The advantage of PPCA is that it works relatively well even for single pseudohaploid samples, and is straight-forward to implement for data with missingness.
 
-\paragraph{Projection PCA}. A further common approach is to project data onto a ``reference''-data set. This facilitates relating ``unknown'' projected samples to ``known'' reference samples. This will remove both sampling noise, and variation that is private to the projected samples. 
+\paragraph{Projection PCA}. A further common approach is to project data onto a ``reference''-data set. This facilitates relating ``unknown'' projected samples to ``known'' reference samples. This will remove both the sampling noise, and the variation that is private to the projected samples. 
 
 
 \paragraph{Grouping individuals} While our framework permits analyses with some missing data, this is not always feasible. Our results suggest that individuals grouped together for $F$-statistic-based analyses should form tight clusters on all relevant PCs on probabilistic PCA/LSE and projection PCA (but not classical PCA). 
 
 
 \paragraph{Dealing with missing data}
-
+We see an inflation in the individual-based estimates of $f$-statistics from ADMIXTOOLS 2 (allowing the software to use all SNPs) applied to simulated genotype data with $50\%$ random missingness. We show that PPCA solves this issue.
 
 \paragraph{How many PCs should be used?}
 
-Our framework is able to deal with missing data illuminate  us to 
+Our framework is able to deal with missing data illuminate us to point out that the conventional method to estimate F-statistics suffers from two major problems. First, one needs to assign individuals to discrete populations which may not be justified for humans, and is difficult to do with ancient samples. And second, the estimates are inaccurate in presence of high amounts of missing genotypes, another characteristic of ancient DNA. We present a PCA-based framework to estimate F-statistics while taking in account these issues. We compare the statistics estimated with different PCA approaches, and show that all approaches work well on ideal simulations with enough samples. In case of individual-based F-statistics, both PPCA and LSE outperform classical PCA, and we provide a PPCA algorithm for the case of missing data. We compare PPCA framework to ADMIXTOOLS 2, and find that our framework outperforms ADMIXTOOLS 2 to estimate individual-based F-statistics with missing data.  
 
-oint out that the conventional method to estimate F-statistics suffers from two major problems. First, one needs to assign individuals to discrete populations which may not be justified for humans, and is difficult to do with ancient samples. And second, the estimates are inaccurate in presence of high amounts of missing genotypes, another characteristic of ancient DNA. We present a PCA-based framework to estimate F-statistics while taking in account these issues. We compare the statistics estimated with different PCA approaches, and show that all approaches work well on ideal simulations with enough samples. In case of individual-based F-statistics, both PPCA and LSE outperform classical PCA, and we provide a PPCA algorithm for the case of missing data. We compare PPCA framework to ADMIXTOOLS 2, and find that our framework outperforms ADMIXTOOLS 2 to estimate individual-based F-statistics with missing data.  
+PCA is widely used in population genetics to visualize clusters of individuals that may represent populations, and clines potentially representing historical admixture. Moreover PCA may reveal fine-scale structure in the population \cite{waldman_genome-wide_2022}. PCA's ability to condense complex genetic data into interpretable dimensions enhances our understanding of human evolution, migration, and admixture events, and throws light on the intricate mosaic of our species' history. However the visualization results from PCA may be influenced by the choice of PCs used, normalization, and the choice of populations used. \cite{elhaik_principal_2022}. We provide a way of quantifying the results of a PCA with F-statistics so that all PCA's can be comparable and can use the same normalizations. Such a quantification using all the top PCs also makes it more straight-forward to justify a visual result made with 2 PCs.
 
-PCA is widely used in population genetics to visualize clusters of individuals that may represent populations, and clines potentially representing historical admixture. Moreover PCA may reveal fine-scale structure in the population \cite{Ashkenazi Jewish}. PCA's ability to condense complex genetic data into interpretable dimensions enhances our understanding of human evolution, migration, and admixture events, and throws light on the intricate mosaic of our species' history. However the visualization results from PCA may be influenced by the choice of PC's used, normalization, and the choice of populations used. \cite{elhaik_principal_2022}. We provide a way of quantifying the results of a PCA with F-statistics  so that all PCA's can be comparable and can use the same normalizations. Such a quantification using all the top PC's also makes it more straight-forward to justify a visual result made with 2 PC's.
-
-We used a PPCA-based framework with the Neandertal data to estimate PC's utilizing all the samples. This approach is more straight-forward than authors' approach to first estimate the PC's using high-coverage genomes, and then project the low-coverage genomes. We show that we can accurately estimate outgroup $F_3$ statistic from the PC's. We find that $F_2$ calculated using diploid genotype data with our framework is comparable to that of ADMIXTOOLS 2. However, ADMIXTOOLS 2 can not be used to estimate $F_2$ with pseudohaploid data since the unbiased estimator in ADMIXTOOLS 2 is undefined in this case. We show that our framework provides accurate estimates even with pseudohaploid samples. 
+We used a PPCA-based framework with the Neandertal data to estimate PCs utilizing all the samples. This approach is more straight-forward than authors' approach to first estimate the PCs using high-coverage genomes, and then project the low-coverage genomes. We show that we can accurately estimate outgroup $F_3$ statistic from the PCs. We find that $F_2$ calculated using diploid genotype data with our framework is comparable to that of ADMIXTOOLS 2. However, ADMIXTOOLS 2 can not be used to estimate $F_2$ with pseudohaploid data since the unbiased estimator in ADMIXTOOLS 2 is undefined in this case. We show that our framework provides accurate estimates even with pseudohaploid samples. 
 
 One limitation of this framework is the need to perform multiple PPCAs to obtain standard errors, which can be computationally expensive. Further studies are needed to design a statistical framework that can estimate the errors using SNP loadings, and therefore can work fast with large datasets.
 
@@ -462,12 +479,12 @@ We describe two issues in accurate estimation of population allele frequencies:
 
 2. Missing data in some individuals for certain sites can make it difficult to get accurate allele frequency estimates at those sites. One commonly used solution to this problem is to filter out all the sites with missing data. However, this may make the number of sites available for F-statistics quite small. E.g., for 100 individuals with $10\%$ randomly missing sites, the available number of sites after filtering out positions with missing data would be $\approx26$ out of a total 1,000,000 sites. 
 
-Studies using PCA generally use specific PC's to visualize population structure or admixture, and the choice of the PC's used can be quite subjective \cite{elhaik_principal_2022}. Estimation of F-statistics from PCA quantifies, using all the important PC's, what the researcher has visualized using seemingly arbitrary PC's.
+Studies using PCA generally use specific PCs to visualize population structure or admixture, and the choice of the PCs used can be quite subjective \cite{elhaik_principal_2022}. Estimation of F-statistics from PCA quantifies, using all the important PCs, what the researcher has visualized using seemingly arbitrary PCs.
 
-However, a limitation with such a framework is that it is possible to define F-statistics in terms of PC's only when allele frequencies are known, and need not be estimated. This is due to the fact that PCA does not filter the noise in the data due to sampling. In addition, missing data can affect the computation of PC's, and subsequently F-statistics.
+However, a limitation with such a framework is that it is possible to define F-statistics in terms of PCs only when allele frequencies are known, and need not be estimated. This is due to the fact that PCA does not filter the noise in the data due to sampling. In addition, missing data can affect the computation of PCs, and subsequently F-statistics.
 
 
-We would point out here that in ancient DNA studies PCA is sometimes used as quality-control step by constructing PC's using high-quality samples, and projecting the low-quality samples which may be from the same populations or even the same individuals as the high coverage samples. In the presence of contamination from present-day people, reference bias, ascertainment bias or batch effects, the projected sample may not overlap with an identical high-coverage sample. These biases and issues are not resolved with PPCA/LSE either, since PPCA only models sampling noise. 
+We would point out here that in ancient DNA studies PCA is sometimes used as quality-control step by constructing PCs using high-quality samples, and projecting the low-quality samples which may be from the same populations or even the same individuals as the high coverage samples. In the presence of contamination from present-day people, reference bias, ascertainment bias or batch effects, the projected sample may not overlap with an identical high-coverage sample. These biases and issues are not resolved with PPCA/LSE either, since PPCA only models sampling noise. 
 
 
 \subsection{F-statistics with PPCA/LSE}
