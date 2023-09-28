@@ -81,7 +81,7 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
                       ncol = 2, nrow = 1, common.legend = TRUE, legend="bottom")
   
   ggsave(pcplot1, figure1,
-         width = 8, height = 6, dpi = 400, units = "in", device='png')
+         width = 8, height = 5, dpi = 400, units = "in", device='png')
   
   
   #next figure
@@ -131,7 +131,7 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
     geom_point() +
     scale_color_manual(values = colors1, name="Populations") + theme_bw() +
     theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.line.y = element_blank(),panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(), strip.text.x = element_text(size = 9)) + xlab("Position of individuals on a PC")
+          panel.grid.minor = element_blank(), strip.text.x = element_text(size = 9, face="bold")) + xlab("Position of individuals on a PC")
    
   ggsave(pcplot2, figure2,
          width = 8, height = 6, dpi = 400, units = "in", device='png')
