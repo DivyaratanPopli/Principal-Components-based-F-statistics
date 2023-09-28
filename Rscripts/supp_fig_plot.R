@@ -81,7 +81,7 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
                       ncol = 2, nrow = 1, common.legend = TRUE, legend="bottom")
   
   ggsave(pcplot1, figure1,
-         width = 8, height = 5, dpi = 300, units = "in", device='png')
+         width = 8, height = 6, dpi = 400, units = "in", device='png')
   
   
   #next figure
@@ -134,7 +134,7 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
           panel.grid.minor = element_blank(), strip.text.x = element_text(size = 9)) + xlab("Position of individuals on a PC")
    
   ggsave(pcplot2, figure2,
-         width = 8, height = 6, dpi = 300, units = "in", device='png')
+         width = 8, height = 6, dpi = 400, units = "in", device='png')
 }
 
 plot_pcs(ppcaf=snakemake@input[["ppcaf"]],
