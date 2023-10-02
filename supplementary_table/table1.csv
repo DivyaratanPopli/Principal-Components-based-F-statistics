@@ -1,0 +1,106 @@
+Method,Statistic,Mean,Simulation
+ADMIXTOOLS 2,f2(X1_X2),2074.303285,Population-based
+ADMIXTOOLS 2,"f2(X3,X4)",4005.81119,Population-based
+ADMIXTOOLS 2,"f2(X2,X3)",9207.71423,Population-based
+ADMIXTOOLS 2,"f2(X1,X4)",10036.80986,Population-based
+LSE_scale8,f2(X1_X2),2072.96192637022,Population-based
+LSE_scale8,"f2(X3,X4)",4005.37147744485,Population-based
+LSE_scale8,"f2(X2,X3)",9202.99040024988,Population-based
+LSE_scale8,"f2(X1,X4)",10035.1708468603,Population-based
+LSE_scale12,f2(X1_X2),2073.96896113622,Population-based
+LSE_scale12,"f2(X3,X4)",4006.00837269928,Population-based
+LSE_scale12,"f2(X2,X3)",9203.13623806646,Population-based
+LSE_scale12,"f2(X1,X4)",10035.2391438599,Population-based
+PPCA_scale8,f2(X1_X2),2037.79725434773,Population-based
+PPCA_scale8,"f2(X3,X4)",3958.05547298587,Population-based
+PPCA_scale8,"f2(X2,X3)",9168.78989302741,Population-based
+PPCA_scale8,"f2(X1,X4)",9957.28527253482,Population-based
+PPCA_scale12,f2(X1_X2),2060.04524379434,Population-based
+PPCA_scale12,"f2(X3,X4)",3978.47494042944,Population-based
+PPCA_scale12,"f2(X2,X3)",9191.49715002744,Population-based
+PPCA_scale12,"f2(X1,X4)",10006.3989134922,Population-based
+ADMIXTOOLS 2,f2(X1_X2),2074.75489,Individual-based
+ADMIXTOOLS 2,"f2(X3,X4)",3993.887775,Individual-based
+ADMIXTOOLS 2,"f2(X2,X3)",9244.99037,Individual-based
+ADMIXTOOLS 2,"f2(X1,X4)",10051.15067,Individual-based
+LSE_scale8,f2(X1_X2),2054.99106441453,Individual-based
+LSE_scale8,"f2(X3,X4)",4011.43828292227,Individual-based
+LSE_scale8,"f2(X2,X3)",9247.63713742526,Individual-based
+LSE_scale8,"f2(X1,X4)",10037.7467304693,Individual-based
+LSE_scale12,f2(X1_X2),2091.79021710347,Individual-based
+LSE_scale12,"f2(X3,X4)",4029.19291200165,Individual-based
+LSE_scale12,"f2(X2,X3)",9291.79284825131,Individual-based
+LSE_scale12,"f2(X1,X4)",10056.0605082663,Individual-based
+PPCA_scale8,f2(X1_X2),2019.04728685351,Individual-based
+PPCA_scale8,"f2(X3,X4)",3965.6279767234,Individual-based
+PPCA_scale8,"f2(X2,X3)",9209.96344854584,Individual-based
+PPCA_scale8,"f2(X1,X4)",9961.94234947492,Individual-based
+PPCA_scale12,f2(X1_X2),2044.64383891601,Individual-based
+PPCA_scale12,"f2(X3,X4)",3986.04050944109,Individual-based
+PPCA_scale12,"f2(X2,X3)",9238.63941905756,Individual-based
+PPCA_scale12,"f2(X1,X4)",10009.9594343958,Individual-based
+ADMIXTOOLS 2,f2(X1_X2),2525.17189,Individual-based with missing values
+ADMIXTOOLS 2,"f2(X3,X4)",5060.42717,Individual-based with missing values
+ADMIXTOOLS 2,"f2(X2,X3)",11544.84952,Individual-based with missing values
+ADMIXTOOLS 2,"f2(X1,X4)",12301.88807,Individual-based with missing values
+LSE_scale8,f2(X1_X2),2750.50248176219,Individual-based with missing values
+LSE_scale8,"f2(X3,X4)",5191.49988470567,Individual-based with missing values
+LSE_scale8,"f2(X2,X3)",11235.8343957137,Individual-based with missing values
+LSE_scale8,"f2(X1,X4)",12014.8593706139,Individual-based with missing values
+LSE_scale12,f2(X1_X2),3075.02481991568,Individual-based with missing values
+LSE_scale12,"f2(X3,X4)",5427.64870410088,Individual-based with missing values
+LSE_scale12,"f2(X2,X3)",11799.4846849267,Individual-based with missing values
+LSE_scale12,"f2(X1,X4)",12783.6682635939,Individual-based with missing values
+PPCA_scale8,f2(X1_X2),2280.32814843715,Individual-based with missing values
+PPCA_scale8,"f2(X3,X4)",4207.62620932047,Individual-based with missing values
+PPCA_scale8,"f2(X2,X3)",9333.27298947604,Individual-based with missing values
+PPCA_scale8,"f2(X1,X4)",9964.03721071158,Individual-based with missing values
+PPCA_scale12,f2(X1_X2),2392.08725785624,Individual-based with missing values
+PPCA_scale12,"f2(X3,X4)",4310.24040842078,Individual-based with missing values
+PPCA_scale12,"f2(X2,X3)",9458.3773988497,Individual-based with missing values
+PPCA_scale12,"f2(X1,X4)",10112.8172599707,Individual-based with missing values
+LSE_scale8,"F3(X1;X3,X4)",8021.3323396028,Population-based
+LSE_scale8,"F3(X4;X1,X2)",8671.26948886229,Population-based
+LSE_scale12,"F3(X1;X3,X4)",8021.45286404756,Population-based
+LSE_scale12,"F3(X4;X1,X2)",8671.22857752525,Population-based
+PPCA_scale8,"F3(X1;X3,X4)",7974.12480346089,Population-based
+PPCA_scale8,"F3(X4;X1,X2)",8622.44000191804,Population-based
+PPCA_scale12,"F3(X1;X3,X4)",8006.61282743608,Population-based
+PPCA_scale12,"F3(X4;X1,X2)",8657.21727293428,Population-based
+ADMIXTOOLS 2,"F3(X1;X3,X4)",8023.58991,Population-based
+ADMIXTOOLS 2,"F3(X4;X1,X2)",8672.9416225,Population-based
+LSE_scale8,"F3(X1;X3,X4)",8015.35856520714,Individual-based
+LSE_scale8,"F3(X4;X1,X2)",8704.33158598902,Individual-based
+LSE_scale12,"F3(X1;X3,X4)",8023.80682743648,Individual-based
+LSE_scale12,"F3(X4;X1,X2)",8718.05982027606,Individual-based
+PPCA_scale8,"F3(X1;X3,X4)",7971.89542783384,Individual-based
+PPCA_scale8,"F3(X4;X1,X2)",8654.08402169013,Individual-based
+PPCA_scale12,"F3(X1;X3,X4)",8003.27775644446,Individual-based
+PPCA_scale12,"F3(X4;X1,X2)",8688.35287921643,Individual-based
+ADMIXTOOLS 2,"F3(X1;X3,X4)",8017.5416925,Individual-based
+ADMIXTOOLS 2,"F3(X4;X1,X2)",8720.194205,Individual-based
+PCA_scale8,"F3(X1;X3,X4)",9426.02493621849,Individual-based with missing values
+PCA_scale8,"F3(X4;X1,X2)",10330.7851300959,Individual-based with missing values
+PCA_scale12,"F3(X1;X3,X4)",10083.2068295276,Individual-based with missing values
+PCA_scale12,"F3(X4;X1,X2)",10842.7499371669,Individual-based with missing values
+PPCA_scale8,"F3(X1;X3,X4)",7876.20524895432,Individual-based with missing values
+PPCA_scale8,"F3(X4;X1,X2)",8543.72072294541,Individual-based with missing values
+PPCA_scale12,"F3(X1;X3,X4)",8007.29388201384,Individual-based with missing values
+PPCA_scale12,"F3(X4;X1,X2)",8616.45510202148,Individual-based with missing values
+ADMIXTOOLS 2,"F3(X1;X3,X4)",9835.918,Individual-based with missing values
+ADMIXTOOLS 2,"F3(X4;X1,X2)",10677.7425925,Individual-based with missing values
+LSE_scale8,"F3(X1,X3;X2,X4)",6579.91392164754,Population-based
+LSE_scale12,"F3(X1,X3;X2,X4)",6579.19902404543,Population-based
+PPCA_scale8,"F3(X1,X3;X2,X4)",6565.11121911432,Population-based
+PPCA_scale12,"F3(X1,X3;X2,X4)",6579.68793964795,Population-based
+ADMIXTOOLS 2,"F3(X1,X3;X2,X4)",6582.2048075,Population-based
+LSE_scale8,"F3(X1,X3;X2,X4)",6609.4772602789,Individual-based
+LSE_scale12,"F3(X1,X3;X2,X4)",6613.43511370623,Individual-based
+PPCA_scale8,"F3(X1,X3;X2,X4)",6593.61526722192,Individual-based
+PPCA_scale12,"F3(X1,X3;X2,X4)",6608.95725254811,Individual-based
+ADMIXTOOLS 2,"F3(X1,X3;X2,X4)",6613.7491875,Individual-based
+PCA_scale8,"F3(X1,X3;X2,X4)",7654.34569992992,Individual-based with missing values
+PCA_scale12,"F3(X1,X3;X2,X4)",8040.23971225202,Individual-based with missing values
+PPCA_scale8,"F3(X1,X3;X2,X4)",6404.677921215,Individual-based with missing values
+PPCA_scale12,"F3(X1,X3;X2,X4)",6434.4334962717,Individual-based with missing values
+ADMIXTOOLS 2,"F3(X1,X3;X2,X4)",8130.569265,Individual-based with missing values
