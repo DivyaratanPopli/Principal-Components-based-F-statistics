@@ -35,9 +35,11 @@ plot_f2s <-function(x1, x2, x3, truef, nfile_avg1, nfile_avg2, nfile_avg3, f2plo
   df[df$Method=="emu","Method"] = "PCA"
   df[df$Method=="ppca_miss","Method"] = "PPCA"
   df[df$data=="Indiviadual-based-missing","data"] = "With missing data"
+
   
   xx=ggplot(df, aes(x=Scale, y=F2, col=Method)) +
-    geom_point(alpha=1) + facet_grid(rows = vars(factor(data,levels=c("Population-based", "Individual-based","With missing data")))) +
+    geom_point(alpha=1) +
+    facet_grid(rows = vars(factor(data,levels=c("Population-based", "Individual-based","With missing data")))) +
     geom_errorbar(aes(ymin=F2-(2*SE), ymax=F2+(2*SE)), width=.2, alpha=1) +
     scale_color_manual(values=c(PCA="#E69F00", LSE="#009E73", PPCA="#CC79A7")) +
     geom_hline(data = tru, aes(yintercept = true_val, linetype="True")) +
@@ -47,7 +49,8 @@ plot_f2s <-function(x1, x2, x3, truef, nfile_avg1, nfile_avg2, nfile_avg3, f2plo
     xlab("Number of PC's used") + ylab("f2") +
     theme_bw() + theme(legend.position="bottom", axis.text=element_text(size=14),
                        axis.title=element_text(size=14), legend.text=element_text(size=14), legend.title=element_text(size=14),
-                       strip.text.y = element_text(size = 11))
+                       strip.text.y = element_text(size = 11)) +
+    scale_x_continuous(breaks=c(7, 25, 50,75))
   
   ggsave(f2plot, xx,
          width = 8, height = 7, dpi = 400, units = "in", device='png')
@@ -59,3 +62,5 @@ plot_f2s(x1=snakemake@input[["x1"]],
          truef=snakemake@input[["truef"]],
          nfile_avg1=snakemake@input[["nfile_avg1"]], nfile_avg2=snakemake@input[["nfile_avg2"]],
          nfile_avg3=snakemake@input[["nfile_avg3"]], f2plot=snakemake@output[["f2plot"]])
+
+

@@ -1,3 +1,5 @@
+import python_scripts as py
+
 
 folder1="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE/"
 folder2="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE_1ind/"
@@ -45,6 +47,37 @@ rule supp_PC_comparison_all_inds1:
     script:
         "Rscripts/scale_f2.R"
 
+rule supp_pc_explained_sim:
+    input:
+        ppcaf = folder1 + "simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/pcs_method_ppca_direct/pcs_npcs8.csv",
+        indf = folder1 + "simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/eigen_pop.ind"
+    output:
+        pcplot1 = "plots/supplementary/pcplot1.png",
+        pcplot2 = "plots/supplementary/pcplot2.png"
+    script:
+        "Rscripts/supp_fig_plot.R"
+
+
+rule supp_pc_explained_sim_pca:
+    input:
+        ppcaf = folder1 + "simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/pcs_method_pca/pcs_npcs8.csv",
+        indf = folder1 + "simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/eigen_pop.ind"
+    output:
+        pcplot1 = "plots/supplementary/pcaplot1.png",
+        pcplot2 = "plots/supplementary/pcaplot2.png"
+    script:
+        "Rscripts/supp_fig_plot.R"
+
+rule supp_pc_explained_sim_lse:
+    input:
+        ppcaf = folder1 + "simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/pcs_method_PCA1/pcs_npcs8.csv",
+        indf = folder1 + "simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/eigen_pop.ind"
+    output:
+        pcplot1 = "plots/supplementary/lseplot1.png",
+        pcplot2 = "plots/supplementary/lseplot2.png"
+    script:
+        "Rscripts/supp_fig_plot_lse.R"
+
 
 rule Fig_PCA_PPCA_LSE_scales:
     input:
@@ -69,7 +102,7 @@ rule supp_method_comparison_ideal:
     script:
         "Rscripts/plot_f2.R"
 
-rule supp_method_comparison_1ind:
+rule supp_method_comparison_iind:
     input:
         flist=expand(folder2 + "simfiles/Ne{{Ne}}/split_times{{sp}}/mu{{mu}}/average_run/npop{{npop}}_nind{{nind}}/avgAccuracy_{vals}_scale{{npcs}}", vals=["PCA1_val","ppca_direct_val","admixtools2Norm"]),
         fscale2=folder2 + "simfiles/Ne{Ne}/split_times{sp}/mu{mu}/average_run/npop{npop}_nind{nind}/avgAccuracy_ppca_direct_val_scale{npcs2}",
@@ -118,6 +151,24 @@ rule one_plot_1ind_missing:
         plotf="plots/simfiles/Ne{Ne}/split_times{sp}/npop{npop}_nind{nind}/missing{miss}/plots_{npcs}_{npcs2}/mu{mu}_plot_all_1ind_missing.png"
     script:
         "Rscripts/plot_all_missing.R"
+
+rule one_plot_supp_table:
+    input:
+        plotf1 = folder1 + "simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_f2.csv",
+        plotf2 = folder2 + "simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_f2.csv",
+        plotf3 = folder3 + "simfiles/Ne1000/split_times1000/npop10_nind100/missing0.5/plots_8_12/mu0.05_f2.csv",
+        plotf4 = folder1 + "simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_f3.csv",
+        plotf5 = folder2 + "simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_f3.csv",
+        plotf6 = folder3 + "simfiles/Ne1000/split_times1000/npop10_nind100/missing0.5/plots_8_12/mu0.05_f3.csv",
+        plotf7 = folder1 + "simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_f4.csv",
+        plotf8 = folder2 + "simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_f4.csv",
+        plotf9 = folder3 + "simfiles/Ne1000/split_times1000/npop10_nind100/missing0.5/plots_8_12/mu0.05_f4.csv",
+    output:
+        s="supplementary_table/table1.csv"
+    run:
+        py.maketable(f2_1=input.plotf1, f2_2=input.plotf2, f2_3=input.plotf3, f3_1=input.plotf4,
+        f3_2=input.plotf5, f3_3=input.plotf6, f4_1=input.plotf7, f4_2=input.plotf8, f4_3=input.plotf9, outfile=output.s)
+
 
 rule admixplot_f4:
     input:
@@ -168,4 +219,4 @@ rule main_fig_all_pca:
     output:
         f2plot="plots/simfiles_Ne{Ne}_split_times{sp}/npop{npop}_nind{nind}/missing{miss}/mu{mu}_main_fig_all_pca.png"
     script:
-        "Rscripts/main_fig_pca_all.R"
+        "Rscripts/main_fig_pca_all_moredata.R"
