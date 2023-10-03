@@ -27,7 +27,10 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
   df[df$pop=="pop9","pop"]="X9"
   df[df$pop=="pop10","pop"]="X10"
   
-  colors1 <- c("X5" = "black", "X1" = "red", "X2" = "blue", "X3"= "green", "X4" = "yellow2", "X6" = "yellow4", "X7" = "yellowgreen", "X8" = "cyan3", "X9" = "darkorange1", "X10" = "purple4")
+  colors1 <- c("X5" = "#88CCEE", "X1" = "#CC6677", "X2" = "#DDCC77", "X3"= "#117733", 
+               "X4" = "#332288", "X6" = "#888888", "X7" = "#44AA99", "X8" = "#999933", 
+               "X9" = "#882255", "X10" = "#000000")
+  
   
   df$pc1=as.numeric(df$pc1)
   df$pc2=as.numeric(df$pc2)
@@ -64,7 +67,7 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
   df[df$pop=="pop9","pop"]="X9"
   df[df$pop=="pop10","pop"]="X10"
   
-  colors1 <- c("X5" = "black", "X1" = "red", "X2" = "blue", "X3"= "green", "X4" = "yellow2", "X6" = "yellow4", "X7" = "yellowgreen", "X8" = "cyan3", "X9" = "darkorange1", "X10" = "purple4")
+  #colors1 <- c("X5" = "black", "X1" = "red", "X2" = "blue", "X3"= "green", "X4" = "yellow2", "X6" = "yellow4", "X7" = "yellowgreen", "X8" = "cyan3", "X9" = "darkorange1", "X10" = "purple4")
   
   
   xx2=ggplot(df, aes(x=pc1, y=pc2, color=pop)) +
@@ -85,10 +88,10 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
   
   
   #next figure
-  df1=as.data.frame(cbind(inds$V1, t(pc[1,]), t(pc[2,]), t(pc[3,]), t(pc[4,]), t(pc[5,]), t(pc[6,]), t(pc[7,]), t(pc[8,]) ))
+  df1=as.data.frame(cbind(inds$V1, t(pc[1,]), t(pc[2,]), t(pc[3,]), t(pc[4,]), t(pc[5,]), t(pc[6,]), t(pc[7,]), t(pc[8,]), t(pc[9,]), t(pc[10,]) ))
   df1$pop=unlist(lapply(strsplit(as.character(df1$V1), "_"), '[[', 1))
   
-  colnames(df1) = c("V1", "pc1", "pc2", "pc3","pc4", "pc5", "pc6","pc7", "pc8", "pop")
+  colnames(df1) = c("V1", "pc1", "pc2", "pc3","pc4", "pc5", "pc6","pc7", "pc8", "pc9", "pc10", "pop")
   df2 <- df1[, -which(names(df1) == 'V1')]
   
   df_long <- df2 %>%
@@ -117,7 +120,10 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
     "pc5"="PC 5",
     "pc6"="PC 6",
     "pc7"="PC 7",
-    "pc8"="PC 8"
+    "pc8"="PC 8",
+    "pc9"="PC 9",
+    "pc10"="PC 10"
+    
   )
   
   pc_labeller <- function(variable,value){
@@ -127,11 +133,12 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
   
   figure2 <- ggplot(data=df_long, aes(x=PCval, y=y, color=pop), alpha=0.01) +
     geom_jitter(width = 0.00, height = 0.01) +
-    facet_wrap(~PCname, ncol = 1, labeller = pc_labeller) +
+    facet_wrap(~factor(PCname, levels=c("pc1", "pc2", "pc3","pc4", "pc5", "pc6","pc7", "pc8", "pc9", "pc10")), ncol = 1, labeller = pc_labeller, strip.position="left") +
     geom_point() +
     scale_color_manual(values = colors1, name="Populations") + theme_bw() +
-    theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.line.y = element_blank(),panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(), strip.text.x = element_text(size = 11, face="bold")) + xlab("Position of individuals on a PC")
+    theme(strip.text.y = element_text(size = 12, face="bold"), axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.line.y = element_blank(),panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(), legend.title = element_text(size=16), legend.text = element_text(size=14), axis.text.x = element_text(size=12),, axis.title.x = element_text(size=14) )  + 
+    xlab("Position of individuals on a PC")
    
   ggsave(pcplot2, figure2,
          width = 8, height = 6, dpi = 400, units = "in", device='png')
