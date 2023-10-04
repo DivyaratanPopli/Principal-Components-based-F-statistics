@@ -1,12 +1,12 @@
 library(ggplot2)
 
-x1="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE/simfiles/Ne1000/split_times1000/npop10_nind100/mu0.05_f2_fig_all.csv"
-x2="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE_1ind/simfiles/Ne1000/split_times1000/npop10_nind100/mu0.05_f2_fig_all.csv"
-x3="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE_1ind_missing/simfiles/Ne1000/split_times1000/npop10_nind100/missing0.5/mu0.05_f2_fig_all.csv"
-truef="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE/simfiles/Ne1000/split_times1000/mu0.05/avgrun/npop10_nind100/true_val/f2mat8"
-nfile_avg1="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE/simfiles/Ne1000/split_times1000/mu0.05/average_run/npop10_nind100/avgAccuracy_noisy_val_scale8"
-nfile_avg2="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE_1ind/simfiles/Ne1000/split_times1000/mu0.05/average_run/npop10_nind100/avgAccuracy_noisy_val_scale8"
-nfile_avg3="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE_1ind_missing/simfiles/Ne1000/split_times1000/mu0.05/average_run/npop10_nind100/missing0.5/avgAccuracy_noisy_val_scale8"
+#x1="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE/simfiles/Ne1000/split_times1000/npop10_nind100/mu0.05_f2_fig_all.csv"
+#x2="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE_1ind/simfiles/Ne1000/split_times1000/npop10_nind100/mu0.05_f2_fig_all.csv"
+#x3="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE_1ind_missing/simfiles/Ne1000/split_times1000/npop10_nind100/missing0.5/mu0.05_f2_fig_all.csv"
+#truef="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE/simfiles/Ne1000/split_times1000/mu0.05/avgrun/npop10_nind100/true_val/f2mat8"
+#nfile_avg1="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE/simfiles/Ne1000/split_times1000/mu0.05/average_run/npop10_nind100/avgAccuracy_noisy_val_scale8"
+#nfile_avg2="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE_1ind/simfiles/Ne1000/split_times1000/mu0.05/average_run/npop10_nind100/avgAccuracy_noisy_val_scale8"
+#nfile_avg3="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/Fig_comparison_PCA_PPCA_LSE_1ind_missing/simfiles/Ne1000/split_times1000/mu0.05/average_run/npop10_nind100/missing0.5/avgAccuracy_noisy_val_scale8"
 
 plot_f2s <-function(x1, x2, x3, truef, nfile_avg1, nfile_avg2, nfile_avg3, f2plot){
   
