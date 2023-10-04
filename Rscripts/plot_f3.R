@@ -16,7 +16,7 @@ plotf3 <- function(admf, ppca_muf, ppca_stdf, plotf){
   colnames(ppca1)=c('mu','std')
   ppca1$pop1=rep('Altai',6)
   ppca1$pop2=rep('Vindija33.19',6)
-  ppca1$pop3=c('Les_Cottes_L35MQ25','Goyet_L35MQ25','Mezmaiskaya1_L35MQ25','Mezmaiskaya2_L35MQ25','VindijaG1_L35MQ25','Spy_L35MQ25')
+  ppca1$pop3=c('Les Cottes Z4-1514','Goyet Q56-1','Mezmaiskaya1','Mezmaiskaya2','Vindija 87','Spy 94a')
   ppca1$method='ppca'
   
   
