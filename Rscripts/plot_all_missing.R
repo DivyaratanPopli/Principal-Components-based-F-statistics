@@ -32,6 +32,10 @@ plot_all <- function(f2f, f3f, f4f, ftrue, true_f2, plotf){
   gg[gg$method=="LSE_scale8","method"]="EMU_scale8"
   gg[gg$method=="LSE_scale12","method"]="EMU_scale12"
 
+  formatter1000 <- function(x){
+    round(x/118000, digits=3)
+  }
+
   g_f2=ggplot(gg, aes(x=split_time, y=mean_f2, fill=method)) +
     geom_bar(stat="identity", color="black",
              position=position_dodge()) +
@@ -43,7 +47,8 @@ plot_all <- function(f2f, f3f, f4f, ftrue, true_f2, plotf){
     geom_segment(aes(x = 3.52, y = tr3, xend = 4.5, yend = tr3, linetype="True F2"), colour= 'red') +
     scale_linetype_manual(name ="", values = 2) + scale_x_discrete(labels=c(expression(F[2](X[1],X[2])), expression(F[2](X[3],X[4])),expression(F[2](X[2],X[3])),expression(F[2](X[1],X[4])))) +
     xlab("Statistic") + ylab("Estimates") +
-    theme_classic()
+    theme_classic() +
+    scale_y_continuous(labels = formatter1000)
 
 
 
@@ -59,7 +64,8 @@ plot_all <- function(f2f, f3f, f4f, ftrue, true_f2, plotf){
     xlab("Statistic") + ylab("Estimates") +
     theme_classic() +
     theme(legend.position = "none",
-          legend.title = element_blank())
+          legend.title = element_blank())+
+          scale_y_continuous(labels = formatter1000)
 
 
 
@@ -74,7 +80,8 @@ plot_all <- function(f2f, f3f, f4f, ftrue, true_f2, plotf){
     xlab("Statistic") + ylab("Estimates") + scale_x_discrete(labels=c(expression(F[4](X[1],X[3]*";"*X[2],X[4])))) +
     theme_classic() +
     theme(legend.position = "none",
-          legend.title = element_blank())
+          legend.title = element_blank())+
+          scale_y_continuous(labels = formatter1000)
 
 
 
