@@ -53,7 +53,7 @@ plot_f2s <-function(x1, x2, x3, truef, nfile_avg1, nfile_avg2, nfile_avg3, f2plo
     theme_bw() + theme(legend.position="bottom", axis.text=element_text(size=14),
                        axis.title=element_text(size=14), legend.text=element_text(size=14), legend.title=element_text(size=14),
                        strip.text.y = element_text(size = 11)) +
-    scale_x_continuous(breaks=c(7, 35, 50,75, 95)) +
+    scale_x_continuous(breaks=c(7, 23, 35, 50,75, 95)) +
     scale_y_continuous(labels = formatter1000)
   
   ggsave(f2plot, xx,
