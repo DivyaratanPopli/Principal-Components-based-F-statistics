@@ -29,7 +29,9 @@ plotf3 <- function(admf, ppca_muf, ppca_stdf, plotf){
   f3_plot=ggplot(vec, aes(x=mu, y=pop3, color=method)) +
     geom_point() +
     geom_errorbar(aes(xmin=mu-2*std, xmax=mu+2*std), width=0.1) +
-    theme_classic() + ylab('Poplation X') + xlab("F3(Altai ; Vindija33.19 , X)")
+    scale_color_discrete(labels=c('ADMIXTOOLS 2', 'PPCA')) +
+    theme_classic() + ylab('Poplation X') + xlab("F3(Altai ; Vindija33.19 , X)") +
+    guides(color=guide_legend(title="Method"))
   
   ggsave(plotf, f3_plot,
          width = 8, height = 5, dpi = 300, units = "in", device='png')
