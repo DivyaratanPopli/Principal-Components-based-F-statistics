@@ -51,6 +51,10 @@ plot_f2s <- function(flist,slist,f2plot, pc1, pc2, sp, truef){
   tru=data.frame("Pair_f"=c("1_2", "3_4", "2_3", "1_4"), "true_val"=c(tr[1,2],tr[3,4],tr[2,3],tr[1,4]))
   tru$Pair_f = factor(tru$Pair_f, levels=c('1_2','3_4','2_3','1_4'))
 
+  formatter1000 <- function(x){
+    round(x/118000, digits=3)
+  }
+
   ggplot(df1, aes(x=Scale, y=F2, col=Method), alpha=0.1) +
     geom_point() +
     facet_grid(cols=vars(Pair_f)) +
@@ -60,7 +64,8 @@ plot_f2s <- function(flist,slist,f2plot, pc1, pc2, sp, truef){
     scale_linetype_manual(name = "", values = 2,
               guide = guide_legend(override.aes = list(linetype = "dashed"))) +
     xlab("Number of PC's used") + ylab("f2") +
-    theme_bw()
+    theme_bw() +
+    scale_y_continuous(labels = formatter1000)
 
   ggsave(f2plot,
          width = 8, height = 5, dpi = 150, units = "in", device='png')
