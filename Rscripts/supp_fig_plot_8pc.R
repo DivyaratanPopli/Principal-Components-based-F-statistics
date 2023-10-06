@@ -107,7 +107,7 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
   df_long[df_long$pop=="pop7","pop"]="X7"
   df_long[df_long$pop=="pop8","pop"]="X8"
   df_long[df_long$pop=="pop9","pop"]="X9"
-  df_long[df_long$pop=="pop10","pop"]="X10"  
+  df_long[df_long$pop=="pop10","pop"]="X10"
 
 
   pc_names <- list(
@@ -131,7 +131,7 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
     facet_wrap(~factor(PCname, levels=c("pc1", "pc2", "pc3","pc4", "pc5", "pc6","pc7", "pc8")), ncol = 1, labeller = pc_labeller, strip.position="left") +
     geom_point() +
     scale_color_manual(values = colors1, name="Populations") + theme_bw() +
-    theme(strip.text.y = element_text(size = 12, face="bold"), axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.line.y = element_blank(),panel.grid.major = element_blank(),
+    theme(strip.text.y = element_text(size = 17, face="bold"), axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.line.y = element_blank(),panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(), legend.title = element_text(size=16), legend.text = element_text(size=14), axis.text.x = element_text(size=12),, axis.title.x = element_text(size=14) )  +
     xlab("Position of individuals on a PC")
 

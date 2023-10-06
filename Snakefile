@@ -47,7 +47,17 @@ rule supp_PC_comparison_all_inds1:
     script:
         "Rscripts/scale_f2.R"
 
-rule supp_pc_explained_sim:
+rule supp_pc_explained_sim_supplementary:
+    input:
+        ppcaf = folder1 + "simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/pcs_method_ppca_direct/pcs_npcs8.csv",
+        indf = folder1 + "simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/eigen_pop.ind"
+    output:
+        pcplot1 = "plots/supplementary/pcplot1_8pc.png",
+        pcplot2 = "plots/supplementary/pcplot2_8pc.png"
+    script:
+        "Rscripts/supp_fig_plot_8pc.R"
+
+rule supp_pc_explained_sim_main:
     input:
         ppcaf = folder1 + "simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/pcs_method_ppca_direct/pcs_npcs8.csv",
         indf = folder1 + "simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/eigen_pop.ind"
@@ -220,3 +230,12 @@ rule main_fig_all_pca:
         f2plot="plots/simfiles_Ne{Ne}_split_times{sp}/npop{npop}_nind{nind}/missing{miss}/mu{mu}_main_fig_all_pca.png"
     script:
         "Rscripts/main_fig_pca_all_moredata.R"
+
+rule supp_lse_admix:
+    input:
+        admixf=folder2 + "simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/admixtools2Norm/f2mat102",
+        lsef=expand(folder2 + "simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/PCA1_val/f2mat{npcs}", npcs=list(range(2,105)))
+    output:
+        outplotf="plots/supplementary/lse_admix.png"
+    script:
+        "Rscripts/supp_lse_admixtools.R"
