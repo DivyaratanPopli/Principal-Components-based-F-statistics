@@ -17,8 +17,8 @@ plotf <- function(admixf, lsef, outplotf){
   } 
   xx1=xx1/116762
   admix=admix/116762
-  png(file=outplotf)
-  plot(xx1, ylab="f2", xlab="Number of PCs")
+  png(file=outplotf, res=200, height=5, width=8, units = "in")
+  plot(xx1, ylab=expression('f2(X'[1]*',X'[4]*')'), xlab="Number of PCs")
   abline(h=admix, col="red")
   legend("bottomright", legend=c("LSE", "ADMIXTOOLS 2"),
          col=c("black", "red"), lty=c(NA,1), pch=c(1,NA))
