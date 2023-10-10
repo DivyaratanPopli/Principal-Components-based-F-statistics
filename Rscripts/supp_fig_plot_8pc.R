@@ -111,14 +111,15 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
 
 
   pc_names <- list(
-    "pc1"="PC 1",
-    "pc2"="PC 2",
-    "pc3"="PC 3",
-    "pc4"="PC 4",
-    "pc5"="PC 5",
-    "pc6"="PC 6",
-    "pc7"="PC 7",
-    "pc8"="PC 8"
+    "pc1"="PC 1\n27.2%",
+    "pc2"="PC 2\n19.4%",
+    "pc3"="PC 3\n13.8%",
+    "pc4"="PC 4\n12.2%",
+    "pc5"="PC 5\n10.1%",
+    "pc6"="PC 6\n8.3%",
+    "pc7"="PC 7\n5.3%",
+    "pc8"="PC 8\n3.7%"
+
   )
 
   pc_labeller <- function(variable,value){
@@ -129,9 +130,10 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
   figure2 <- ggplot(data=df_long, aes(x=PCval, y=y, color=pop), alpha=0.01) +
     geom_jitter(width = 0.00, height = 0.01) +
     facet_wrap(~factor(PCname, levels=c("pc1", "pc2", "pc3","pc4", "pc5", "pc6","pc7", "pc8")), ncol = 1, labeller = pc_labeller, strip.position="left") +
+    geom_vline(xintercept = 0, color = "grey60") +
     geom_point() +
     scale_color_manual(values = colors1, name="Populations") + theme_bw() +
-    theme(strip.text.y = element_text(size = 17, face="bold"), axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.line.y = element_blank(),panel.grid.major = element_blank(),
+    theme(strip.text.y = element_text(size = 15, face="bold"), axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.line.y = element_blank(),panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(), legend.title = element_text(size=16), legend.text = element_text(size=14), axis.text.x = element_text(size=12),, axis.title.x = element_text(size=14) )  +
     xlab("Position of individuals on a PC")
 

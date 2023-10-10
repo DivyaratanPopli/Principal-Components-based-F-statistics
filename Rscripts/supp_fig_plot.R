@@ -134,7 +134,7 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
   figure2 <- ggplot(data=df_long, aes(x=PCval, y=y, color=pop), alpha=0.01) +
     geom_jitter(width = 0.00, height = 0.01) +
     facet_wrap(~factor(PCname, levels=c("pc1", "pc2", "pc3","pc4", "pc5", "pc6","pc7", "pc8", "pc9", "pc10")), ncol = 1, labeller = pc_labeller, strip.position="left") +
-    geom_vline(xintercept = 0, color = "grey90") +
+    geom_vline(xintercept = 0, color = "grey60") +
     geom_point() +
     scale_color_manual(values = colors1, name="Populations") + theme_bw() +
     theme(strip.text.y = element_text(size = 12, face="bold"), axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.line.y = element_blank(),panel.grid.major = element_blank(),
