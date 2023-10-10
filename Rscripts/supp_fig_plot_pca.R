@@ -40,10 +40,10 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
   xx1=ggplot(df, aes(x=pc1, y=pc2, color=pop)) +
     geom_point() +
     #geom_point()
-    scale_color_manual(values = colors1, name="Populations") + ylim(c(-0.25,0.3)) + xlim(c(-0.25,0.3)) +
+    scale_color_manual(values = colors1, name="Populations") +ylim(c(-0.25,0.2)) + xlim(c(-0.25,0.2)) +
     theme_bw() + theme(legend.position="none", axis.text=element_text(size=14),
-                       axis.title=element_text(size=16)) +
-    xlab("PC 1") + ylab("PC 2")
+                       axis.title=element_text(size=16), aspect.ratio=1) +
+    xlab("PC 1 (27.21 %)") + ylab("PC 2 (19.37 %)")
 
   library(dplyr)
 
@@ -73,10 +73,10 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
   xx2=ggplot(df, aes(x=pc1, y=pc2, color=pop)) +
     geom_point() +
     #geom_point()
-    scale_color_manual(values = colors1, name="Populations") +ylim(c(-0.25,0.3)) + xlim(c(-0.25,0.3)) +
+    scale_color_manual(values = colors1, name="Populations") +ylim(c(-0.25,0.2)) + xlim(c(-0.25,0.2)) +
     theme_bw() + theme(legend.position="none", axis.text=element_text(size=14),
-                       axis.title=element_text(size=16)) +
-    xlab("PC 3") + ylab("PC 4")
+                       axis.title=element_text(size=16), aspect.ratio=1) +
+    xlab("PC 3 (13.82%)") + ylab("PC 4 (12.2 %)")
 
 
   figure1 <- ggarrange(xx1, xx2,
@@ -111,18 +111,17 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
   df_long[df_long$pop=="pop9","pop"]="X9"
   df_long[df_long$pop=="pop10","pop"]="X10"
 
-
   pc_names <- list(
-    "pc1"="PC 1\n44.3%",
-    "pc2"="PC 2\n22.5%",
-    "pc3"="PC 3\n11.4%",
-    "pc4"="PC 4\n8.9%",
-    "pc5"="PC 5\n6.1%",
-    "pc6"="PC 6\n4.2%",
+    "pc1"="PC 1\n8.0%",
+    "pc2"="PC 2\n5.7%",
+    "pc3"="PC 3\n4.1%",
+    "pc4"="PC 4\n3.6%",
+    "pc5"="PC 5\n3.0%",
+    "pc6"="PC 6\n2.5%",
     "pc7"="PC 7\n1.7%",
-    "pc8"="PC 8\n0.8%",
-    "pc9"="PC 9\n0.6%",
-    "pc10"="PC 10\n0.2%"
+    "pc8"="PC 8\n1.3%",
+    "pc9"="PC 9\n1.3%",
+    "pc10"="PC 10\n1.1%"
 
   )
 
@@ -134,11 +133,11 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
   figure2 <- ggplot(data=df_long, aes(x=PCval, y=y, color=pop), alpha=0.01) +
     geom_jitter(width = 0.00, height = 0.01) +
     facet_wrap(~factor(PCname, levels=c("pc1", "pc2", "pc3","pc4", "pc5", "pc6","pc7", "pc8", "pc9", "pc10")), ncol = 1, labeller = pc_labeller, strip.position="left") +
-    geom_point() +
     geom_vline(xintercept = 0, color = "grey60") +
+    geom_point() +
     scale_color_manual(values = colors1, name="Populations") + theme_bw() +
     theme(strip.text.y = element_text(size = 12, face="bold"), axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.title.y = element_blank(), axis.line.y = element_blank(),panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(), legend.title = element_text(size=16), legend.text = element_text(size=14), axis.text.x = element_text(size=12),, axis.title.x = element_text(size=14) )  +
+          panel.grid.minor = element_blank(), legend.title = element_text(size=16), legend.text = element_text(size=14), axis.text.x = element_text(size=12), axis.title.x = element_text(size=14) )  +
     xlab("Position of individuals on a PC")
 
   ggsave(pcplot2, figure2,

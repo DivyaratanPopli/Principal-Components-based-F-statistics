@@ -76,7 +76,7 @@ rule supp_pc_explained_sim_pca:
         pcplot1 = "plots/supplementary/pcaplot1.png",
         pcplot2 = "plots/supplementary/pcaplot2.png"
     script:
-        "Rscripts/supp_fig_plot.R"
+        "Rscripts/supp_fig_plot_pca.R"
 
 rule supp_pc_explained_sim_lse:
     input:
