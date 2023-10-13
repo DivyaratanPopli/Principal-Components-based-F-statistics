@@ -139,7 +139,7 @@ F_4(X_1,X_2;X_3,X_4) &= \frac{1}{S}\sum_{s=1}^S(\mathcal{X}_{1s} - \mathcal{X}_{
 
 Here, $S$ is the total number of SNPs, and $\mathcal{X}_{is}$ is the (unobserved) population allele frequency in population $X_i$ at SNP $s$. 
 
-Assuming a tree-like relationship between populations, $F_2(X_1,X_4)$ is interpreted as the branch length between populations $X_1$ and $X_4$ (Fig. \ref{fig2:overview} A) and it reflects the expected amount of drift that occurred between $X_1$ and $X_4$. $F_3(X_1;X_3,X_4)$ represents the amount of drift that occurred on the external branch connecting $X_1$ to the common ancestor node of $X_3$ and $X_4$ (Fig. \ref{fig2:overview} B). Under a tree-like model, $F_3$ will always be non-negative. However, in the case where $X_1$ is admixed between $X_3$ and $X_4$, $F_3(X_1;X_3,X_4)$ may be negative, and hence this is used as a test for admixture \cite{peter_admixture_2016, patterson_ancient_2012}. $F_4(X_1,X_3;X_2,X_4)$ represents the covariance between shared drifts between X1,X2 and X3,X4. This would be represented by the internal branch between the common ancestor nodes of $X_1$, $X_2$ and $X_3$, $X_4$ (Fig. \ref{fig2:overview} C). The $F_4$- statistic, with a different permutation of the populations, can be used as test of admixture. $F_4(X_1,X_2;X_3,X_4)$ is expected to be 0 if $X_1$, $X_2$, $X_3$, $X_4$ are related to each other by a tree (Fig. \ref{fig2:overview} D). In this case, a significantly non-zero value suggests a departure from the null model of treeness.
+Assuming a tree-like relationship between populations, $F_2(X_1,X_4)$ is interpreted as the branch length between populations $X_1$ and $X_4$ (Fig. \ref{fig2:overview} A) and it reflects the expected amount of drift that occurred between $X_1$ and $X_4$. $F_3(X_1;X_3,X_4)$ represents the amount of drift that occurred on the external branch connecting $X_1$ to the common ancestor node of $X_3$ and $X_4$ (Fig. \ref{fig2:overview} B). Under a tree-like model, $F_3$ will always be non-negative. However, in the case where $X_1$ is admixed between $X_3$ and $X_4$, $F_3(X_1;X_3,X_4)$ may be negative, and hence this is used as a test for admixture \cite{peter_admixture_2016, patterson_ancient_2012}. $F_4(X_1,X_4;X_2,X_3)$ represents the covariance between shared drifts between X1,X4 and X2,X3. This would be represented by the internal branch between the common ancestor nodes of $X_1$, $X_2$ and $X_3$, $X_4$ (Fig. \ref{fig2:overview} C). The $F_4$- statistic, with a different permutation of the populations, can be used as test of admixture. $F_4(X_1,X_2;X_3,X_4)$ is expected to be 0 if $X_1$, $X_2$, $X_3$, $X_4$ are related to each other by a tree (Fig. \ref{fig2:overview} D). In this case, a significantly non-zero value suggests a departure from the null model of treeness.
 
 It is straightforward to verify that $F_3$ and $F_4$ can be written in terms of $F_2$s as:
 
@@ -167,7 +167,7 @@ f_3(X_1;X_3,X_4) &=\frac{1}{S} \sum_{s=1}^S\left[(x_{1s} - x_{3s})(x_{1s} - x_{4
 f_4(X_1,X_2;X_3,X_4) &= \frac{1}{S}\sum_{s=1}^S(x_{1s} - x_{2s})(x_{3s} - x_{4s}) \text{.}
 \end{align}\label{eq:f4_error} 
 
-Oteo-Garcia \& Oteo \cite{oteo-garcia_geometrical_2021} showed that $F$-statistics can be defined more generally in a geometrical framework. In this framework, each population can be represented as a point in a high-dimensional allele frequency space. $F_2(X_1, X_4)$ is then the  squared Euclidean distance between points representing populations $X_1$ and $X_4$ (Fig. \ref{fig2:overview} E). $F_3(X_1;X_3,X_4)$ is then a dot product of the vectors $\Vec{\CX1} - \Vec{\CX_3}$ and $\Vec{\CX_1} - \Vec{\CX_4}$ (Fig. \ref{fig2:overview} F). $F_4(X_1,X_3;X_2,X_4)$ is a dot product of vectors $\Vec{\CX_1} - \Vec{\CX_3}$ and $\Vec{\CX_2} - \Vec{\CX_4}$ (Fig. \ref{fig2:overview} G), and $F_4(X_1,X_2;X_3,X_4)$ is a dot product of vectors $\Vec{\CX_1} - \Vec{\CX_2}$ and $\Vec{\CX_3} - \Vec{\CX_4}$ (Fig. \ref{fig2:overview} H).  We define the vector of allele frequencies of population $i$ as $\mathcal{X}_i = (\mathcal{X}_{i1}, \dots, \mathcal{X}_{iS})$. 
+Oteo-Garcia \& Oteo \cite{oteo-garcia_geometrical_2021} showed that $F$-statistics can be defined more generally in a geometrical framework. In this framework, each population can be represented as a point in a high-dimensional allele frequency space. $F_2(X_1, X_4)$ is then the  squared Euclidean distance between points representing populations $X_1$ and $X_4$ (Fig. \ref{fig2:overview} E). $F_3(X_1;X_3,X_4)$ is then a dot product of the vectors $\Vec{\CX1} - \Vec{\CX_3}$ and $\Vec{\CX_1} - \Vec{\CX_4}$ (Fig. \ref{fig2:overview} F). $F_4(X_1,X_4;X_2,X_3)$ is a dot product of vectors $\Vec{\CX_1} - \Vec{\CX_4}$ and $\Vec{\CX_2} - \Vec{\CX_3}$ (Fig. \ref{fig2:overview} G), and $F_4(X_1,X_2;X_3,X_4)$ is a dot product of vectors $\Vec{\CX_1} - \Vec{\CX_2}$ and $\Vec{\CX_3} - \Vec{\CX_4}$ (Fig. \ref{fig2:overview} H).  We define the vector of allele frequencies of population $i$ as $\mathcal{X}_i = (\mathcal{X}_{i1}, \dots, \mathcal{X}_{iS})$. 
 
 \begin{align}\label{eq:f_geometric}
 F_2(X_1,X_4) &= \frac{1}{S}||\Vec{\mathcal{X}_{1}} - \vec{\mathcal{X}_{4}}||^2\nonumber\\
@@ -181,7 +181,7 @@ Crucially however, these interpretations only hold for the (unobserved) populati
 \begin{figure}[ht!]
     \includegraphics[width=16.5cm]{ppt/overview.png}
     \centering
-    \caption{Schematics showing different interpretations of F-statistics. The columns represent $F_2(X_1,X_4)$, $F_3(X_1;X_3,X_4)$, $F4(X_1,X_3;X_2,X_4)$, $F4(X_1,X_2,X_3,X_4)$. The first row shows a tree interpretation of each statistic, the second row shows F-statistics in an allele-frequency space with three axes representing three SNPs, and the last row is the interpretation of F-statistics on a PCA. Blue lines represent the statistic, and the dotted lines represent orthogonal projections. Black squares denote right angles.}
+    \caption{Schematics showing different interpretations of F-statistics. The columns represent $F_2(X_1,X_4)$, $F_3(X_1;X_3,X_4)$, $F4(X_1,X_4;X_2,X_3)$, $F4(X_1,X_2,X_3,X_4)$. The first row shows a tree interpretation of each statistic, the second row shows F-statistics in an allele-frequency space with three axes representing three SNPs, and the last row is the interpretation of F-statistics on a PCA. Blue lines represent the statistic, and the dotted lines represent orthogonal projections. Black squares denote right angles.}
     \label{fig2:overview}
 \end{figure}
 
@@ -190,16 +190,16 @@ Crucially however, these interpretations only hold for the (unobserved) populati
 
 This geometric framework provides a complementary way to understand the properties of F-statistics \cite{oteo-garcia_geometrical_2021}. However, many population genetic studies use a large number of SNPs (in the order of a million), and it is not possible to visualize population vectors in such a high dimensional space. Peter at al. showed that one can do dimensionality reduction on such datasets with PCA, and use the top PCs to estimate F-statistics efficiently \cite{peter_geometric_2022}.
 
-We illustrate this in Fig. \ref{fig2:overview}:  $F_2(X_1,X_2)$ can be thought of as the squared Eucledian distance between populations $X_1$ and $X_2$ in PCA-space. Similarly, $F_3(X_1;X_3,X_4)$ is represented as the length of projection of the vector $X_1-X_3$ on $X_1-X_4$. Internal branch length $F_4(X_1,X_3;X_2,X_4)$ can be described as the length of projection of $X_1-X_3$ on $X_2-X_4$ on PCA, and the test of admixture $F_4(X_1,X_2,X_3,X_4)$ is equivalent to the length of projection of $X_1-X_2$ on $X_3-X_4$. 
+We illustrate this in Fig. \ref{fig2:overview}:  $F_2(X_1,X_2)$ can be thought of as the squared Eucledian distance between populations $X_1$ and $X_2$ in PCA-space. Similarly, $F_3(X_1;X_3,X_4)$ is represented as the length of projection of the vector $X_1-X_3$ on $X_1-X_4$. Internal branch length $F_4(X_1,X_4;X_2,X_3)$ can be described as the length of projection of $X_2-X_3$ on $X_1-X_4$ on PCA, and the test of admixture $F_4(X_1,X_2,X_3,X_4)$ is equivalent to the length of projection of $X_1-X_2$ on $X_3-X_4$. 
 
 
 To formalize the relationship between $f$-statistics and PCA, let us assume our dataset $\mathbf{X}$ has $M$ populations and $S$ SNPs, such that our genotype matrix $\MX$ has the dimension $[M \times S]$. The $i$-th row of $\MX$ corresponds to the $S$-dimensional row-vector $\Vec{\mathcal{X}_i}$ whose entries are  allele frequencies $\in$ [0,1]. PCA of mean-centered $\MX$ allows us to project this $S$-dimensional data onto a $q$ dimensional subspace, where $q < M$. $q = M-1$ represents the case where we retain all the PCs, and thus PCA only rotates $\MX$. However, in practice we often only need few PCs ($q \ll M$) to explain most variation in the genetic data \cite{peter_geometric_2022}, which can greatly simplify calculations and visualizations. 
 
-A common algorithm to estimate PCs is viaSingular Value Decomposition (SVD). For this approach, we first mean-center $\MX$ to a  matrix $\MX_c$, and then decompose $\MX_c$ into an orthonormal matrix $\mathbf{U}$, a diagonal matrix $\mathbf{\Sigma}$, and another orthonormal matrix $\mathbf{V^T}$.
+A common algorithm to estimate PCs is viaSingular Value Decomposition (SVD). For this approach, we first mean-center $\MX$ to a  matrix $\MX_c$, and then decompose $\MX_c$ into an orthonormal matrix $\mathbf{U}$, a diagonal matrix $\mathbf{E}$, and another orthonormal matrix $\mathbf{V^T}$.
 
-$$\MX_c = (\mathbf{U}\mathbf{\Sigma}) \mathbf{V}^T = \mathbf{WL},$$
+$$\MX_c = (\mathbf{U}\mathbf{E}) \mathbf{V}^T = \mathbf{WL},$$
 
- We perform SVD to decompose $\mathbf{Y}$ into a product of $\mathbf{W} = \mathbf{U\Sigma}$ and $\mathbf{L} = \mathbf{V}^T$. In the context of PCA, $\mathbf{W}_{[M\times M]}$ is a matrix of principal components (where the $i$-th row corresponds to the $i$-th PC) and contains information about structure, while $\mathbf{L}_{[M\times S]}$, also known as the SNP loadings contains the contribution of each SNP to each PC, and can be used to identify outlier SNPs that may be potential candidates for selection \cite{gower_distance_1966}. 
+ We perform SVD to decompose $\mathbf{Y}$ into a product of $\mathbf{W} = \mathbf{UE}$ and $\mathbf{L} = \mathbf{V}^T$. In the context of PCA, $\mathbf{W}_{[M\times M]}$ is a matrix of principal components (where the $i$-th row corresponds to the $i$-th PC) and contains information about structure, while $\mathbf{L}_{[M\times S]}$, also known as the SNP loadings contains the contribution of each SNP to each PC, and can be used to identify outlier SNPs that may be potential candidates for selection \cite{gower_distance_1966}. 
 
 Since F-statistics can be written as dot products in an allele frequency space (eq. \ref{eq:f_geometric}), and dot products are invariant to rotation, PCA will not change F-statistics as long as we retain all PCs and we can calculate F-statistics from the PCs directly \cite{peter_geometric_2022}:
 
@@ -227,10 +227,10 @@ where $N$ denotes a multivariate normal distribution, $\MX_c$ is again the cente
 
 The goal of PPCA is to estimate the parameters of the model, namely $\mathbf{W}$ and $\Psi$ given the observed data. For complete data, $\Psi$ and $\mathbf{W}$ can be calculated from SVD using the maximum-likelihood estimators
 \begin{align*}
-    \hat{\Psi} &= \frac{1}{M-q}\sum_{j=q+1}^M \Sigma_{jj}\\
-    \hat{\mathbf{W}} &= \mathbf{U}(\mathbf{\Sigma} - \hat{\Psi}\BI),
+    \hat{\Psi} &= \frac{1}{M-q}\sum_{j=q+1}^M e_{j}\\
+    \hat{\mathbf{W}} &= \mathbf{U}(\mathbf{E} - \hat{\Psi}\BI),
 \end{align*}
-where $\sigma_j$ is the $j$-th entry on the diagonal of $\Sigma$.
+where $e_j$ is the $j$-th entry on the diagonal of $\mathbf{E}$.
 
 Thus, the MLE solution of PPCA results differ from those of classical PCA only in that the PCs are ``shrunk'' by a common term that incorporates the noise discarded in the PCA, notably a PCA plot would look almost the same, only the axes scales would be different. Thus, for PPCA we need to set the number of retained dimensions $q$ a priori, since changing $q$ requires rescaling all PCs. In addition, setting $q=M-1$ (or equivalently, $\Psi=0$), recoups classical PCA.
 
@@ -249,9 +249,9 @@ The covariance used by LSE is an estimated covariance matrix, and its properties
 
 
 \begin{align}\label{eq:f_lse}
-F_2(X_1,X_4) &= \sum_{q=1}^{M}\mathbb{I}(e_q \geq 0) (w_{1q} - w_{4q})^2 - \sum_{q=1}^M \mathbb{I}(e_q <0) (w_{1q} - w_{4q})^2,
+F_2(X_1,X_4) &= \sum_{j=1}^{M}\mathbb{I}(e_j \geq 0) (w_{1j} - w_{4j})^2 - \sum_{j=1}^M \mathbb{I}(e_j <0) (w_{1j} - w_{4j})^2,
 \end{align}
-where $e_q$ denotes the $q$-th eigenvalue of $\mathbf{G}$, and $\mathbb{I}$ denotes the indicator function that is 1 when the condition is satisfied, and zero otherwise.
+where $e_j$ denotes the $j$-th eigenvalue of $\mathbf{G}$, and $\mathbb{I}$ denotes the indicator function that is 1 when the condition is satisfied, and zero otherwise.
 
 
 \subsection{Missing data}
