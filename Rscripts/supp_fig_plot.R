@@ -40,9 +40,9 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
   xx1=ggplot(df, aes(x=pc1, y=pc2, color=pop)) +
     geom_point() +
     #geom_point()
-    scale_color_manual(values = colors1, name="Populations") +ylim(c(-0.25,0.2)) + xlim(c(-0.25,0.2)) +
+    scale_color_manual(values = colors1, name="Populations") +ylim(c(-0.25,0.1)) + xlim(c(-0.2,0.2)) +
     theme_bw() + theme(legend.position="none", axis.text=element_text(size=14),
-                       axis.title=element_text(size=16), aspect.ratio=1) +
+                       axis.title=element_text(size=16)) + coord_fixed(ratio = 1) +
     xlab("PC 1 (27.21 %)") + ylab("PC 2 (19.37 %)")
 
   library(dplyr)
@@ -73,9 +73,9 @@ plot_pcs <- function(ppcaf, indf, pcplot1,pcplot2){
   xx2=ggplot(df, aes(x=pc1, y=pc2, color=pop)) +
     geom_point() +
     #geom_point()
-    scale_color_manual(values = colors1, name="Populations") +ylim(c(-0.25,0.2)) + xlim(c(-0.25,0.2)) +
+    scale_color_manual(values = colors1, name="Populations") +ylim(c(-0.25,0.1)) + xlim(c(-0.2,0.2)) +
     theme_bw() + theme(legend.position="none", axis.text=element_text(size=14),
-                       axis.title=element_text(size=16), aspect.ratio=1) +
+                       axis.title=element_text(size=16)) + coord_fixed(ratio = 1) +
     xlab("PC 3 (13.82%)") + ylab("PC 4 (12.2 %)")
 
 
