@@ -1,4 +1,4 @@
-id=$1
+id=$@
 pdflatex $id
 bibtex $id
 bibtex $id
