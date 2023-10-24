@@ -26,7 +26,7 @@ plot_f2s <-function(x1, x2, x3, truef, nfile_avg1, nfile_avg2, nfile_avg3, f2plo
 
   noi1=data.frame("Pair"="1_4", "noisy_val"=noisy1[1,4])
   noi2=data.frame("Pair"="1_4", "noisy_val"=noisy2[1,4])
-  noi3=data.frame("Pair"="1_4", "noisy_val"=noisy3[1,4])
+  noi3=data.frame("Pair"="1_4", "noisy_val"=4*noisy3[1,4])
   noi=rbind(noi1,noi2,noi3)
   noi$data=c("Population-based", "Individual-based","With missing data")
 
