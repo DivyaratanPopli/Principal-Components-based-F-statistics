@@ -234,6 +234,7 @@ rule main_fig_all_pca:
 rule supp_lse_admix:
     input:
         admixf=folder2 + "simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/admixtools2Norm/f2mat102",
+        truef="/mnt/diversity/divyaratan_popli/fstats/genetic_simulations/test_samplesize100/simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/true_val/f2mat",
         lsef=expand(folder2 + "simfiles/Ne1000/split_times1000/mu0.05/run1/npop10_nind100/PCA1_val/f2mat{npcs}", npcs=list(range(2,105)))
     output:
         outplotf="plots/supplementary/lse_admix.png"
