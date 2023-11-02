@@ -94,7 +94,6 @@ rule Fig_PCA_PPCA_LSE_scales:
         flist=expand(folder1+"simfiles/Ne{{Ne}}/split_times{{sp}}/mu{{mu}}/average_run/npop{{npop}}_nind{{nind}}/avgAccuracy_{vals}_scale{npcs}", vals=["PCA1_val","pca_val","ppca_direct_val"], npcs=list(range(2,51))),
         slist=expand(folder1+"simfiles/Ne{{Ne}}/split_times{{sp}}/mu{{mu}}/average_run/npop{{npop}}_nind{{nind}}/stdDev_{vals}_scale{npcs}", vals=["PCA1_val","pca_val","ppca_direct_val"], npcs=list(range(2,51))),
         true=folder2+"simfiles/Ne{Ne}/split_times{sp}/mu{mu}/avgrun/npop{npop}_nind{nind}/true_val/f2mat8",
-    output:
 
 
 
@@ -173,10 +172,11 @@ rule one_plot_supp_table:
         plotf7 = folder1 + "simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_f4.csv",
         plotf8 = folder2 + "simfiles/Ne1000/split_times1000/npop10_nind100/plots_8_12/mu0.05_f4.csv",
         plotf9 = folder3 + "simfiles/Ne1000/split_times1000/npop10_nind100/missing0.5/plots_8_12/mu0.05_f4.csv",
+        truef = folder1+"simfiles/Ne1000/split_times1000/mu0.05/avgrun/npop10_nind100/true_val/f2mat15"
     output:
         s="supplementary_table/table1.csv"
     run:
-        py.maketable(f2_1=input.plotf1, f2_2=input.plotf2, f2_3=input.plotf3, f3_1=input.plotf4,
+        py.maketable(f2_1=input.plotf1, f2_2=input.plotf2, f2_3=input.plotf3, f3_1=input.plotf4, truef=input.truef,
         f3_2=input.plotf5, f3_3=input.plotf6, f4_1=input.plotf7, f4_2=input.plotf8, f4_3=input.plotf9, outfile=output.s)
 
 
