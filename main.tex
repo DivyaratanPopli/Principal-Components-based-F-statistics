@@ -227,8 +227,8 @@ where $N$ denotes a multivariate normal distribution, $\MX_c$ is again the cente
 
 The goal of PPCA is to estimate the parameters of the model, namely $\mathbf{W}$ and $\Psi$ given the observed data. For complete data, $\Psi$ and $\mathbf{W}$ can be calculated from SVD using the maximum-likelihood estimators
 \begin{align*}
-    \hat{\Psi} &= \frac{1}{M-q}\sum_{j=q+1}^M e_{j}\\
-    \hat{\mathbf{W}} &= \mathbf{U}(\mathbf{E} - \hat{\Psi}\BI),
+    \hat{\Psi} &= \frac{1}{M-q}\sum_{j=q+1}^M e^2_{j}\\
+    \hat{\mathbf{W}} &= \mathbf{U}(\mathbf{E}^2 - \hat{\Psi}\BI)^{1/2},
 \end{align*}
 where $e_j$ is the $j$-th entry on the diagonal of $\mathbf{E}$.
 
