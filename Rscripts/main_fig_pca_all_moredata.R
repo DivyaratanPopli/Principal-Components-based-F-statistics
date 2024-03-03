@@ -32,7 +32,8 @@ plot_f2s <-function(x1, x2, x3, truef, nfile_avg1, nfile_avg2, nfile_avg3, f2plo
 
   df=rbind(df1,df2,df3)
 
-  df[df$Method=="emu","Method"] = "PCA"
+  df[df$Method=="emu","Method"] = "classical PCA"
+    df[df$Method=="PCA","Method"] = "classical PCA"
   df[df$Method=="ppca_miss","Method"] = "PPCA"
   df[df$data=="Indiviadual-based-missing","data"] = "With missing data"
 
@@ -44,7 +45,7 @@ plot_f2s <-function(x1, x2, x3, truef, nfile_avg1, nfile_avg2, nfile_avg3, f2plo
     geom_point(alpha=1) +
     facet_grid(rows = vars(factor(data,levels=c("Population-based", "Individual-based","With missing data"))), scales="free") +
     geom_errorbar(aes(ymin=F2-(2*SE), ymax=F2+(2*SE)), width=.2, alpha=1) +
-    scale_color_manual(values=c(PCA="#E69F00", LSE="#009E73", PPCA="#CC79A7")) +
+    scale_color_manual(values=c("classical PCA"="#E69F00", LSE="#009E73", PPCA="#CC79A7")) +
     geom_hline(data = tru, aes(yintercept = true_val, linetype="True")) +
     geom_hline(data = noi, aes(yintercept = noisy_val, linetype = "Uncorrected")) +
     scale_linetype_manual(name = "f2", values = c("True" = "dashed", "Uncorrected" = "dotted"),

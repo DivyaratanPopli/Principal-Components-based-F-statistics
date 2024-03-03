@@ -38,10 +38,10 @@ plot_all <- function(f2f, f3f, f4f, ftrue, true_f2, plotf){
              position=position_dodge()) +
     geom_errorbar(aes(ymin=mean_f2-(2*std_error), ymax=mean_f2+(2*std_error)), width=.2,
                   position=position_dodge(.9)) +
-    geom_segment(aes(x = 0.52, y = tr1, xend = 1.5, yend = tr1, linetype="True F2"), colour= 'red') +
-    geom_segment(aes(x = 1.52, y = tr2, xend = 2.5, yend = tr2, linetype="True F2"), colour= 'red') +
-    geom_segment(aes(x = 2.52, y = tr3m, xend = 3.5, yend = tr3m, linetype="True F2"), colour= 'red') +
-    geom_segment(aes(x = 3.52, y = tr3, xend = 4.5, yend = tr3, linetype="True F2"), colour= 'red') +
+    geom_segment(aes(x = 0.52, y = tr1, xend = 1.5, yend = tr1, linetype="True F-statistic"), colour= 'red') +
+    geom_segment(aes(x = 1.52, y = tr2, xend = 2.5, yend = tr2, linetype="True F-statistic"), colour= 'red') +
+    geom_segment(aes(x = 2.52, y = tr3m, xend = 3.5, yend = tr3m, linetype="True F-statistic"), colour= 'red') +
+    geom_segment(aes(x = 3.52, y = tr3, xend = 4.5, yend = tr3, linetype="True F-statistic"), colour= 'red') +
     scale_linetype_manual(name ="", values = 2) + scale_x_discrete(labels=c(expression(F[2](X[1],X[2])), expression(F[2](X[3],X[4])),expression(F[2](X[2],X[3])),expression(F[2](X[1],X[4])))) +
     xlab("Statistic") + ylab("Estimates") +
     theme_classic() +

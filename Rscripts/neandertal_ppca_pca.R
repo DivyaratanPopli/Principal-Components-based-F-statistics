@@ -69,7 +69,7 @@ plotf <- function(n_pcs, ppcaf, ppcaf1, indf, outplot1, outplot2){
     scale_color_manual(values = colors1, name="pop") + theme_classic() + xlab("PC 1 (82.78%)")+ ylab("PC 2 (17.21%)") + coord_fixed(ratio = 1) +
     geom_vline(xintercept = 0, color = "grey60") +
     geom_hline(yintercept = 0, color = "grey60") +
-    guides(color=guide_legend(title="Populations")) +
+    guides(color=guide_legend(title="")) +
     theme(axis.text=element_text(size=14),
         axis.title=element_text(size=16), legend.text=element_text(size=14), legend.title=element_text(size=16))
 
@@ -106,7 +106,7 @@ plotf <- function(n_pcs, ppcaf, ppcaf1, indf, outplot1, outplot2){
     scale_color_manual(values = colors1, name="pop") + theme_classic()+ xlab("PC 1 (71.59%)")+ ylab("PC 2 (28.40%)") + coord_fixed(ratio = 1) +
     geom_vline(xintercept = 0, color = "grey60") +
     geom_hline(yintercept = 0, color = "grey60") +
-    guides(color=guide_legend(title="Populations")) +
+    guides(color=guide_legend(title="")) +
     theme(axis.text=element_text(size=14),
         axis.title=element_text(size=16), legend.text=element_text(size=14), legend.title=element_text(size=16))
 
